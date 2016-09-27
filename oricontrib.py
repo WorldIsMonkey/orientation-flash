@@ -44,6 +44,18 @@ def save_main_config(var):
     messagebox.showinfo("", "主设置已保存。")
 
 
+def initialize():
+    if messagebox.askyesno("", "你确定要初始化数据吗？这将清除所有已输入的数据。"):
+        if os.path.exists("data"):
+            try:
+                shutil.rmtree("data")
+                messagebox.showinfo("", "数据初始化成功！")
+            except:
+                messagebox.showerror("", "数据初始化失败。")
+        else:
+            messagebox.showinfo("", "数据初始化成功！")
+
+
 def submit(button):
     button["text"] = "提交中..."
     if messagebox.askyesno("", "你确定要将数据上传至服务器吗？"):
@@ -442,6 +454,9 @@ if (__name__ == "__main__"):
 
     BRun = Button(root, text="测试运行(Mac only)", command=lambda: os.system("open -a Flash\ Player orient16demo.swf"))
     BRun.grid(row=10, columnspan=2)
+
+    BInit = Button(root, text="数据初始化", command=initialize)
+    BInit.grid(row=11, columnspan=2)
 
     enable = load_main_config()
     for i in range(len(enable)):
