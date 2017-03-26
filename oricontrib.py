@@ -1,13 +1,73 @@
 #!/usr/bin/env python3
 
-__author__ = "Andrew Wang"
 
+"""
+Copyright Andrew Wang, 2017
+Distributed under the terms of the GNU General Public License.
+
+This is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This file is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this file.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
+
+#                                                              7MBMBL
+#                                                              BBMBM:
+#                                                             OBMBM,
+#                                                             BMBM.
+#                                                            OMBM,
+#                             :uBBBR               s0H;     .MBM.
+#                          ;DBMBMBMB,             MBMBM     RBM,
+#                       :MBMBMBMBBB:             MBMBB     .BM:
+#                     7BMBH sBMBMB,            :MBBBM      BM:
+#                   UMBM,   BBBMB:            2MBBBM       r.
+#                 vBMO     BMBMBi            BBBBBM                  rEBMBR,
+#                 uS      BMBMBr           :BMBMBM                .RBMBMBMBM
+#                        BMBMB7           SBMBMBB.               FMB    :BMB
+#                       BMBMBs          :MBMBMBB.               BMB       ,
+#                      BMBMBF          EMBMBMBM,               FMBM
+#                     MBBMBX         iBMBMBBBM:                MBBBS
+#                    OMBMB0        .MBM:uBBBB;                 OMBMB:
+#                   DMBMBM        RBB7 ;BMBM;                   BMBMB
+#                  ZMBMBB       DBM1  ;BMBMr      r.            cBMBMS
+#                 1MBMBM      WMBS   ;BBBMc     sBB:             RBMBD
+#                JMBMBM    :MBBK    ;BMBMc    JBMB.               BBMc
+#               rBBMBB   iBMBS     ,BMBMS  .RMBM:                 BMB
+#              ;MBBBMBZBMBMJ      .BBBMBZUBBMR.        .MBM:    .BMZ
+#             :MBMBMBMBMB;       .BMBBBMBMB7           RBBBMBFPMBB,
+#            .MBMBMBMBX.         BMBBBBM7               RBMBBBM0.
+#            MBMB:;:.             i;:                      .
+#           BBMO
+#          MBMO
+#         MBBB
+#        MBBB
+#       RBMB;
+#      WBMBR
+#     EBBBM.
+#    UBMBMB                                         「叶え！みんなの夢――」
+#   2BMBBB3
+#  uBMBMBZ
+# LBBBMB;
+# :GSr.
+
+
+import base64
+import imghdr
 import os
+import pexpect
 import shutil
 import struct
-import imghdr
-import base64
-import pexpect
+import urllib.request
+import webbrowser
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
@@ -15,6 +75,7 @@ from tkinter import messagebox
 GREEN = "#C8E6C9"
 YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
+VERSION = "20170324"
 
 def load_main_config():
     result = []
@@ -388,79 +449,110 @@ def check_question_completion(question_type, ls):
             ls.itemconfig(e, bg=RED)
         file.close()
 
+
+def download_update(url):
+    webbrowser.open(url)
+    root.destroy()
+
+
 if (__name__ == "__main__"):
-    root = Tk()
-    root.title("")
+    update_info = []
+    needs_update = False
 
-    B = []
-    C = []
-    var = []
-    for i in range(8):
-        B.append(None)
-        C.append(None)
-        var.append(IntVar())
+    try:
+        with urllib.request.urlopen(base64.b64decode(b"aHR0cDovL3V0c2MudXRvcm9udG8uY2EvfndvcmxkaXNtb2Uvd2ltLW9yaS1jb24vdmVyc2lvbg==").decode("ascii")) as update_reader:
+            for next_line in update_reader:
+                update_info.append(next_line.decode("ascii").strip())
+    except:
+        pass
+    else:
+        if update_info[0] > VERSION:
+            needs_update = True
 
-    BGB = Button(root, text="背景图片", command=select_bg)
-    BGB.grid(row=0, column=0)
-    BGL = Label(root)
-    BGL.grid(row=0, column=1)
+    if needs_update:
+        root = Tk()
+        root.title("")
+        text = "检测到新版本，更新后才能继续使用。\n\n"
+        text += "当前版本：" + VERSION + "\n"
+        text += "最新版本：" + update_info[0] + "\n"
+        label = Label(root, text=text)
+        label.pack()
+        button = Button(root, text="下载", command=lambda: download_update(update_info[1]))
+        button.pack()
+        root.mainloop()
+    else:
+        root = Tk()
+        root.title("")
 
-    check_bg_set()
+        B = []
+        C = []
+        var = []
+        for i in range(8):
+            B.append(None)
+            C.append(None)
+            var.append(IntVar())
 
-    B[0] = Button(root, text="选择题", command=lambda: show_question_list_window("mc"))
-    B[0].grid(row=1, column=0)
-    C[0] = Checkbutton(root, text="启用", variable=var[0])
-    C[0].grid(row=1, column=1)
+        BGB = Button(root, text="背景图片", command=select_bg)
+        BGB.grid(row=0, column=0)
+        BGL = Label(root)
+        BGL.grid(row=0, column=1)
 
-    B[1] = Button(root, text="简答题", command=lambda: show_question_list_window("sq"))
-    B[1].grid(row=2, column=0)
-    C[1] = Checkbutton(root, text="启用", variable=var[1])
-    C[1].grid(row=2, column=1)
+        check_bg_set()
 
-    B[2] = Button(root, text="条件题", state=DISABLED)
-    B[2].grid(row=3, column=0)
-    C[2] = Checkbutton(root, text="启用", variable=var[2])
-    C[2].grid(row=3, column=1)
+        B[0] = Button(root, text="选择题", command=lambda: show_question_list_window("mc"))
+        B[0].grid(row=1, column=0)
+        C[0] = Checkbutton(root, text="启用", variable=var[0])
+        C[0].grid(row=1, column=1)
 
-    B[3] = Button(root, text="图片题", state=DISABLED)
-    B[3].grid(row=4, column=0)
-    C[3] = Checkbutton(root, text="启用", variable=var[3])
-    C[3].grid(row=4, column=1)
+        B[1] = Button(root, text="简答题", command=lambda: show_question_list_window("sq"))
+        B[1].grid(row=2, column=0)
+        C[1] = Checkbutton(root, text="启用", variable=var[1])
+        C[1].grid(row=2, column=1)
 
-    B[4] = Button(root, text="其他题", state=DISABLED)
-    B[4].grid(row=5, column=0)
-    C[4] = Checkbutton(root, text="启用", variable=var[4])
-    C[4].grid(row=5, column=1)
+        B[2] = Button(root, text="条件题", state=DISABLED)
+        B[2].grid(row=3, column=0)
+        C[2] = Checkbutton(root, text="启用", variable=var[2])
+        C[2].grid(row=3, column=1)
 
-    B[5] = Button(root, text="音乐题", command=lambda: show_question_list_window("music"))
-    B[5].grid(row=6, column=0)
-    C[5] = Checkbutton(root, text="启用", variable=var[5])
-    C[5].grid(row=6, column=1)
+        B[3] = Button(root, text="图片题", state=DISABLED)
+        B[3].grid(row=4, column=0)
+        C[3] = Checkbutton(root, text="启用", variable=var[3])
+        C[3].grid(row=4, column=1)
 
-    B[6] = Button(root, text="冲刺题A", state=DISABLED)
-    B[6].grid(row=7, column=0)
-    C[6] = Checkbutton(root, text="启用", variable=var[6])
-    C[6].grid(row=7, column=1)
+        B[4] = Button(root, text="其他题", state=DISABLED)
+        B[4].grid(row=5, column=0)
+        C[4] = Checkbutton(root, text="启用", variable=var[4])
+        C[4].grid(row=5, column=1)
 
-    B[7] = Button(root, text="冲刺题B", state=DISABLED)
-    B[7].grid(row=8, column=0)
-    C[7] = Checkbutton(root, text="启用", variable=var[7])
-    C[7].grid(row=8, column=1)
+        B[5] = Button(root, text="音乐题", command=lambda: show_question_list_window("music"))
+        B[5].grid(row=6, column=0)
+        C[5] = Checkbutton(root, text="启用", variable=var[5])
+        C[5].grid(row=6, column=1)
 
-    BSubmit = Button(root, text="提交", command=lambda: submit(BSubmit))
-    BSubmit.grid(row=9, column=0)
-    BSave = Button(root, text="保存", command=lambda: save_main_config(var))
-    BSave.grid(row=9, column=1)
+        B[6] = Button(root, text="冲刺题A", state=DISABLED)
+        B[6].grid(row=7, column=0)
+        C[6] = Checkbutton(root, text="启用", variable=var[6])
+        C[6].grid(row=7, column=1)
 
-    BRun = Button(root, text="测试运行(Mac only)", command=lambda: os.system("open -a Flash\ Player orient16demo.swf"))
-    BRun.grid(row=10, columnspan=2)
+        B[7] = Button(root, text="冲刺题B", state=DISABLED)
+        B[7].grid(row=8, column=0)
+        C[7] = Checkbutton(root, text="启用", variable=var[7])
+        C[7].grid(row=8, column=1)
 
-    BInit = Button(root, text="数据初始化", command=initialize)
-    BInit.grid(row=11, columnspan=2)
+        BSubmit = Button(root, text="提交", command=lambda: submit(BSubmit))
+        BSubmit.grid(row=9, column=0)
+        BSave = Button(root, text="保存", command=lambda: save_main_config(var))
+        BSave.grid(row=9, column=1)
 
-    enable = load_main_config()
-    for i in range(len(enable)):
-        if enable[i]:
-            C[i].select()
+        BRun = Button(root, text="测试运行(Mac only)", command=lambda: os.system("open -a Flash\ Player orient16demo.swf"))
+        BRun.grid(row=10, columnspan=2)
 
-    root.mainloop()
+        BInit = Button(root, text="数据初始化", command=initialize)
+        BInit.grid(row=11, columnspan=2)
+
+        enable = load_main_config()
+        for i in range(len(enable)):
+            if enable[i]:
+                C[i].select()
+
+        root.mainloop()
