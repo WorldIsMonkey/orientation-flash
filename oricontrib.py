@@ -363,7 +363,7 @@ def edit_question(question_type, ls):
             R4.grid(row=9, column=1)
 
         save_btn = Button(question_edit, text="保存", command=lambda: save_question(question_type, index, SV, IV, question_edit, ls))
-        save_btn.grid(row=10, columnspan=2)
+        save_btn.grid(row=99, columnspan=2)
 
         question_edit.mainloop()
 
@@ -509,7 +509,7 @@ if (__name__ == "__main__"):
         C[1] = Checkbutton(root, text="启用", variable=var[1])
         C[1].grid(row=2, column=1)
 
-        B[2] = Button(root, text="条件题", state=DISABLED)
+        B[2] = Button(root, text="判断题", state=DISABLED)
         B[2].grid(row=3, column=0)
         C[2] = Checkbutton(root, text="启用", variable=var[2])
         C[2].grid(row=3, column=1)
@@ -539,16 +539,21 @@ if (__name__ == "__main__"):
         C[7] = Checkbutton(root, text="启用", variable=var[7])
         C[7].grid(row=8, column=1)
 
-        BSubmit = Button(root, text="提交", command=lambda: submit(BSubmit))
-        BSubmit.grid(row=9, column=0)
         BSave = Button(root, text="保存", command=lambda: save_main_config(var))
-        BSave.grid(row=9, column=1)
+        BSave.grid(row=9, columnspan=2)
+        BExport = Button(root, text="导出")
+        BExport.grid(row=10, column=0)
+        if sys.platform == "win32":
+            BSubmit = Button(root, text="提交", state=DISABLED)
+        else:
+            BSubmit = Button(root, text="提交", command=lambda: submit(BSubmit))
+        BSubmit.grid(row=10, column=1)
 
-        BRun = Button(root, text="测试运行(Mac only)", command=lambda: os.system("open -a Flash\ Player orient16demo.swf"))
-        BRun.grid(row=10, columnspan=2)
+        BRun = Button(root, text="测试运行", command=lambda: os.system("open -a Flash\ Player orient16demo.swf"))
+        BRun.grid(row=11, columnspan=2)
 
         BInit = Button(root, text="数据初始化", command=initialize)
-        BInit.grid(row=11, columnspan=2)
+        BInit.grid(row=12, columnspan=2)
 
         enable = load_main_config()
         for i in range(len(enable)):
