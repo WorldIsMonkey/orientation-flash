@@ -106,15 +106,16 @@ def save_main_config(var):
 
 
 def initialize():
-    if messagebox.askyesno("", "你确定要初始化数据吗？这将清除所有已输入的数据。"):
-        if os.path.exists("data"):
-            try:
-                shutil.rmtree("data")
+    if messagebox.askyesno("", "你确定要初始化数据吗？"):
+        if messagebox.askyesno("", "你真的要初始化数据吗？这将清除所有已输入的数据！"):
+            if os.path.exists("data"):
+                try:
+                    shutil.rmtree("data")
+                    messagebox.showinfo("", "数据初始化成功！")
+                except:
+                    messagebox.showerror("", "数据初始化失败。")
+            else:
                 messagebox.showinfo("", "数据初始化成功！")
-            except:
-                messagebox.showerror("", "数据初始化失败。")
-        else:
-            messagebox.showinfo("", "数据初始化成功！")
 
 
 def submit(button):
@@ -184,11 +185,23 @@ def check_dir_existance(question_type):
         os.makedirs("data")
     if not os.path.exists("data/" + question_type):
         os.makedirs("data/" + question_type)
+    if not os.path.exists("data/" + question_type + "/media"):
+        os.makedirs("data/" + question_type + "/media")
 
 
-def select_file():
+def add_media(elem, question_type, filename, description, file_type):
+    selected = select_file(description, file_type)
+    if selected:
+        check_dir_existance(question_type)
+        target = "data/" + question_type + "/media/" + filename
+        shutil.copy(selected, target)
+        check_set(elem, target)
+        messagebox.showinfo("", "设定成功！")
+
+
+def select_file(description, file_type):
     root.update()
-    filename = filedialog.askopenfilename(filetypes=[("JPG Files", "*.jpg")])
+    filename = filedialog.askopenfilename(filetypes=[(description, file_type)])
     return filename
 
 
@@ -198,7 +211,7 @@ def check_bg_image_size(filename):
 
 
 def select_bg():
-    filename = select_file()
+    filename = select_file("JPG Files", "*.jpg")
     if filename:
         if check_bg_image_size(filename):
             if not os.path.exists("data"):
@@ -207,16 +220,16 @@ def select_bg():
             messagebox.showinfo("", "设定成功！")
         else:
             messagebox.showerror("", "图片分辨率必须为1280 x 800.")
-        check_bg_set()
+        check_set(BGL, "data/bg.jpg")
 
 
-def check_bg_set():
-    if os.path.exists("data/bg.jpg"):
-        BGL.config(text="已设定")
-        BGL.config(fg="#4CAF50")
+def check_set(element, file):
+    if os.path.exists(file):
+        element.config(text="已设定")
+        element.config(fg="#4CAF50")
     else:
-        BGL.config(text="未设定")
-        BGL.config(fg="red")
+        element.config(text="未设定")
+        element.config(fg="red")
 
 
 def show_question_list_window(question_type):
@@ -362,6 +375,20 @@ def edit_question(question_type, ls):
             R3.grid(row=8, column=1)
             R4.grid(row=9, column=1)
 
+        if question_type == "music":
+            audio_filename = str(index) + ".mp3"
+            video_filename = str(index) + ".mp4"
+            F1L = Label(question_edit)
+            F2L = Label(question_edit)
+            F1 = Button(question_edit, text="音频 (exactly 20s)", command=lambda: add_media(F1L, "music", audio_filename, "MP3 Files", "*.mp3"))
+            F2 = Button(question_edit, text="视频 (1280 x 720)", command=lambda: add_media(F2L, "music", video_filename, "MP4 Files", "*.mp4"))
+            F1.grid(row=10, column=1)
+            F2.grid(row=11, column=1)
+            F1L.grid(row=10, column=0)
+            F2L.grid(row=11, column=0)
+            check_set(F1L, "data/" + question_type + "/media/" + audio_filename)
+            check_set(F2L, "data/" + question_type + "/media/" + video_filename)
+
         save_btn = Button(question_edit, text="保存", command=lambda: save_question(question_type, index, SV, IV, question_edit, ls))
         save_btn.grid(row=99, columnspan=2)
 
@@ -466,7 +493,7 @@ if (__name__ == "__main__"):
     except:
         pass
     else:
-        if update_info[0] > VERSION:
+        if update_info[0] != VERSION:
             needs_update = True
 
     if needs_update:
@@ -492,55 +519,55 @@ if (__name__ == "__main__"):
             C.append(None)
             var.append(IntVar())
 
-        BGB = Button(root, text="背景图片", command=select_bg)
-        BGB.grid(row=0, column=0)
         BGL = Label(root)
-        BGL.grid(row=0, column=1)
+        BGL.grid(row=0, column=0)
+        BGB = Button(root, text="背景图片", command=select_bg)
+        BGB.grid(row=0, column=1)
 
-        check_bg_set()
+        check_set(BGL, "data/bg.jpg")
 
         B[0] = Button(root, text="选择题", command=lambda: show_question_list_window("mc"))
-        B[0].grid(row=1, column=0)
-        C[0] = Checkbutton(root, text="启用", variable=var[0])
-        C[0].grid(row=1, column=1)
+        B[0].grid(row=1, column=1)
+        #C[0] = Checkbutton(root, text="启用", variable=var[0])
+        #C[0].grid(row=1, column=1)
 
         B[1] = Button(root, text="简答题", command=lambda: show_question_list_window("sq"))
-        B[1].grid(row=2, column=0)
-        C[1] = Checkbutton(root, text="启用", variable=var[1])
-        C[1].grid(row=2, column=1)
+        B[1].grid(row=2, column=1)
+        #C[1] = Checkbutton(root, text="启用", variable=var[1])
+        #C[1].grid(row=2, column=0)
 
         B[2] = Button(root, text="判断题", state=DISABLED)
-        B[2].grid(row=3, column=0)
-        C[2] = Checkbutton(root, text="启用", variable=var[2])
-        C[2].grid(row=3, column=1)
+        B[2].grid(row=3, column=1)
+        #C[2] = Checkbutton(root, text="启用", variable=var[2])
+        #C[2].grid(row=3, column=0)
 
         B[3] = Button(root, text="图片题", state=DISABLED)
-        B[3].grid(row=4, column=0)
-        C[3] = Checkbutton(root, text="启用", variable=var[3])
-        C[3].grid(row=4, column=1)
+        B[3].grid(row=4, column=1)
+        #C[3] = Checkbutton(root, text="启用", variable=var[3])
+        #C[3].grid(row=4, column=0)
 
-        B[4] = Button(root, text="其他题", state=DISABLED)
-        B[4].grid(row=5, column=0)
-        C[4] = Checkbutton(root, text="启用", variable=var[4])
-        C[4].grid(row=5, column=1)
+        #B[4] = Button(root, text="其他题", state=DISABLED)
+        #B[4].grid(row=5, column=1)
+        #C[4] = Checkbutton(root, text="启用", variable=var[4])
+        #C[4].grid(row=5, column=0)
 
         B[5] = Button(root, text="音乐题", command=lambda: show_question_list_window("music"))
-        B[5].grid(row=6, column=0)
-        C[5] = Checkbutton(root, text="启用", variable=var[5])
-        C[5].grid(row=6, column=1)
+        B[5].grid(row=6, column=1)
+        #C[5] = Checkbutton(root, text="启用", variable=var[5])
+        #C[5].grid(row=6, column=0)
 
-        B[6] = Button(root, text="冲刺题A", state=DISABLED)
-        B[6].grid(row=7, column=0)
-        C[6] = Checkbutton(root, text="启用", variable=var[6])
-        C[6].grid(row=7, column=1)
+        #B[6] = Button(root, text="冲刺题A", state=DISABLED)
+        #B[6].grid(row=7, column=1)
+        #C[6] = Checkbutton(root, text="启用", variable=var[6])
+        #C[6].grid(row=7, column=0)
 
-        B[7] = Button(root, text="冲刺题B", state=DISABLED)
-        B[7].grid(row=8, column=0)
-        C[7] = Checkbutton(root, text="启用", variable=var[7])
-        C[7].grid(row=8, column=1)
+        #B[7] = Button(root, text="冲刺题B", state=DISABLED)
+        #B[7].grid(row=8, column=1)
+        #C[7] = Checkbutton(root, text="启用", variable=var[7])
+        #C[7].grid(row=8, column=0)
 
-        BSave = Button(root, text="保存", command=lambda: save_main_config(var))
-        BSave.grid(row=9, columnspan=2)
+        #BSave = Button(root, text="保存", command=lambda: save_main_config(var))
+        #BSave.grid(row=9, columnspan=2)
         BExport = Button(root, text="导出")
         BExport.grid(row=10, column=0)
         if sys.platform == "win32":
