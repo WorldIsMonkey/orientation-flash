@@ -61,6 +61,7 @@ along with this file.  If not, see <http://www.gnu.org/licenses/>.
 
 
 import base64
+import hashlib
 import imghdr
 import os
 import pexpect
@@ -76,6 +77,15 @@ GREEN = "#C8E6C9"
 YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
 VERSION = "20170324"
+
+
+def md5(fname):
+    hash_md5 = hashlib.md5()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
 
 def load_main_config():
     result = []
@@ -124,7 +134,6 @@ def submit(button):
         try:
             var_password = base64.b64decode(b"V0lNV0lNMTIzNDU2").decode("ascii")
             var_command = base64.b64decode(b"c2NwIC1yIGRhdGEgd29ybGRpc21vZUBmaXNzdXJlLnV0c2MudXRvcm9udG8uY2E6fg==").decode("ascii")
-            # make sure in the above command that username and hostname are according to your server
             var_child = pexpect.spawn(var_command)
             i = var_child.expect(["password:", "yes/no", pexpect.EOF])
 
@@ -242,6 +251,9 @@ def show_question_list_window(question_type):
     elif question_type == "music":
         no_questions = 30
         title = "音乐题"
+    elif question_type == "tf":
+        no_questions = 15
+        title = "判断题"
     mc = Tk()
     mc.title(title)
     ls = Listbox(mc, height=no_questions + 1)
@@ -305,7 +317,7 @@ def edit_question(question_type, ls):
             except IndexError:
                 pass
 
-        if question_type in {"mc", "sq"}:
+        if question_type in {"mc", "sq", "tf"}:
             L0 = Label(question_edit, text="问题第1行")
             L0.grid(row=0, column=0)
             E0 = Entry(question_edit, textvariable=SV[0])
@@ -374,14 +386,21 @@ def edit_question(question_type, ls):
             R2.grid(row=7, column=1)
             R3.grid(row=8, column=1)
             R4.grid(row=9, column=1)
+        elif question_type == "tf":
+            L5 = Label(question_edit, text="答案")
+            L5.grid(row=6, column=0)
+            R1 = Radiobutton(question_edit, text="True", variable=IV, value=1)
+            R2 = Radiobutton(question_edit, text="False", variable=IV, value=2)
+            R1.grid(row=6, column=1)
+            R2.grid(row=7, column=1)
 
         if question_type == "music":
             audio_filename = str(index) + ".mp3"
             video_filename = str(index) + ".mp4"
             F1L = Label(question_edit)
             F2L = Label(question_edit)
-            F1 = Button(question_edit, text="音频 (exactly 20s)", command=lambda: add_media(F1L, "music", audio_filename, "MP3 Files", "*.mp3"))
-            F2 = Button(question_edit, text="视频 (1280 x 720)", command=lambda: add_media(F2L, "music", video_filename, "MP4 Files", "*.mp4"))
+            F1 = Button(question_edit, text="音频 (mp3, exactly 20s)", command=lambda: add_media(F1L, "music", audio_filename, "MP3 Files", "*.mp3"))
+            F2 = Button(question_edit, text="视频 (mp4, 1280 x 720)", command=lambda: add_media(F2L, "music", video_filename, "MP4 Files", "*.mp4"))
             F1.grid(row=10, column=1)
             F2.grid(row=11, column=1)
             F1L.grid(row=10, column=0)
@@ -407,13 +426,14 @@ def save_question(question_type, index, SV, IV, window, ls):
                 file.write("N/A\n")
             else:
                 file.write(SV[i].get() + "\n")
-    elif question_type == "music":
+    elif question_type in {"music", "tf"}:
         for i in range(len(SV)):
             if i > 1:
                 file.write("N/A\n")
             else:
                 file.write(SV[i].get() + "\n")
-    if question_type in {"mc", "music"}:
+
+    if question_type in {"mc", "music", "tf"}:
         file.write(str(IV.get()) + "\n")
     elif question_type == "sq":
         file.write("-1\n")
@@ -438,6 +458,8 @@ def check_question_completion(question_type, ls):
         no_questions = 20
     elif question_type == "music":
         no_questions = 30
+    elif question_type == "tf":
+        no_questions = 15
     greenlist = []
     for i in range(0, no_questions + 1):
         if i == 0:
@@ -465,7 +487,7 @@ def check_question_completion(question_type, ls):
                 if question_type == "music":
                     ls.itemconfig(e, bg=YELLOW)
                 else:
-                    if count != 1: # 问题第二行可以为空
+                    if count != 1:  # 问题第二行可以为空
                         ls.itemconfig(e, bg=YELLOW)
             elif count == 6 and l.strip() == "0":
                 ls.itemconfig(e, bg=YELLOW)
@@ -482,29 +504,40 @@ def download_update(url):
     root.destroy()
 
 
+def export():
+    filename = filedialog.asksaveasfilename(filetypes=[("ZIP Files", "*.zip")])
+    if filename:
+        shutil.make_archive(filename, 'zip', 'data')
+
+
 if (__name__ == "__main__"):
+    debug = False
     update_info = []
     needs_update = False
 
-    try:
-        with urllib.request.urlopen(base64.b64decode(b"aHR0cDovL3V0c2MudXRvcm9udG8uY2EvfndvcmxkaXNtb2Uvd2ltLW9yaS1jb24vdmVyc2lvbg==").decode("ascii")) as update_reader:
-            for next_line in update_reader:
-                update_info.append(next_line.decode("ascii").strip())
-    except:
-        pass
-    else:
-        if update_info[0] != VERSION:
-            needs_update = True
+    if not debug:
+        try:
+            with urllib.request.urlopen(base64.b64decode(b"aHR0cDovL3V0c2MudXRvcm9udG8uY2EvfndvcmxkaXNtb2Uvd2ltLW9yaS1jb24vdmVyc2lvbg==").decode("ascii")) as update_reader:
+                for next_line in update_reader:
+                    update_info.append(next_line.decode("ascii").strip())
+        except:
+            pass
+        else:
+            if update_info[1] != VERSION:
+                needs_update = True
+            swfmd5 = md5("orientation.swf")
+            if update_info[2] != swfmd5:
+                need_update = True
 
     if needs_update:
         root = Tk()
         root.title("")
         text = "检测到新版本，更新后才能继续使用。\n\n"
-        text += "当前版本：" + VERSION + "\n"
-        text += "最新版本：" + update_info[0] + "\n"
+        text += "当前版本：" + VERSION + " " + swfmd5 + "\n"
+        text += "最新版本：" + update_info[1] + " " + update_info[2] + "\n"
         label = Label(root, text=text)
         label.pack()
-        button = Button(root, text="下载", command=lambda: download_update(update_info[1]))
+        button = Button(root, text="下载", command=lambda: download_update(update_info[0]))
         button.pack()
         root.mainloop()
     else:
@@ -536,7 +569,7 @@ if (__name__ == "__main__"):
         #C[1] = Checkbutton(root, text="启用", variable=var[1])
         #C[1].grid(row=2, column=0)
 
-        B[2] = Button(root, text="判断题", state=DISABLED)
+        B[2] = Button(root, text="是非题", command=lambda: show_question_list_window("tf"))
         B[2].grid(row=3, column=1)
         #C[2] = Checkbutton(root, text="启用", variable=var[2])
         #C[2].grid(row=3, column=0)
@@ -568,7 +601,7 @@ if (__name__ == "__main__"):
 
         #BSave = Button(root, text="保存", command=lambda: save_main_config(var))
         #BSave.grid(row=9, columnspan=2)
-        BExport = Button(root, text="导出")
+        BExport = Button(root, text="导出", command=export)
         BExport.grid(row=10, column=0)
         if sys.platform == "win32":
             BSubmit = Button(root, text="提交", state=DISABLED)
@@ -579,12 +612,12 @@ if (__name__ == "__main__"):
         BRun = Button(root, text="测试运行", command=lambda: os.system("open -a Flash\ Player orient16demo.swf"))
         BRun.grid(row=11, columnspan=2)
 
-        BInit = Button(root, text="数据初始化", command=initialize)
+        BInit = Button(root, text="!数据初始化!", command=initialize)
         BInit.grid(row=12, columnspan=2)
 
-        enable = load_main_config()
-        for i in range(len(enable)):
-            if enable[i]:
-                C[i].select()
+        #enable = load_main_config()
+        #for i in range(len(enable)):
+            #if enable[i]:
+                #C[i].select()
 
         root.mainloop()
