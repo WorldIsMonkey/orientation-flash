@@ -525,9 +525,10 @@ if (__name__ == "__main__"):
         else:
             if update_info[1] != VERSION:
                 needs_update = True
-            swfmd5 = md5("orientation.swf")
-            if update_info[2] != swfmd5:
-                need_update = True
+            swfmd5 = md5("orientation.swf")[:7]
+            if update_info[2][:7] != swfmd5:
+                needs_update = True
+            print(swfmd5, update_info[2])
 
     if needs_update:
         root = Tk()
@@ -609,7 +610,7 @@ if (__name__ == "__main__"):
             BSubmit = Button(root, text="提交", command=lambda: submit(BSubmit))
         BSubmit.grid(row=10, column=1)
 
-        BRun = Button(root, text="测试运行", command=lambda: os.system("open -a Flash\ Player orient16demo.swf"))
+        BRun = Button(root, text="测试运行", command=lambda: os.system("open -a Flash\ Player orientation.swf"))
         BRun.grid(row=11, columnspan=2)
 
         BInit = Button(root, text="!数据初始化!", command=initialize)
