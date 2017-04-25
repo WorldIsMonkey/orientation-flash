@@ -79,12 +79,12 @@ RED = "#FFCDD2"
 VERSION = "20170324"
 
 
-def md5(fname):
-    hash_md5 = hashlib.md5()
+def sha1(fname):
+    hash_sha1 = hashlib.sha1()
     with open(fname, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
+            hash_sha1.update(chunk)
+    return hash_sha1.hexdigest()
 
 
 def load_main_config():
@@ -525,16 +525,15 @@ if (__name__ == "__main__"):
         else:
             if update_info[1] != VERSION:
                 needs_update = True
-            swfmd5 = md5("orientation.swf")[:7]
-            if update_info[2][:7] != swfmd5:
+            swfsha1 = sha1("orientation.swf")[:7]
+            if update_info[2][:7] != swfsha1:
                 needs_update = True
-            print(swfmd5, update_info[2])
 
     if needs_update:
         root = Tk()
         root.title("")
         text = "检测到新版本，更新后才能继续使用。\n\n"
-        text += "当前版本：" + VERSION + " " + swfmd5 + "\n"
+        text += "当前版本：" + VERSION + " " + swfsha1 + "\n"
         text += "最新版本：" + update_info[1] + " " + update_info[2] + "\n"
         label = Label(root, text=text)
         label.pack()
