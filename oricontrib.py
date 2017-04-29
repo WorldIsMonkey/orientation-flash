@@ -64,14 +64,16 @@ import base64
 import hashlib
 import imghdr
 import os
-import pexpect
 import shutil
+import ssl
 import struct
+import tarfile
 import urllib.request
 import webbrowser
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+
 
 GREEN = "#C8E6C9"
 YELLOW = "#FFF9C4"
@@ -128,30 +130,55 @@ def initialize():
                 messagebox.showinfo("", "数据初始化成功！")
 
 
-def submit(button):
-    button["text"] = "提交中..."
-    if messagebox.askyesno("", "你确定要将数据上传至服务器吗？"):
-        try:
-            var_password = base64.b64decode(b"V0lNV0lNMTIzNDU2").decode("ascii")
-            var_command = base64.b64decode(b"c2NwIC1yIGRhdGEgd29ybGRpc21vZUBmaXNzdXJlLnV0c2MudXRvcm9udG8uY2E6fg==").decode("ascii")
-            var_child = pexpect.spawn(var_command)
-            i = var_child.expect(["password:", "yes/no", pexpect.EOF])
+def submit(root):
+    def upload(top, button, username, password):
+        if messagebox.askyesno("", "你确定要将数据上传至服务器吗？"):
+            button["text"] = "正在连接..."
+            top.update()
 
-            if i==0: # send password
-                var_child.sendline(var_password)
-                var_child.expect(pexpect.EOF)
-            elif i==1:
-                var_child.sendline("yes")
-                j = var_child.expect(["password:", pexpect.EOF])
-                if j==0:
+            try:
+                import pexpect
+                var_password = password
+                var_command = (base64.b64decode(b"c2NwIC1yIGRhdGEg").decode("ascii") +
+                               username +
+                               base64.b64decode(b"QGZpc3N1cmUudXRzYy51dG9yb250by5jYTp+").decode("ascii"))
+                var_child = pexpect.spawn(var_command)
+                i = var_child.expect(["password:", "yes/no", "denied", pexpect.EOF])
+
+                if i == 0: # send password
+                    button["text"] = "正在上传..."
+                    top.update()
                     var_child.sendline(var_password)
                     var_child.expect(pexpect.EOF)
-            else:
-                messagebox.showerror("", "提交失败。")
-            messagebox.showinfo("", "提交成功！")
-        except Exception as e:
-            messagebox.showerror("", "提交失败。")
-    button["text"] = "提交"
+                elif i == 1:
+                    var_child.sendline("yes")
+                    j = var_child.expect(["password:", pexpect.EOF])
+                    if j == 0:
+                        var_child.sendline(var_password)
+                        var_child.expect(pexpect.EOF)
+                elif i == 2:
+                    raise Exception("用户名或密码错误。")
+                else:
+                    raise Exception("提交失败。")
+                messagebox.showinfo("", "提交成功！")
+            except Exception as e:
+                messagebox.showerror("", str(e))
+            finally:
+                top.destroy()
+
+    top = Toplevel(root)
+    top.title = ""
+    username_label = Label(top, text="username: ")
+    username_label.grid(row=0, column=0)
+    password_label = Label(top, text="password: ")
+    password_label.grid(row=1, column=0)
+    username = Entry(top)
+    username.grid(row=0, column=1)
+    password = Entry(top)
+    password.grid(row=1, column=1)
+    button = Button(top,text='提交',command=lambda: upload(top, button, username.get(), password.get()))
+    button.grid(row=2, columnspan=2)
+    top.mainloop()
 
 
 def get_image_size(fname):
@@ -505,13 +532,106 @@ def download_update(url):
 
 
 def export():
-    filename = filedialog.asksaveasfilename(filetypes=[("ZIP Files", "*.zip")])
+    filename = filedialog.asksaveasfilename(filetypes=[(".tar.gz Files", "*.tar.gz")], title="导出至...")
     if filename:
-        shutil.make_archive(filename, 'zip', 'data')
+        shutil.make_archive(filename, 'gztar', 'data')
+
+
+def raise_above_all(window):
+    window.attributes('-topmost', 1)
+    window.attributes('-topmost', 0)
+
+
+def set_str_var(root, strvar, text):
+    strvar.set(text)
+    root.update()
+
+
+def first_time_run():
+    root = Tk()
+    root.title("")
+    label1 = Label(root, text="正在为首次运行做准备...")
+    label1.pack()
+    text = StringVar()
+    label2 = Label(root, textvariable=text)
+    label2.pack()
+    set_str_var(root, text, "Starting...")
+
+    bring_to_front(root)
+
+    try:
+        if not os.path.exists("tmp"):
+            os.makedirs("tmp")
+        ssl._create_default_https_context = ssl._create_unverified_context
+        if sys.platform == "win32":
+            set_str_var(root, text, "Downloading Adobe Flash Player...")
+            download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flashplayer_25_sa.exe", "flashplayer.exe")
+        else:
+            set_str_var(root, text, "Downloading ptyprocess...")
+            download("https://github.com/pexpect/ptyprocess/archive/0.5.1.tar.gz", "tmp/ptyprocess.tar.gz")
+            set_str_var(root, text, "Extracting ptyprocess...")
+            extract_tar_gz("tmp/ptyprocess.tar.gz", "tmp/")
+            os.system("mv ./tmp/ptyprocess-0.5.1/ptyprocess .")
+
+            set_str_var(root, text, "Downloading pexpect...")
+            download("https://github.com/pexpect/pexpect/archive/4.2.1.tar.gz", "tmp/pexpect.tar.gz")
+            set_str_var(root, text, "Extracting pexpect...")
+            extract_tar_gz("tmp/pexpect.tar.gz", "tmp/")
+            os.system("mv ./tmp/pexpect-4.2.1/pexpect .")
+
+            set_str_var(root, text, "Downloading Adobe Flash Player...")
+            if sys.platform == "darwin":
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flashplayer_25_sa.dmg", "tmp/flashplayer.dmg")
+                set_str_var(root, text, "Extracting Adobe Flash Player...")
+                os.system("hdiutil attach -nobrowse -mountpoint ./tmp/flashplayer ./tmp/flashplayer.dmg")
+                os.system("cp -r ./tmp/flashplayer/Flash\\ Player.app .")
+                os.system("hdiutil detach ./tmp/flashplayer")
+            else:
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
+                set_str_var(root, text, "Extracting Adobe Flash Player...")
+                extract_tar_gz("tmp/flashplayer.tar.gz", "tmp/")
+                os.system("mv ./tmp/flashplayer ./flashplayer")
+
+        set_str_var(root, text, "Removing temporary folder...")
+        if os.path.exists("tmp"):
+            shutil.rmtree("tmp")
+        root.destroy()
+    except Exception as e:
+        set_str_var(root, text, "初始化失败。")
+        root.mainloop()
+    else:
+        with open("__version__", "w") as file:
+            file.write(VERSION)
+
+
+def untar():
+    tar = tarfile.open("path_to/test/sample.tar.bz2", "r:bz2")
+    tar.extractall()
+    tar.close()
+
+
+def download(url, file, length=16*1024):
+    req = urllib.request.urlopen(url)
+    with open(file, 'wb') as fp:
+        shutil.copyfileobj(req, fp, length)
+
+
+def extract_tar_gz(file, target):
+    tar = tarfile.open(file, "r:gz")
+    tar.extractall(target)
+    tar.close()
+
+
+def bring_to_front(root):
+    root.lift()
+    root.attributes('-topmost', True)
+    root.after_idle(root.attributes, '-topmost', False)
+    if sys.platform == "darwin":
+        os.system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
 
 
 if (__name__ == "__main__"):
-    debug = False
+    debug = True
     update_info = []
     needs_update = False
 
@@ -541,6 +661,13 @@ if (__name__ == "__main__"):
         button.pack()
         root.mainloop()
     else:
+        if os.path.exists("__version__"):
+            with open("__version__", "r") as file:
+                if file.read().strip() != VERSION:
+                    first_time_run()
+        else:
+            first_time_run()
+
         root = Tk()
         root.title("")
 
@@ -574,8 +701,8 @@ if (__name__ == "__main__"):
         #C[2] = Checkbutton(root, text="启用", variable=var[2])
         #C[2].grid(row=3, column=0)
 
-        B[3] = Button(root, text="图片题", state=DISABLED)
-        B[3].grid(row=4, column=1)
+        #B[3] = Button(root, text="图片题", state=DISABLED)
+        #B[3].grid(row=4, column=1)
         #C[3] = Checkbutton(root, text="启用", variable=var[3])
         #C[3].grid(row=4, column=0)
 
@@ -603,13 +730,17 @@ if (__name__ == "__main__"):
         #BSave.grid(row=9, columnspan=2)
         BExport = Button(root, text="导出", command=export)
         BExport.grid(row=10, column=0)
+
         if sys.platform == "win32":
             BSubmit = Button(root, text="提交", state=DISABLED)
+            BRun = Button(root, text="测试运行", command=lambda: os.system('start flashplayer.exe "orientation.swf"'))
         else:
-            BSubmit = Button(root, text="提交", command=lambda: submit(BSubmit))
+            BSubmit = Button(root, text="提交", command=lambda: submit(root))
+            if sys.platform == "darwin":
+                BRun = Button(root, text="测试运行", command=lambda: os.system("open -a Flash\ Player orientation.swf"))
+            else:
+                BRun = Button(root, text="测试运行", command=lambda: os.system("./flashplayer orientation.swf"))
         BSubmit.grid(row=10, column=1)
-
-        BRun = Button(root, text="测试运行", command=lambda: os.system("open -a Flash\ Player orientation.swf"))
         BRun.grid(row=11, columnspan=2)
 
         BInit = Button(root, text="!数据初始化!", command=initialize)
@@ -620,4 +751,5 @@ if (__name__ == "__main__"):
             #if enable[i]:
                 #C[i].select()
 
+        bring_to_front(root)
         root.mainloop()
