@@ -1,3 +1,10 @@
 .DS_Store
 __pycache__
+__version__
 data
+pexpect
+ptyprocess
+tmp
+flashplayer
+flashplayer.exe
+Flash Player.app
