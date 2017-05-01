@@ -78,7 +78,7 @@ from tkinter import messagebox
 GREEN = "#C8E6C9"
 YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
-VERSION = "20170324"
+VERSION = "20170430"
 
 
 def sha1(fname):
@@ -131,23 +131,22 @@ def initialize():
 
 
 def submit(root):
-    def upload(top, button, username, password):
+    def upload(top, button, host, username, password):
         if messagebox.askyesno("", "你确定要将数据上传至服务器吗？"):
+            button["state"] = DISABLED
             button["text"] = "正在连接..."
             top.update()
 
             try:
                 import pexpect
                 var_password = password
-                var_command = (base64.b64decode(b"c2NwIC1yIGRhdGEg").decode("ascii") +
-                               username +
-                               base64.b64decode(b"QGZpc3N1cmUudXRzYy51dG9yb250by5jYTp+").decode("ascii"))
+                var_command = ("scp -r ./data " + username + "@" + host + ":~")
                 var_child = pexpect.spawn(var_command)
                 i = var_child.expect(["password:", "yes/no", "denied", pexpect.EOF])
 
-                if i == 0: # send password
-                    button["text"] = "正在上传..."
-                    top.update()
+                button["text"] = "正在上传..."
+                top.update()
+                if i == 0:  # send password
                     var_child.sendline(var_password)
                     var_child.expect(pexpect.EOF)
                 elif i == 1:
@@ -166,18 +165,23 @@ def submit(root):
             finally:
                 top.destroy()
 
-    top = Toplevel(root)
-    top.title = ""
-    username_label = Label(top, text="username: ")
-    username_label.grid(row=0, column=0)
-    password_label = Label(top, text="password: ")
-    password_label.grid(row=1, column=0)
+    top = Toplevel()
+    top.title = "使用SCP上传"
+    host_label = Label(top, text="Host: ")
+    host_label.grid(row=0, column=0)
+    username_label = Label(top, text="Username: ")
+    username_label.grid(row=1, column=0)
+    password_label = Label(top, text="Password: ")
+    password_label.grid(row=2, column=0)
+    host = Entry(top)
+    host.insert(0, "fissure.utsc.utoronto.ca")
+    host.grid(row=0, column=1)
     username = Entry(top)
-    username.grid(row=0, column=1)
+    username.grid(row=1, column=1)
     password = Entry(top)
-    password.grid(row=1, column=1)
-    button = Button(top,text='提交',command=lambda: upload(top, button, username.get(), password.get()))
-    button.grid(row=2, columnspan=2)
+    password.grid(row=2, column=1)
+    button = Button(top,text="提交", command=lambda: upload(top, button, host.get(), username.get(), password.get()))
+    button.grid(row=3, columnspan=2)
     top.mainloop()
 
 
@@ -537,11 +541,6 @@ def export():
         shutil.make_archive(filename, 'gztar', 'data')
 
 
-def raise_above_all(window):
-    window.attributes('-topmost', 1)
-    window.attributes('-topmost', 0)
-
-
 def set_str_var(root, strvar, text):
     strvar.set(text)
     root.update()
@@ -597,6 +596,8 @@ def first_time_run():
             shutil.rmtree("tmp")
         root.destroy()
     except Exception as e:
+        global error
+        error = True
         set_str_var(root, text, "初始化失败。")
         root.mainloop()
     else:
@@ -631,7 +632,8 @@ def bring_to_front(root):
 
 
 if (__name__ == "__main__"):
-    debug = True
+    debug = False
+    error = False
     update_info = []
     needs_update = False
 
@@ -650,6 +652,7 @@ if (__name__ == "__main__"):
                 needs_update = True
 
     if needs_update:
+        error = True
         root = Tk()
         root.title("")
         text = "检测到新版本，更新后才能继续使用。\n\n"
@@ -659,8 +662,10 @@ if (__name__ == "__main__"):
         label.pack()
         button = Button(root, text="下载", command=lambda: download_update(update_info[0]))
         button.pack()
+        bring_to_front(root)
         root.mainloop()
-    else:
+
+    if not error:
         if os.path.exists("__version__"):
             with open("__version__", "r") as file:
                 if file.read().strip() != VERSION:
@@ -668,6 +673,7 @@ if (__name__ == "__main__"):
         else:
             first_time_run()
 
+    if not error:
         root = Tk()
         root.title("")
 
