@@ -1,4 +1,8 @@
 # WIM Orientation Contribution
-A platform for editing WIM Orientation front-end.
 
-Please run under Python 3 environment. Only works on macOS at the moment.
+A platform for editing content for WIM Orientation front-end.
+
+Usage:
+```
+$ python3 wim-ori-con
+```
