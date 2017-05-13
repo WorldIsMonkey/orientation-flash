@@ -78,7 +78,7 @@ from tkinter import messagebox
 GREEN = "#C8E6C9"
 YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
-VERSION = "20170430"
+DEPENDENCY_VERSION = "20170430"
 
 
 def sha1(fname):
@@ -602,7 +602,7 @@ def first_time_run():
         root.mainloop()
     else:
         with open("__version__", "w") as file:
-            file.write(VERSION)
+            file.write(DEPENDENCY_VERSION)
 
 
 def untar():
@@ -634,33 +634,27 @@ def bring_to_front(root):
 if (__name__ == "__main__"):
     debug = False
     error = False
-    update_info = []
     needs_update = False
 
     if not debug:
         try:
-            with urllib.request.urlopen(base64.b64decode(b"aHR0cDovL3V0c2MudXRvcm9udG8uY2EvfndvcmxkaXNtb2Uvd2ltLW9yaS1jb24vdmVyc2lvbg==").decode("ascii")) as update_reader:
-                for next_line in update_reader:
-                    update_info.append(next_line.decode("ascii").strip())
-        except:
-            pass
-        else:
-            if update_info[1] != VERSION:
+            with urllib.request.urlopen("https://raw.githubusercontent.com/A-Kun/wim-ori-con/master/wim-ori-con.py") as latest_code_reader:
+                latest_code = latest_code_reader.read().decode("utf-8").strip()
+            with open("wim-ori-con.py", encoding="utf8") as current_code_reader:
+                current_code = current_code_reader.read().strip()
+            if latest_code != current_code:
                 needs_update = True
-            swfsha1 = sha1("orientation.swf")[:7]
-            if update_info[2][:7] != swfsha1:
-                needs_update = True
+        except Exception as e:
+            print(e)
 
     if needs_update:
         error = True
         root = Tk()
         root.title("")
-        text = "检测到新版本，更新后才能继续使用。\n\n"
-        text += "当前版本：" + VERSION + " " + swfsha1 + "\n"
-        text += "最新版本：" + update_info[1] + " " + update_info[2] + "\n"
+        text = "检测到新版本，更新后才能继续使用。\n"
         label = Label(root, text=text)
         label.pack()
-        button = Button(root, text="下载", command=lambda: download_update(update_info[0]))
+        button = Button(root, text="下载", command=lambda: download_update("https://github.com/A-Kun/wim-ori-con/archive/master.zip"))
         button.pack()
         bring_to_front(root)
         root.mainloop()
@@ -668,7 +662,7 @@ if (__name__ == "__main__"):
     if not error:
         if os.path.exists("__version__"):
             with open("__version__", "r") as file:
-                if file.read().strip() != VERSION:
+                if file.read().strip() != DEPENDENCY_VERSION:
                     first_time_run()
         else:
             first_time_run()
