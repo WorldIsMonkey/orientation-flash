@@ -78,6 +78,8 @@ from tkinter import messagebox
 GREEN = "#C8E6C9"
 YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
+# Incrementing this variable will force a call to first_time_run.
+# Do this when dependency update is required.
 DEPENDENCY_VERSION = "20170430"
 
 
@@ -570,13 +572,13 @@ def first_time_run():
             download("https://github.com/pexpect/ptyprocess/archive/0.5.1.tar.gz", "tmp/ptyprocess.tar.gz")
             set_str_var(root, text, "Extracting ptyprocess...")
             extract_tar_gz("tmp/ptyprocess.tar.gz", "tmp/")
-            os.system("mv ./tmp/ptyprocess-0.5.1/ptyprocess .")
+            os.system("cp -r ./tmp/ptyprocess-0.5.1/ptyprocess .")
 
             set_str_var(root, text, "Downloading pexpect...")
             download("https://github.com/pexpect/pexpect/archive/4.2.1.tar.gz", "tmp/pexpect.tar.gz")
             set_str_var(root, text, "Extracting pexpect...")
             extract_tar_gz("tmp/pexpect.tar.gz", "tmp/")
-            os.system("mv ./tmp/pexpect-4.2.1/pexpect .")
+            os.system("cp -r ./tmp/pexpect-4.2.1/pexpect .")
 
             set_str_var(root, text, "Downloading Adobe Flash Player...")
             if sys.platform == "darwin":
@@ -589,7 +591,7 @@ def first_time_run():
                 download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 extract_tar_gz("tmp/flashplayer.tar.gz", "tmp/")
-                os.system("mv ./tmp/flashplayer ./flashplayer")
+                os.system("cp ./tmp/flashplayer ./flashplayer")
 
         set_str_var(root, text, "Removing temporary folder...")
         if os.path.exists("tmp"):
