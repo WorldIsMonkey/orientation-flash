@@ -563,7 +563,10 @@ def first_time_run():
     try:
         if not os.path.exists("tmp"):
             os.makedirs("tmp")
-        ssl._create_default_https_context = ssl._create_unverified_context
+        try:
+            ssl._create_default_https_context = ssl._create_unverified_context
+        except Exception as e:
+            print(e)
         if sys.platform == "win32":
             set_str_var(root, text, "Downloading Adobe Flash Player...")
             download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flashplayer_25_sa.exe", "flashplayer.exe")
@@ -598,6 +601,7 @@ def first_time_run():
             shutil.rmtree("tmp")
         root.destroy()
     except Exception as e:
+        print(e)
         global error
         error = True
         set_str_var(root, text, "初始化失败。")
@@ -634,7 +638,7 @@ def bring_to_front(root):
 
 
 if (__name__ == "__main__"):
-    debug = False
+    debug = False  # Setting this flag to True will disable checking for update
     error = False
     needs_update = False
 
