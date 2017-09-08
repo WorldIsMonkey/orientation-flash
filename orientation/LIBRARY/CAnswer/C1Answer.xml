@@ -1,0 +1,40 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="CAnswer/C1Answer" itemID="54060ee7-000000ae" lastModified="1434000323">
+  <timeline>
+    <DOMTimeline name="C1Answer">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMStaticText width="446.3" height="67.2">
+                  <matrix>
+                    <Matrix tx="-82.85" ty="430.55"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>长门有希</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                    <DOMTextRun>
+                      <characters></characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+                <DOMBitmapInstance libraryItemName="Picture(Old)/Bitmap 154">
+                  <matrix>
+                    <Matrix tx="2.3" ty="-85.45"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

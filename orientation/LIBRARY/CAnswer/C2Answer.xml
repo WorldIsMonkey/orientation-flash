@@ -1,0 +1,36 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="CAnswer/C2Answer" itemID="540961eb-000000f3" lastModified="1434000161">
+  <timeline>
+    <DOMTimeline name="C2Answer">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMStaticText width="446.3" height="67.2">
+                  <matrix>
+                    <Matrix tx="35.9" ty="398.9"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>佐仓千代</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                    <DOMTextRun>
+                      <characters></characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+                <DOMBitmapInstance libraryItemName="Picture(Old)/Bitmap 156"/>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

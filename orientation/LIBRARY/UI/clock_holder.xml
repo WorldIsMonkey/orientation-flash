@@ -1,0 +1,21 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="UI/clock_holder" itemID="55754b83-00000732" lastModified="1433799378">
+  <timeline>
+    <DOMTimeline name="clock_holder">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[var myLoader:Loader = new Loader();                     // create a new instance of the Loader class
+var url:URLRequest = new URLRequest("simple_circle_white.swf"); // in this case both SWFs are in the same folder 
+myLoader.load(url);                                     // load the SWF file
+addChild(myLoader);]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

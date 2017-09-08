@@ -1,0 +1,40 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="CAnswer/C11Answer" itemID="54096c63-00000316" lastModified="1434001808">
+  <timeline>
+    <DOMTimeline name="C11Answer">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMStaticText width="276.8" height="67.2" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="55.45" ty="365.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>我妻有乃</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                    <DOMTextRun>
+                      <characters></characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+                <DOMBitmapInstance libraryItemName="Picture(Old)/Bitmap 166">
+                  <matrix>
+                    <Matrix ty="45.95"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

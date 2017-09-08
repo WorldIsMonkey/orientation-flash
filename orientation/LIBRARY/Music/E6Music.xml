@@ -1,0 +1,38 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Music/E6Music" itemID="5409321a-000001b8" lastModified="1492284352">
+  <timeline>
+    <DOMTimeline name="E6Music" currentFrame="1" guides='&lt;guidelines&gt;&lt;guideline direction="h"&gt;-155&lt;/guideline&gt;&lt;/guidelines&gt;'>
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="1" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[import flash.events.Event; 
+import flash.media.Sound; 
+import flash.net.URLRequest; 
+
+var s:Sound = new Sound(); 
+s.addEventListener(Event.COMPLETE, onSoundLoaded); 
+var req:URLRequest = new URLRequest("data/music/media/6.mp3"); 
+s.load(req);
+	
+function onSoundLoaded(event:Event):void 
+{ 
+    var localSound:Sound = event.target as Sound; 
+    localSound.play(); 
+}
+]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

@@ -1,0 +1,31 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Picture(Old)/G4Pic" itemID="575ba012-00000213" lastModified="1465622546">
+  <timeline>
+    <DOMTimeline name="G4Pic">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance selected="true" libraryItemName="Picture(Old)/发光.jpg">
+                  <matrix>
+                    <Matrix a="0.7054443359375" d="0.705413818359375" tx="335.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMBitmapInstance selected="true" libraryItemName="Picture(Old)/五感.png">
+                  <matrix>
+                    <Matrix a="0.77435302734375" d="0.774398803710938" ty="138.95"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMBitmapInstance selected="true" libraryItemName="Picture(Old)/黑洞.png">
+                  <matrix>
+                    <Matrix tx="877" ty="46.2"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

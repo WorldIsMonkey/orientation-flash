@@ -75,12 +75,13 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 
+DEBUG = False  # Setting this flag to True will disable checking for update
 GREEN = "#C8E6C9"
 YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20170430"
+DEPENDENCY_VERSION = "20170908"
 
 
 def sha1(fname):
@@ -116,25 +117,25 @@ def save_main_config(var):
     for e in var:
         file.write(str(IntVar.get(e)))
     file.close()
-    messagebox.showinfo("", "主设置已保存。")
+    messagebox.showinfo("", "主设置已保存.")
 
 
 def initialize():
-    if messagebox.askyesno("", "你确定要初始化数据吗？"):
-        if messagebox.askyesno("", "你真的要初始化数据吗？这将清除所有已输入的数据！"):
+    if messagebox.askyesno("", "你确定要初始化数据吗?"):
+        if messagebox.askyesno("", "你真的要初始化数据吗?\n这将清除所有已输入的数据!"):
             if os.path.exists("data"):
                 try:
                     shutil.rmtree("data")
-                    messagebox.showinfo("", "数据初始化成功！")
+                    messagebox.showinfo("", "数据初始化成功!")
                 except:
-                    messagebox.showerror("", "数据初始化失败。")
+                    messagebox.showerror("", "数据初始化失败.")
             else:
-                messagebox.showinfo("", "数据初始化成功！")
+                messagebox.showinfo("", "数据初始化成功!")
 
 
 def submit(root):
     def upload(top, button, host, username, password):
-        if messagebox.askyesno("", "你确定要将数据上传至服务器吗？"):
+        if messagebox.askyesno("", "你确定要将数据上传至服务器吗?"):
             button["state"] = DISABLED
             button["text"] = "正在连接..."
             top.update()
@@ -158,10 +159,10 @@ def submit(root):
                         var_child.sendline(var_password)
                         var_child.expect(pexpect.EOF)
                 elif i == 2:
-                    raise Exception("用户名或密码错误。")
+                    raise Exception("用户名或密码错误.")
                 else:
-                    raise Exception("提交失败。")
-                messagebox.showinfo("", "提交成功！")
+                    raise Exception("提交失败.")
+                messagebox.showinfo("", "提交成功!")
             except Exception as e:
                 messagebox.showerror("", str(e))
             finally:
@@ -231,15 +232,17 @@ def check_dir_existance(question_type):
         os.makedirs("data/" + question_type + "/media")
 
 
-def add_media(elem, question_type, filename, description, file_type):
+def add_media(elem, question_type, filename, description, file_type, width=None, height=None):
     selected = select_file(description, file_type)
     if selected:
-        check_dir_existance(question_type)
-        target = "data/" + question_type + "/media/" + filename
-        shutil.copy(selected, target)
-        check_set(elem, target)
-        messagebox.showinfo("", "设定成功！")
-
+        if width and height and check_image_size(selected, width, height):
+            check_dir_existance(question_type)
+            target = "data/" + question_type + "/media/" + filename
+            shutil.copy(selected, target)
+            check_set(elem, target)
+            messagebox.showinfo("", "设定成功!")
+        else:
+            messagebox.showerror("", "图片分辨率必须为{0} x {1}.".format(width, height))
 
 def select_file(description, file_type):
     root.update()
@@ -247,19 +250,19 @@ def select_file(description, file_type):
     return filename
 
 
-def check_bg_image_size(filename):
+def check_image_size(filename, width, height):
     size = get_image_size(filename)
-    return size == (1280, 800)
+    return size == (width, height)
 
 
 def select_bg():
     filename = select_file("JPG Files", "*.jpg")
     if filename:
-        if check_bg_image_size(filename):
+        if check_image_size(filename, 1280, 800):
             if not os.path.exists("data"):
                 os.makedirs("data")
             shutil.copy(filename, "data/bg.jpg")
-            messagebox.showinfo("", "设定成功！")
+            messagebox.showinfo("", "设定成功!")
         else:
             messagebox.showerror("", "图片分辨率必须为1280 x 800.")
         check_set(BGL, "data/bg.jpg")
@@ -276,30 +279,42 @@ def check_set(element, file):
 
 def show_question_list_window(question_type):
     if question_type == "mc":
-        no_questions = 40
+        num_questions = 40
         title = "选择题"
     elif question_type == "sq":
-        no_questions = 20
+        num_questions = 20
         title = "简答题"
     elif question_type == "music":
-        no_questions = 30
+        num_questions = 30
         title = "音乐题"
     elif question_type == "tf":
-        no_questions = 15
+        num_questions = 15
         title = "判断题"
+    elif question_type == "pic1":
+        num_questions = 10
+        title = "图片题 (遮挡)"
+    elif question_type == "pic2":
+        num_questions = 10
+        title = "图片题 (马赛克)"
+    elif question_type == "fc":
+        num_questions = 0
+        title = "冲刺题"
     mc = Tk()
     mc.title(title)
-    ls = Listbox(mc, height=no_questions + 1)
+    ls = Listbox(mc, height=num_questions + 1)
     ls.insert(0, "规则文本")
-    for i in range(1, no_questions + 1):
+    for i in range(1, num_questions + 1):
         ls.insert(i, str(i))
 
     check_question_completion(question_type, ls)
 
+    edit_btn_top = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
+    edit_btn_top.pack()
+
     ls.pack()
 
-    btn = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
-    btn.pack()
+    edit_btn_bottom = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
+    edit_btn_bottom.pack()
 
     ls.mainloop()
 
@@ -351,12 +366,12 @@ def edit_question(question_type, ls):
                 pass
 
         if question_type in {"mc", "sq", "tf"}:
-            L0 = Label(question_edit, text="问题第1行")
+            L0 = Label(question_edit, text="问题第 1 行")
             L0.grid(row=0, column=0)
             E0 = Entry(question_edit, textvariable=SV[0])
             E0.grid(row=0, column=1)
 
-            L1 = Label(question_edit, text="问题第2行")
+            L1 = Label(question_edit, text="问题第 2 行")
             L1.grid(row=1, column=0)
             E1 = Entry(question_edit, textvariable=SV[1])
             E1.grid(row=1, column=1)
@@ -370,6 +385,11 @@ def edit_question(question_type, ls):
             L1.grid(row=1, column=0)
             E1 = Entry(question_edit, textvariable=SV[1])
             E1.grid(row=1, column=1)
+        elif question_type in {"pic1", "pic2"}:
+            L0 = Label(question_edit, text="答案")
+            L0.grid(row=0, column=0)
+            E0 = Entry(question_edit, textvariable=SV[0])
+            E0.grid(row=0, column=1)
 
         if question_type == "sq":
             L2 = Label(question_edit, text="答案")
@@ -378,22 +398,22 @@ def edit_question(question_type, ls):
             E2.grid(row=2, column=1)
 
         if question_type == "mc":
-            L2 = Label(question_edit, text="A选项")
+            L2 = Label(question_edit, text="A 选项")
             L2.grid(row=2, column=0)
             E2 = Entry(question_edit, textvariable=SV[2])
             E2.grid(row=2, column=1)
 
-            L3 = Label(question_edit, text="B选项")
+            L3 = Label(question_edit, text="B 选项")
             L3.grid(row=3, column=0)
             E3 = Entry(question_edit, textvariable=SV[3])
             E3.grid(row=3, column=1)
 
-            L4 = Label(question_edit, text="C选项")
+            L4 = Label(question_edit, text="C 选项")
             L4.grid(row=4, column=0)
             E4 = Entry(question_edit, textvariable=SV[4])
             E4.grid(row=4, column=1)
 
-            L5 = Label(question_edit, text="D选项")
+            L5 = Label(question_edit, text="D 选项")
             L5.grid(row=5, column=0)
             E5 = Entry(question_edit, textvariable=SV[5])
             E5.grid(row=5, column=1)
@@ -441,6 +461,54 @@ def edit_question(question_type, ls):
             check_set(F1L, "data/" + question_type + "/media/" + audio_filename)
             check_set(F2L, "data/" + question_type + "/media/" + video_filename)
 
+            tip = Label(question_edit, text="\nTip:\n为了更好的观众体验，\n可在音频文件前后添加淡入和淡出，\n并对所有音频文件进行音量平衡.\n")
+            tip.grid(row=14, columnspan=2)
+        elif question_type == "pic1":
+            pic1_filename = str(index) + "-1.jpg"
+            pic2_filename = str(index) + "-2.jpg"
+            F1L = Label(question_edit)
+            F2L = Label(question_edit)
+            F1 = Button(question_edit, text="问题图 (jpg, 1280 x 720)", command=lambda: add_media(F1L, "pic1", pic1_filename, "JPG Files", "*.jpg", 1280, 720))
+            F2 = Button(question_edit, text="答案图 (jpg, 1280 x 720)", command=lambda: add_media(F2L, "pic1", pic2_filename, "JPG Files", "*.jpg", 1280, 720))
+            F1.grid(row=10, column=1)
+            F2.grid(row=11, column=1)
+            F1L.grid(row=10, column=0)
+            F2L.grid(row=11, column=0)
+            check_set(F1L, "data/" + question_type + "/media/" + pic1_filename)
+            check_set(F2L, "data/" + question_type + "/media/" + pic2_filename)
+
+            tip = Label(question_edit, text="\nTip:\n若图片不符合尺寸，\n请将图片进行缩放、剪裁，\n或在图片四周添加透明像素.\n")
+            tip.grid(row=14, columnspan=2)
+        elif question_type == "pic2":
+            pic1_filename = str(index) + "-1.jpg"
+            pic2_filename = str(index) + "-2.jpg"
+            pic3_filename = str(index) + "-3.jpg"
+            pic4_filename = str(index) + "-4.jpg"
+            F1L = Label(question_edit)
+            F2L = Label(question_edit)
+            F3L = Label(question_edit)
+            F4L = Label(question_edit)
+            F1 = Button(question_edit, text="最模糊图片 (jpg, 1280 x 720)", command=lambda: add_media(F1L, "pic2", pic1_filename, "JPG Files", "*.jpg", 1280, 720))
+            F2 = Button(question_edit, text="图片2 (jpg, 1280 x 720)", command=lambda: add_media(F2L, "pic2", pic2_filename, "JPG Files", "*.jpg", 1280, 720))
+            F3 = Button(question_edit, text="图片3 (jpg, 1280 x 720)", command=lambda: add_media(F3L, "pic2", pic3_filename, "JPG Files", "*.jpg", 1280, 720))
+            F4 = Button(question_edit, text="原图 (jpg, 1280 x 720)", command=lambda: add_media(F4L, "pic2", pic4_filename, "JPG Files", "*.jpg", 1280, 720))
+            F1.grid(row=10, column=1)
+            F2.grid(row=11, column=1)
+            F3.grid(row=12, column=1)
+            F4.grid(row=13, column=1)
+            F1L.grid(row=10, column=0)
+            F2L.grid(row=11, column=0)
+            F3L.grid(row=12, column=0)
+            F4L.grid(row=13, column=0)
+            check_set(F1L, "data/" + question_type + "/media/" + pic1_filename)
+            check_set(F2L, "data/" + question_type + "/media/" + pic2_filename)
+            check_set(F3L, "data/" + question_type + "/media/" + pic3_filename)
+            check_set(F4L, "data/" + question_type + "/media/" + pic4_filename)
+
+            tip = Label(question_edit, text="\nTip:\n若图片不符合尺寸，\n请将图片进行缩放、剪裁，\n或在图片四周添加透明像素.\n")
+            tip.grid(row=14, columnspan=2)
+
+
         save_btn = Button(question_edit, text="保存", command=lambda: save_question(question_type, index, SV, IV, question_edit, ls))
         save_btn.grid(row=99, columnspan=2)
 
@@ -465,6 +533,12 @@ def save_question(question_type, index, SV, IV, window, ls):
                 file.write("N/A\n")
             else:
                 file.write(SV[i].get() + "\n")
+    elif question_type in {"pic1", "pic2"}:
+        for i in range(len(SV)):
+            if i > 0:
+                file.write("N/A\n")
+            else:
+                file.write(SV[i].get() + "\n")
 
     if question_type in {"mc", "music", "tf"}:
         file.write(str(IV.get()) + "\n")
@@ -486,15 +560,19 @@ def save_rule(question_type, content, window, ls):
 
 def check_question_completion(question_type, ls):
     if question_type == "mc":
-        no_questions = 40
+        num_questions = 40
     elif question_type == "sq":
-        no_questions = 20
+        num_questions = 20
     elif question_type == "music":
-        no_questions = 30
+        num_questions = 30
     elif question_type == "tf":
-        no_questions = 15
+        num_questions = 15
+    elif question_type in {"pic1", "pic2"}:
+        num_questions = 10
+    elif question_type == "fc":
+        num_questions = 0
     greenlist = []
-    for i in range(0, no_questions + 1):
+    for i in range(0, num_questions + 1):
         if i == 0:
             try:
                 file = open("data/" + question_type + "/0.config", encoding="utf8")
@@ -537,8 +615,8 @@ def download_update(url):
     root.destroy()
 
 
-def export():
-    filename = filedialog.asksaveasfilename(filetypes=[(".tar.gz Files", "*.tar.gz")], title="导出至...")
+def export_data():
+    filename = filedialog.asksaveasfilename(filetypes=[("GZ Files", "*.gz")], title="导出至...")
     if filename:
         shutil.make_archive(filename, 'gztar', 'data')
 
@@ -551,8 +629,8 @@ def set_str_var(root, strvar, text):
 def first_time_run():
     root = Tk()
     root.title("")
-    label1 = Label(root, text="正在为首次运行做准备...")
-    label1.pack()
+    #label1 = Label(root, text="正在为首次运行做准备...")
+    #label1.pack()
     text = StringVar()
     label2 = Label(root, textvariable=text)
     label2.pack()
@@ -569,29 +647,29 @@ def first_time_run():
             print(e)
         if sys.platform == "win32":
             set_str_var(root, text, "Downloading Adobe Flash Player...")
-            download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flashplayer_25_sa.exe", "flashplayer.exe")
+            download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/26/flashplayer_26_sa.exe", "flashplayer.exe")
         else:
-            set_str_var(root, text, "Downloading ptyprocess...")
-            download("https://github.com/pexpect/ptyprocess/archive/0.5.1.tar.gz", "tmp/ptyprocess.tar.gz")
-            set_str_var(root, text, "Extracting ptyprocess...")
-            extract_tar_gz("tmp/ptyprocess.tar.gz", "tmp/")
-            os.system("cp -r ./tmp/ptyprocess-0.5.1/ptyprocess .")
+            #set_str_var(root, text, "Downloading ptyprocess...")
+            #download("https://github.com/pexpect/ptyprocess/archive/0.5.1.tar.gz", "tmp/ptyprocess.tar.gz")
+            #set_str_var(root, text, "Extracting ptyprocess...")
+            #extract_tar_gz("tmp/ptyprocess.tar.gz", "tmp/")
+            #os.system("cp -r ./tmp/ptyprocess-0.5.1/ptyprocess .")
 
-            set_str_var(root, text, "Downloading pexpect...")
-            download("https://github.com/pexpect/pexpect/archive/4.2.1.tar.gz", "tmp/pexpect.tar.gz")
-            set_str_var(root, text, "Extracting pexpect...")
-            extract_tar_gz("tmp/pexpect.tar.gz", "tmp/")
-            os.system("cp -r ./tmp/pexpect-4.2.1/pexpect .")
+            #set_str_var(root, text, "Downloading pexpect...")
+            #download("https://github.com/pexpect/pexpect/archive/4.2.1.tar.gz", "tmp/pexpect.tar.gz")
+            #set_str_var(root, text, "Extracting pexpect...")
+            #extract_tar_gz("tmp/pexpect.tar.gz", "tmp/")
+            #os.system("cp -r ./tmp/pexpect-4.2.1/pexpect .")
 
             set_str_var(root, text, "Downloading Adobe Flash Player...")
             if sys.platform == "darwin":
-                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flashplayer_25_sa.dmg", "tmp/flashplayer.dmg")
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/26/flashplayer_26_sa.dmg", "tmp/flashplayer.dmg")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 os.system("hdiutil attach -nobrowse -mountpoint ./tmp/flashplayer ./tmp/flashplayer.dmg")
                 os.system("cp -r ./tmp/flashplayer/Flash\\ Player.app .")
                 os.system("hdiutil detach ./tmp/flashplayer")
             else:
-                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/26/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 extract_tar_gz("tmp/flashplayer.tar.gz", "tmp/")
                 os.system("cp ./tmp/flashplayer ./flashplayer")
@@ -604,7 +682,7 @@ def first_time_run():
         print(e)
         global error
         error = True
-        set_str_var(root, text, "初始化失败。")
+        set_str_var(root, text, "初始化失败.")
         root.mainloop()
     else:
         with open("__version__", "w") as file:
@@ -637,12 +715,57 @@ def bring_to_front(root):
         os.system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
 
 
+def run_flash():
+    flash_installed = True
+    if os.path.exists("__version__"):
+        with open("__version__", "r") as file:
+            if file.read().strip() != DEPENDENCY_VERSION:
+                flash_installed = False
+    else:
+        flash_installed = False
+    if not flash_installed:
+        if messagebox.askyesno("", "需要安装 Adobe Flash Player 才能继续.\n你要下载并安装 Adobe Flash Player 吗?\nAdobe Flash Player 将被安装在本程序目录下."):
+            first_time_run()
+            flash_installed = True
+
+    if flash_installed:
+        if sys.platform == "darwin":
+            os.system("open -a Flash\ Player orientation.swf")
+        elif sys.platform == "win32":
+            os.system('start flashplayer.exe "orientation.swf"')
+        else:
+            os.system("./flashplayer orientation.swf")
+
+
+def import_data():
+    selected = select_file("TAR GZ Files", "*.gz")
+    if selected:
+        if messagebox.askyesno("", "你确定要导入数据吗?\n如果要导入的数据会覆盖当前数据中的相同题目."):
+            try:
+                extract_tar_gz(selected, './data/')
+                messagebox.showinfo("", "导入成功.")
+            except:
+                messagenbox.showerror("", "导入失败.")
+
+
 if (__name__ == "__main__"):
-    debug = False  # Setting this flag to True will disable checking for update
     error = False
     needs_update = False
 
-    if not debug:
+    try:
+        file = open("wim-ori-con.py")
+        file.close()
+    except:
+        error = True
+        root = Tk()
+        root.title("")
+        text = "检测到 working directory 不是本程序所在目录.\n请 cd 至本程序所在目录后重试."
+        label = Label(root, text=text)
+        label.pack()
+        bring_to_front(root)
+        root.mainloop()
+
+    if (not error) and (not DEBUG):
         try:
             with urllib.request.urlopen("https://raw.githubusercontent.com/A-Kun/wim-ori-con/master/wim-ori-con.py") as latest_code_reader:
                 latest_code = latest_code_reader.read().decode("utf-8").strip()
@@ -653,25 +776,17 @@ if (__name__ == "__main__"):
         except Exception as e:
             print(e)
 
-    if needs_update:
+    if (not error) and needs_update:
         error = True
         root = Tk()
         root.title("")
-        text = "检测到新版本，更新后才能继续使用。\n"
+        text = "检测到新版本，更新后才能继续使用.\n"
         label = Label(root, text=text)
         label.pack()
         button = Button(root, text="下载", command=lambda: download_update("https://github.com/A-Kun/wim-ori-con/archive/master.zip"))
         button.pack()
         bring_to_front(root)
         root.mainloop()
-
-    if not error:
-        if os.path.exists("__version__"):
-            with open("__version__", "r") as file:
-                if file.read().strip() != DEPENDENCY_VERSION:
-                    first_time_run()
-        else:
-            first_time_run()
 
     if not error:
         root = Tk()
@@ -687,28 +802,33 @@ if (__name__ == "__main__"):
 
         BGL = Label(root)
         BGL.grid(row=0, column=0)
-        BGB = Button(root, text="背景图片", command=select_bg)
+        BGB = Button(root, text="背景图片 (jpg, 1280 x 800)", command=select_bg)
         BGB.grid(row=0, column=1)
 
         check_set(BGL, "data/bg.jpg")
 
         B[0] = Button(root, text="选择题", command=lambda: show_question_list_window("mc"))
-        B[0].grid(row=1, column=1)
+        B[0].grid(row=1, columnspan=2)
         #C[0] = Checkbutton(root, text="启用", variable=var[0])
         #C[0].grid(row=1, column=1)
 
         B[1] = Button(root, text="简答题", command=lambda: show_question_list_window("sq"))
-        B[1].grid(row=2, column=1)
+        B[1].grid(row=2, columnspan=2)
         #C[1] = Checkbutton(root, text="启用", variable=var[1])
         #C[1].grid(row=2, column=0)
 
         B[2] = Button(root, text="是非题", command=lambda: show_question_list_window("tf"))
-        B[2].grid(row=3, column=1)
+        B[2].grid(row=3, columnspan=2)
         #C[2] = Checkbutton(root, text="启用", variable=var[2])
         #C[2].grid(row=3, column=0)
 
-        #B[3] = Button(root, text="图片题", state=DISABLED)
-        #B[3].grid(row=4, column=1)
+        B[3] = Button(root, text="图片题 (遮挡)", command=lambda: show_question_list_window("pic1"))
+        B[3].grid(row=4, columnspan=2)
+        #C[3] = Checkbutton(root, text="启用", variable=var[3])
+        #C[3].grid(row=4, column=0)
+
+        B[4] = Button(root, text="图片题 (马赛克)", command=lambda: show_question_list_window("pic2"))
+        B[4].grid(row=5, columnspan=2)
         #C[3] = Checkbutton(root, text="启用", variable=var[3])
         #C[3].grid(row=4, column=0)
 
@@ -718,14 +838,17 @@ if (__name__ == "__main__"):
         #C[4].grid(row=5, column=0)
 
         B[5] = Button(root, text="音乐题", command=lambda: show_question_list_window("music"))
-        B[5].grid(row=6, column=1)
+        B[5].grid(row=6, columnspan=2)
         #C[5] = Checkbutton(root, text="启用", variable=var[5])
         #C[5].grid(row=6, column=0)
 
-        #B[6] = Button(root, text="冲刺题A", state=DISABLED)
-        #B[6].grid(row=7, column=1)
+        B[6] = Button(root, text="冲刺题", command=lambda: show_question_list_window("fc"))
+        B[6].grid(row=7, columnspan=2)
         #C[6] = Checkbutton(root, text="启用", variable=var[6])
         #C[6].grid(row=7, column=0)
+
+        space = Label(root, text="")
+        space.grid(row=8, columnspan=2)
 
         #B[7] = Button(root, text="冲刺题B", state=DISABLED)
         #B[7].grid(row=8, column=1)
@@ -734,23 +857,25 @@ if (__name__ == "__main__"):
 
         #BSave = Button(root, text="保存", command=lambda: save_main_config(var))
         #BSave.grid(row=9, columnspan=2)
-        BExport = Button(root, text="导出", command=export)
-        BExport.grid(row=10, column=0)
+        BExport = Button(root, text="导入数据", command=import_data)
+        BExport.grid(row=10, columnspan=2)
+        BExport = Button(root, text="导出数据", command=export_data)
+        BExport.grid(row=11, columnspan=2)
 
-        if sys.platform == "win32":
-            BSubmit = Button(root, text="提交", state=DISABLED)
-            BRun = Button(root, text="测试运行", command=lambda: os.system('start flashplayer.exe "orientation.swf"'))
-        else:
-            BSubmit = Button(root, text="提交", command=lambda: submit(root))
-            if sys.platform == "darwin":
-                BRun = Button(root, text="测试运行", command=lambda: os.system("open -a Flash\ Player orientation.swf"))
-            else:
-                BRun = Button(root, text="测试运行", command=lambda: os.system("./flashplayer orientation.swf"))
-        BSubmit.grid(row=10, column=1)
-        BRun.grid(row=11, columnspan=2)
+        #if sys.platform == "win32":
+            #BSubmit = Button(root, text="提交", state=DISABLED)
+            #BRun = Button(root, text="测试运行", command=lambda: os.system('start flashplayer.exe "orientation.swf"'))
+        #else:
+            #BSubmit = Button(root, text="提交", command=lambda: submit(root))
+            #BRun = Button(root, text="测试运行", command=run_flash)
+
+        #BSubmit.grid(row=10, column=1)
+
+        BRun = Button(root, text="测试运行", command=run_flash)
+        BRun.grid(row=12, columnspan=2)
 
         BInit = Button(root, text="!数据初始化!", command=initialize)
-        BInit.grid(row=12, columnspan=2)
+        BInit.grid(row=13, columnspan=2)
 
         #enable = load_main_config()
         #for i in range(len(enable)):

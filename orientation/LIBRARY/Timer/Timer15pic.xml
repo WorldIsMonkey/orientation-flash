@@ -1,0 +1,385 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Timer/Timer15pic" itemID="575a2053-00000257" lastModified="1465524580" lastUniqueIdentifier="1">
+  <timeline>
+    <DOMTimeline name="Timer15pic" currentFrame="1">
+      <layers>
+        <DOMLayer name="Actions" color="#9933CC" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="481" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop(); 
+
+TimerBtn.addEventListener(MouseEvent.CLICK, TimerAct);
+
+function TimerAct(event:MouseEvent):void
+{
+	gotoAndPlay(1);
+}]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 4" color="#FF4FFF">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="1" duration="359" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Spinner/clock">
+                  <matrix>
+                    <Matrix tx="16.85" ty="507.6"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="360" duration="121" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="Spinner/b0.png">
+                  <matrix>
+                    <Matrix tx="-43.15" ty="447.6"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 3" color="#FF800A">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="1" duration="23" keyMode="9728">
+              <elements>
+                <DOMStaticText width="32.15" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="0.85" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>15</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="24" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="32.2" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="0.8" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>14</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="48" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="32.15" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="0.85" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>13</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="72" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="32.15" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="0.85" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>12</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="96" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="23.2" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="5.3" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>11</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="120" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="32.2" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="0.8" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>10</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="144" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>9</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="168" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>8</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="192" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.3" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>7</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="216" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>6</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="240" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>5</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="264" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>4</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="288" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>3</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="312" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>2</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="336" duration="24" keyMode="9728">
+              <elements>
+                <DOMStaticText width="11.7" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="11" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>1</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="360" duration="121" keyMode="9728">
+              <elements>
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
+                  <matrix>
+                    <Matrix tx="6.55" ty="476.7"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>0</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bold="true" size="50" bitmapSize="1000" face="sao"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="White" color="#FF4FFF" current="true" isSelected="true" autoNamed="false" heightLiteral="18">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="1" duration="480" keyMode="9728">
+              <elements>
+                <DOMShape>
+                  <fills>
+                    <FillStyle index="1">
+                      <SolidColor color="#FFFFFF" alpha="0.698039215686274"/>
+                    </FillStyle>
+                  </fills>
+                  <edges>
+                    <Edge fillStyle1="1" edges="!1537 11352|-863 11352!-863 11352|-863 8952!-863 8952|1537 8952!1537 8952|1537 11352"/>
+                    <Edge cubics="!-863 8952(;-863,8952 1537,8952 1537,8952q-863 8952 1537 8952);"/>
+                    <Edge cubics="!1537 8952(1537,8952;1537,8952 1537,11352 1537,11352q1537 8952 1537 11352);"/>
+                    <Edge cubics="!-863 11352(-863,11352;-863,11352 -863,8952 -863,8952q-863 11352 -863 8952);"/>
+                    <Edge cubics="!1537 11352(;1537,11352 -863,11352 -863,11352q1537 11352 -863 11352);"/>
+                  </edges>
+                </DOMShape>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 1" color="#4F80FF" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="480" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="UI/Time" name="TimerBtn" symbolType="button">
+                  <matrix>
+                    <Matrix tx="-831.5" ty="535.6"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="480" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="UI/Time" name="TimerBtnEnd" symbolType="button" centerPoint3DX="-831.5" centerPoint3DY="535.6">
+                  <matrix>
+                    <Matrix tx="-831.5" ty="535.6"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

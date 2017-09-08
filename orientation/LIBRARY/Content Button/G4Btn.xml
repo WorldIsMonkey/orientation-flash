@@ -1,0 +1,42 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Content Button/G4Btn" itemID="542c0e99-000003b5" lastModified="1465616482">
+  <timeline>
+    <DOMTimeline name="G4Btn">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="UI/List" symbolType="button">
+                  <matrix>
+                    <Matrix a="2" d="2" tx="163" ty="46"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMStaticText width="286.3" height="44.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="21.85" ty="19.5"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>★★★★</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="32" bitmapSize="640" face="STYuanti-SC-Bold"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+                <DOMBitmapInstance libraryItemName="UI/run_normal.png copy">
+                  <matrix>
+                    <Matrix a="1.34614562988281" d="1.34614562988281" tx="19.85" ty="28.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

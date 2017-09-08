@@ -1,0 +1,52 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="CAnswer/C10Answer" itemID="54096bea-000002ed" lastModified="1434001545">
+  <timeline>
+    <DOMTimeline name="C10Answer">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMStaticText width="236.85" height="67.2" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="46.1" ty="421.65"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>夕立</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                    <DOMTextRun>
+                      <characters>(</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                    <DOMTextRun>
+                      <characters>二改</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                    <DOMTextRun>
+                      <characters>)</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="48" bitmapSize="960" face="STYuanti-SC-Regular" fillColor="#FF0000"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMStaticText>
+                <DOMBitmapInstance libraryItemName="Picture(Old)/Bitmap 165">
+                  <matrix>
+                    <Matrix a="1.46170043945312" d="1.461669921875" ty="-30.35"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>
