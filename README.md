@@ -6,3 +6,5 @@ Usage:
 ```
 $ python3 wim-ori-con
 ```
+
+For question reviewers, click [here](/QuestionReviewGuideline.md)
