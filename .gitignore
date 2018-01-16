@@ -2,8 +2,7 @@
 __pycache__
 __version__
 data
-pexpect
-ptyprocess
+data_bak
 tmp
 flashplayer
 flashplayer.exe

@@ -235,7 +235,7 @@ def check_dir_existance(question_type):
 def add_media(elem, question_type, filename, description, file_type, width=None, height=None):
     selected = select_file(description, file_type)
     if selected:
-        if width and height and check_image_size(selected, width, height):
+        if (not width and not height) or check_image_size(selected, width, height):
             check_dir_existance(question_type)
             target = "data/" + question_type + "/media/" + filename
             shutil.copy(selected, target)
