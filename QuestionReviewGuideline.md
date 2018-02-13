@@ -112,11 +112,11 @@ pics
 音乐题指的是先播放 20 秒的音乐，再播放相应片段视频 30 秒的题目类型。在实践中，所有信息应当编排在一个独立的电子表格中。
 
 正确示例：
-| 全职猎人	| おはよう。（早安） | Keno | OP	| https://www.youtube.com/watch?v=fdJ35gbxtRI |	0:00 |
-|-|-|-|-|-|-|
-|月刊少女野崎君 | 君じゃなきゃダメみたい | 大石昌良 | OP | https://www.youtube.com/watch?v=EjgOD9vruTE | 0:44 |
-|我的英雄学院 | HEROES | Brian the Sun | ED | https://www.youtube.com/watch?v=YRU7MZWDmgg | 0:00 |
-|回转企鹅罐 | ノルニル | やくしまるえつこ地下铁管弦乐团 | op1 | https://www.bilibili.com/video/av113005/?from=search&seid=17656113164136187952#page=2 | 00:00 |
+| 全职猎人 | おはよう。（早安） | Keno | OP | https://www.youtube.com/watch?v=fdJ35gbxtR | 0:00 |
+|----------------|------------------------|--------------------------------|-----|---------------------------------------------------------------------------------------|-------|
+| 月刊少女野崎君 | 君じゃなきゃダメみたい | 大石昌良 | OP | https://www.youtube.com/watch?v=EjgOD9vruTE | 0:44 |
+| 我的英雄学院 | HEROES | Brian the Sun | ED | https://www.youtube.com/watch?v=YRU7MZWDmgg | 0:00 |
+| 回转企鹅罐 | ノルニル | やくしまるえつこ地下铁管弦乐团 | op1 | https://www.bilibili.com/video/av113005/?from=search&seid=17656113164136187952#page=2 | 00:00 |
 
 其中，第一列为动画片名，第二列为歌曲名称，第三列为歌手名字，第四列可识别的参数为 `OP|ED|插入曲`，其他的参数会被作为 other 处理，第五列为视频地址（推荐使用 YouTube 和哔哩哔哩），第六列为开始截取的时间点。
 
