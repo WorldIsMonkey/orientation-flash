@@ -120,5 +120,7 @@ pics
 
 其中，第一列为动画片名，第二列为歌曲名称，第三列为歌手名字，第四列可识别的参数为 `OP|ED|插入曲`，其他的参数会被作为 other 处理，第五列为视频地址（推荐使用 YouTube 和哔哩哔哩），第六列为开始截取的时间点。
 
+建议题目数量不超过三十题。
+
 ## 意义
 这里所有提到的题目类型都可以自动化处理以插入到答题引擎。自动化脚本托管在[这里](https://github.com/A-Kun/wim-ori-con/tree/master/scripts)。对于电子表格，相应题目类型的文件名为 `MultipleChoice.csv`, `Music.csv`, `ShortAnswer.csv`, `TrueOrFalse.csv`。不接受冗余数据/行/列。
