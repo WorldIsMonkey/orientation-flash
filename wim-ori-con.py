@@ -2,7 +2,7 @@
 
 
 """
-Copyright Andrew Wang, 2018
+Copyright Andrew Wang, 201
 Distributed under the terms of the GNU General Public License.
 
 This is free software: you can redistribute it and/or modify
@@ -81,7 +81,7 @@ YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20180529"
+DEPENDENCY_VERSION = "20180530"
 
 
 def sha1(fname):
@@ -647,7 +647,7 @@ def first_time_run():
             print(e)
         if sys.platform == "win32":
             set_str_var(root, text, "Downloading Adobe Flash Player...")
-            download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/26/flashplayer_26_sa.exe", "flashplayer.exe")
+            download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flashplayer_29_sa.exe", "flashplayer.exe")
         else:
             #set_str_var(root, text, "Downloading ptyprocess...")
             #download("https://github.com/pexpect/ptyprocess/archive/0.5.1.tar.gz", "tmp/ptyprocess.tar.gz")
@@ -663,13 +663,13 @@ def first_time_run():
 
             set_str_var(root, text, "Downloading Adobe Flash Player...")
             if sys.platform == "darwin":
-                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/26/flashplayer_26_sa.dmg", "tmp/flashplayer.dmg")
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flashplayer_29_sa.dmg", "tmp/flashplayer.dmg")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 os.system("hdiutil attach -nobrowse -mountpoint ./tmp/flashplayer ./tmp/flashplayer.dmg")
                 os.system("cp -r ./tmp/flashplayer/Flash\\ Player.app .")
                 os.system("hdiutil detach ./tmp/flashplayer")
             else:
-                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/26/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 extract_tar_gz("tmp/flashplayer.tar.gz", "tmp/")
                 os.system("cp ./tmp/flashplayer ./flashplayer")
