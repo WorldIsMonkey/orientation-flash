@@ -666,6 +666,8 @@ def first_time_run():
                 download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flashplayer_29_sa.dmg", "tmp/flashplayer.dmg")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 os.system("hdiutil attach -nobrowse -mountpoint ./tmp/flashplayer ./tmp/flashplayer.dmg")
+                if os.path.exists("Flash Player.app"):
+                    shutil.rmtree("Flash Player.app")
                 os.system("cp -r ./tmp/flashplayer/Flash\\ Player.app .")
                 os.system("hdiutil detach ./tmp/flashplayer")
             else:
