@@ -2,7 +2,7 @@
 
 
 """
-Copyright Andrew Wang, 2017
+Copyright Andrew Wang, 2018
 Distributed under the terms of the GNU General Public License.
 
 This is free software: you can redistribute it and/or modify
@@ -81,7 +81,7 @@ YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20170908"
+DEPENDENCY_VERSION = "20180529"
 
 
 def sha1(fname):
@@ -517,7 +517,7 @@ def edit_question(question_type, ls):
 
 def save_question(question_type, index, SV, IV, window, ls):
     check_dir_existance(question_type)
-    file = open("data/" + question_type + "/" + str(index) + ".config","w" , encoding="utf8")
+    file = open("data/" + question_type + "/" + str(index) + ".config", "w", encoding="utf8", newline='\n')
     if question_type == "mc":
         for e in SV:
             file.write(e.get() + "\n")
