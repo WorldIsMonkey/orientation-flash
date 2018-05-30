@@ -285,7 +285,7 @@ def show_question_list_window(question_type):
         num_questions = 20
         title = "简答题"
     elif question_type == "music":
-        num_questions = 30
+        num_questions = 40
         title = "音乐题"
     elif question_type == "tf":
         num_questions = 15
@@ -461,7 +461,7 @@ def edit_question(question_type, ls):
             check_set(F1L, "data/" + question_type + "/media/" + audio_filename)
             check_set(F2L, "data/" + question_type + "/media/" + video_filename)
 
-            tip = Label(question_edit, text="\nTip:\n为了更好的观众体验，\n可在音频文件前后添加淡入和淡出，\n并对所有音频文件进行音量平衡.\n")
+            tip = Label(question_edit, text="\nTip:\n为了更好的观众体验，\n可在音频前后添加淡入和淡出，\n并对所有音频进行音量平衡.\n")
             tip.grid(row=14, columnspan=2)
         elif question_type == "pic1":
             pic1_filename = str(index) + "-1.jpg"
@@ -564,7 +564,7 @@ def check_question_completion(question_type, ls):
     elif question_type == "sq":
         num_questions = 20
     elif question_type == "music":
-        num_questions = 30
+        num_questions = 40
     elif question_type == "tf":
         num_questions = 15
     elif question_type in {"pic1", "pic2"}:
