@@ -2,7 +2,7 @@
 
 
 """
-Copyright Andrew Wang, 201
+Copyright Andrew Wang, 2018
 Distributed under the terms of the GNU General Public License.
 
 This is free software: you can redistribute it and/or modify
@@ -81,7 +81,7 @@ YELLOW = "#FFF9C4"
 RED = "#FFCDD2"
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20180530"
+DEPENDENCY_VERSION = "20180531"
 
 
 def sha1(fname):
@@ -849,8 +849,8 @@ if (__name__ == "__main__"):
         #C[6] = Checkbutton(root, text="启用", variable=var[6])
         #C[6].grid(row=7, column=0)
 
-        space = Label(root, text="")
-        space.grid(row=8, columnspan=2)
+        space1 = Label(root, text="")
+        space1.grid(row=8, columnspan=2)
 
         #B[7] = Button(root, text="冲刺题B", state=DISABLED)
         #B[7].grid(row=8, column=1)
@@ -876,8 +876,11 @@ if (__name__ == "__main__"):
         BRun = Button(root, text="测试运行", command=run_flash)
         BRun.grid(row=12, columnspan=2)
 
+        space2 = Label(root, text="")
+        space2.grid(row=13, columnspan=2)
+
         BInit = Button(root, text="!数据初始化!", command=initialize)
-        BInit.grid(row=13, columnspan=2)
+        BInit.grid(row=14, columnspan=2)
 
         #enable = load_main_config()
         #for i in range(len(enable)):
