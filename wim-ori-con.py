@@ -75,21 +75,11 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 
-DEBUG = False  # Setting this flag to True will disable checking for update
-GREEN = "#C8E6C9"
-YELLOW = "#FFF9C4"
-RED = "#FFCDD2"
+# Setting this flag to True will disable checking for update
+DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
 DEPENDENCY_VERSION = "20180531"
-
-
-def sha1(fname):
-    hash_sha1 = hashlib.sha1()
-    with open(fname, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_sha1.update(chunk)
-    return hash_sha1.hexdigest()
 
 
 def load_main_config():
@@ -131,61 +121,6 @@ def initialize():
                     messagebox.showerror("", "数据初始化失败.")
             else:
                 messagebox.showinfo("", "数据初始化成功!")
-
-
-def submit(root):
-    def upload(top, button, host, username, password):
-        if messagebox.askyesno("", "你确定要将数据上传至服务器吗?"):
-            button["state"] = DISABLED
-            button["text"] = "正在连接..."
-            top.update()
-
-            try:
-                import pexpect
-                var_password = password
-                var_command = ("scp -r ./data " + username + "@" + host + ":~")
-                var_child = pexpect.spawn(var_command)
-                i = var_child.expect(["password:", "yes/no", "denied", pexpect.EOF])
-
-                button["text"] = "正在上传..."
-                top.update()
-                if i == 0:  # send password
-                    var_child.sendline(var_password)
-                    var_child.expect(pexpect.EOF)
-                elif i == 1:
-                    var_child.sendline("yes")
-                    j = var_child.expect(["password:", pexpect.EOF])
-                    if j == 0:
-                        var_child.sendline(var_password)
-                        var_child.expect(pexpect.EOF)
-                elif i == 2:
-                    raise Exception("用户名或密码错误.")
-                else:
-                    raise Exception("提交失败.")
-                messagebox.showinfo("", "提交成功!")
-            except Exception as e:
-                messagebox.showerror("", str(e))
-            finally:
-                top.destroy()
-
-    top = Toplevel()
-    top.title = "使用SCP上传"
-    host_label = Label(top, text="Host: ")
-    host_label.grid(row=0, column=0)
-    username_label = Label(top, text="Username: ")
-    username_label.grid(row=1, column=0)
-    password_label = Label(top, text="Password: ")
-    password_label.grid(row=2, column=0)
-    host = Entry(top)
-    host.insert(0, "fissure.utsc.utoronto.ca")
-    host.grid(row=0, column=1)
-    username = Entry(top)
-    username.grid(row=1, column=1)
-    password = Entry(top)
-    password.grid(row=2, column=1)
-    button = Button(top,text="提交", command=lambda: upload(top, button, host.get(), username.get(), password.get()))
-    button.grid(row=3, columnspan=2)
-    top.mainloop()
 
 
 def get_image_size(fname):
@@ -242,7 +177,8 @@ def add_media(elem, question_type, filename, description, file_type, width=None,
             check_set(elem, target)
             messagebox.showinfo("", "设定成功!")
         else:
-            messagebox.showerror("", "图片分辨率必须为{0} x {1}.".format(width, height))
+            messagebox.showerror("", "图片分辨率必须为{} x {}.".format(width, height))
+
 
 def select_file(description, file_type):
     root.update()
@@ -305,8 +241,6 @@ def show_question_list_window(question_type):
     ls.insert(0, "规则文本")
     for i in range(1, num_questions + 1):
         ls.insert(i, str(i))
-
-    check_question_completion(question_type, ls)
 
     edit_btn_top = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
     edit_btn_top.pack()
@@ -546,7 +480,6 @@ def save_question(question_type, index, SV, IV, window, ls):
         file.write("-1\n")
     file.close()
     window.destroy()
-    check_question_completion(question_type, ls)
 
 
 def save_rule(question_type, content, window, ls):
@@ -555,62 +488,9 @@ def save_rule(question_type, content, window, ls):
     file.write(content);
     file.close()
     window.destroy()
-    check_question_completion(question_type, ls)
 
 
-def check_question_completion(question_type, ls):
-    if question_type == "mc":
-        num_questions = 40
-    elif question_type == "sq":
-        num_questions = 20
-    elif question_type == "music":
-        num_questions = 40
-    elif question_type == "tf":
-        num_questions = 15
-    elif question_type in {"pic1", "pic2"}:
-        num_questions = 10
-    elif question_type == "fc":
-        num_questions = 0
-    greenlist = []
-    for i in range(0, num_questions + 1):
-        if i == 0:
-            try:
-                file = open("data/" + question_type + "/0.config", encoding="utf8")
-                if file.read().strip():
-                    ls.itemconfig(i, bg=GREEN)
-                else:
-                    ls.itemconfig(i, bg=RED)
-                file.close()
-            except:
-                ls.itemconfig(i, bg=RED)
-        else:
-            if os.path.exists("data/" + question_type + "/" + str(i) + ".config"):
-                ls.itemconfig(i, bg=GREEN)
-                greenlist.append(i)
-            else:
-                ls.itemconfig(i, bg=RED)
-    for e in greenlist:
-        file = open("data/" + question_type + "/" + str(e) + ".config", encoding="utf8")
-        empty = True
-        count = 0
-        for l in file:
-            if not l.strip():
-                if question_type == "music":
-                    ls.itemconfig(e, bg=YELLOW)
-                else:
-                    if count != 1:  # 问题第二行可以为空
-                        ls.itemconfig(e, bg=YELLOW)
-            elif count == 6 and l.strip() == "0":
-                ls.itemconfig(e, bg=YELLOW)
-            else:
-                empty = False
-            count += 1
-        if empty:
-            ls.itemconfig(e, bg=RED)
-        file.close()
-
-
-def download_update(url):
+def open_browser(url):
     webbrowser.open(url)
     root.destroy()
 
@@ -629,8 +509,6 @@ def set_str_var(root, strvar, text):
 def first_time_run():
     root = Tk()
     root.title("")
-    #label1 = Label(root, text="正在为首次运行做准备...")
-    #label1.pack()
     text = StringVar()
     label2 = Label(root, textvariable=text)
     label2.pack()
@@ -649,18 +527,6 @@ def first_time_run():
             set_str_var(root, text, "Downloading Adobe Flash Player...")
             download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flashplayer_29_sa.exe", "flashplayer.exe")
         else:
-            #set_str_var(root, text, "Downloading ptyprocess...")
-            #download("https://github.com/pexpect/ptyprocess/archive/0.5.1.tar.gz", "tmp/ptyprocess.tar.gz")
-            #set_str_var(root, text, "Extracting ptyprocess...")
-            #extract_tar_gz("tmp/ptyprocess.tar.gz", "tmp/")
-            #os.system("cp -r ./tmp/ptyprocess-0.5.1/ptyprocess .")
-
-            #set_str_var(root, text, "Downloading pexpect...")
-            #download("https://github.com/pexpect/pexpect/archive/4.2.1.tar.gz", "tmp/pexpect.tar.gz")
-            #set_str_var(root, text, "Extracting pexpect...")
-            #extract_tar_gz("tmp/pexpect.tar.gz", "tmp/")
-            #os.system("cp -r ./tmp/pexpect-4.2.1/pexpect .")
-
             set_str_var(root, text, "Downloading Adobe Flash Player...")
             if sys.platform == "darwin":
                 download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flashplayer_29_sa.dmg", "tmp/flashplayer.dmg")
@@ -689,12 +555,6 @@ def first_time_run():
     else:
         with open("__version__", "w") as file:
             file.write(DEPENDENCY_VERSION)
-
-
-def untar():
-    tar = tarfile.open("path_to/test/sample.tar.bz2", "r:bz2")
-    tar.extractall()
-    tar.close()
 
 
 def download(url, file, length=16*1024):
@@ -785,7 +645,7 @@ if (__name__ == "__main__"):
         text = "检测到新版本，更新后才能继续使用.\n"
         label = Label(root, text=text)
         label.pack()
-        button = Button(root, text="下载", command=lambda: download_update("https://github.com/A-Kun/wim-ori-con/archive/master.zip"))
+        button = Button(root, text="下载", command=lambda: open_browser("https://github.com/A-Kun/wim-ori-con/archive/master.zip"))
         button.pack()
         bring_to_front(root)
         root.mainloop()
@@ -797,7 +657,7 @@ if (__name__ == "__main__"):
         B = []
         C = []
         var = []
-        for i in range(8):
+        for i in range(7):
             B.append(None)
             C.append(None)
             var.append(IntVar())
@@ -831,13 +691,8 @@ if (__name__ == "__main__"):
 
         B[4] = Button(root, text="图片题 (马赛克)", command=lambda: show_question_list_window("pic2"))
         B[4].grid(row=5, columnspan=2)
-        #C[3] = Checkbutton(root, text="启用", variable=var[3])
-        #C[3].grid(row=4, column=0)
-
-        #B[4] = Button(root, text="其他题", state=DISABLED)
-        #B[4].grid(row=5, column=1)
-        #C[4] = Checkbutton(root, text="启用", variable=var[4])
-        #C[4].grid(row=5, column=0)
+        #C[4] = Checkbutton(root, text="启用", variable=var[3])
+        #C[4].grid(row=4, column=0)
 
         B[5] = Button(root, text="音乐题", command=lambda: show_question_list_window("music"))
         B[5].grid(row=6, columnspan=2)
@@ -852,26 +707,10 @@ if (__name__ == "__main__"):
         space1 = Label(root, text="")
         space1.grid(row=8, columnspan=2)
 
-        #B[7] = Button(root, text="冲刺题B", state=DISABLED)
-        #B[7].grid(row=8, column=1)
-        #C[7] = Checkbutton(root, text="启用", variable=var[7])
-        #C[7].grid(row=8, column=0)
-
-        #BSave = Button(root, text="保存", command=lambda: save_main_config(var))
-        #BSave.grid(row=9, columnspan=2)
         BExport = Button(root, text="导入数据", command=import_data)
         BExport.grid(row=10, columnspan=2)
         BExport = Button(root, text="导出数据", command=export_data)
         BExport.grid(row=11, columnspan=2)
-
-        #if sys.platform == "win32":
-            #BSubmit = Button(root, text="提交", state=DISABLED)
-            #BRun = Button(root, text="测试运行", command=lambda: os.system('start flashplayer.exe "orientation.swf"'))
-        #else:
-            #BSubmit = Button(root, text="提交", command=lambda: submit(root))
-            #BRun = Button(root, text="测试运行", command=run_flash)
-
-        #BSubmit.grid(row=10, column=1)
 
         BRun = Button(root, text="测试运行", command=run_flash)
         BRun.grid(row=12, columnspan=2)
