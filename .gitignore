@@ -2,7 +2,7 @@
 __pycache__
 __version__
 data
-data_bak
+data_*
 tmp
 flashplayer
 flashplayer.exe
