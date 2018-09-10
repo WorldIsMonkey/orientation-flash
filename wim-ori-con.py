@@ -79,7 +79,7 @@ from tkinter import messagebox
 DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20180531"
+DEPENDENCY_VERSION = "20180909"
 
 
 def load_main_config():
