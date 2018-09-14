@@ -14,7 +14,7 @@ for line in lines:
     song_url = line_splitted[4]
     start_time = line_splitted[5].strip()
     startimes.append(start_time)
-    with open(os.path.join('data','music','%s.config'%i), 'wb') as config_file:
+    with open(os.path.join('..','data','music','%s.config'%i), 'wb') as config_file:
         if 'op' in song_type.lower():
             song_type_numeral='2'
         elif 'ed' in song_type.lower():
@@ -33,5 +33,5 @@ for filename in os.listdir('download'):
     index = filename.split('.')[0]
     if index:
         index=int(index)
-        os.system("ffmpeg -ss %s -t 0:30 -i %s -s 1920x720 %s"%(startimes[index-1], full_filename, os.path.join('data', 'music', 'media', str(index)+'.mp4')))
-        os.system("ffmpeg -ss %s -t 0:20 -i %s %s"%(startimes[index-1], full_filename, os.path.join('data', 'music', 'media', str(index)+'.mp3')))
+        os.system("ffmpeg -ss %s -t 0:30 -i %s -s 1920x720 %s"%(startimes[index-1], full_filename, os.path.join('..','data', 'music', 'media', str(index)+'.mp4')))
+        os.system("ffmpeg -ss %s -t 0:20 -i %s %s"%(startimes[index-1], full_filename, os.path.join('..','data', 'music', 'media', str(index)+'.mp3')))

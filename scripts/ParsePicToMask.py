@@ -15,7 +15,7 @@ for filename in files:
         im_resized = im.resize(size, Image.ANTIALIAS)
         # new_filepath = join(path, "newpics", filename)
         # im_resized.save(new_filepath, "JPEG")
-        new_path = join('.', 'data', 'pic1')
+        new_path = join('..', 'data', 'pic1')
         answer = basename(filename).split('.')[0]
         config_string = "%s\nN/A\nN/A\nN/A\nN/A\nN/A\n" % answer
         with open(join(new_path, "%s.config" % i), 'wb') as file:
