@@ -75,6 +75,9 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 
+GREEN = "#C8E6C9"
+YELLOW = "#FFF9C4"
+RED = "#FFCDD2"
 # Setting this flag to True will disable checking for update
 DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
@@ -241,6 +244,8 @@ def show_question_list_window(question_type):
     ls.insert(0, "规则文本")
     for i in range(1, num_questions + 1):
         ls.insert(i, str(i))
+
+    check_question_completion(question_type, ls)
 
     edit_btn_top = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
     edit_btn_top.pack()
@@ -480,6 +485,7 @@ def save_question(question_type, index, SV, IV, window, ls):
         file.write("-1\n")
     file.close()
     window.destroy()
+    check_question_completion(question_type, ls)
 
 
 def save_rule(question_type, content, window, ls):
@@ -488,6 +494,59 @@ def save_rule(question_type, content, window, ls):
     file.write(content);
     file.close()
     window.destroy()
+    check_question_completion(question_type, ls)
+
+
+def check_question_completion(question_type, ls):
+    if question_type == "mc":
+        num_questions = 40
+    elif question_type == "sq":
+        num_questions = 20
+    elif question_type == "music":
+        num_questions = 40
+    elif question_type == "tf":
+        num_questions = 15
+    elif question_type in {"pic1", "pic2"}:
+        num_questions = 10
+    elif question_type == "fc":
+        num_questions = 0
+    greenlist = []
+    for i in range(0, num_questions + 1):
+        if i == 0:
+            try:
+                file = open("data/" + question_type + "/0.config", encoding="utf8")
+                if file.read().strip():
+                    ls.itemconfig(i, bg=GREEN)
+                else:
+                    ls.itemconfig(i, bg=RED)
+                file.close()
+            except:
+                ls.itemconfig(i, bg=RED)
+        else:
+            if os.path.exists("data/" + question_type + "/" + str(i) + ".config"):
+                ls.itemconfig(i, bg=GREEN)
+                greenlist.append(i)
+            else:
+                ls.itemconfig(i, bg=RED)
+    for e in greenlist:
+        file = open("data/" + question_type + "/" + str(e) + ".config", encoding="utf8")
+        empty = True
+        count = 0
+        for l in file:
+            if not l.strip():
+                if question_type == "music":
+                    ls.itemconfig(e, bg=YELLOW)
+                else:
+                    if count != 1:  # 问题第二行可以为空
+                        ls.itemconfig(e, bg=YELLOW)
+            elif count == 6 and l.strip() == "0":
+                ls.itemconfig(e, bg=YELLOW)
+            else:
+                empty = False
+            count += 1
+        if empty:
+            ls.itemconfig(e, bg=RED)
+        file.close()
 
 
 def open_browser(url):
