@@ -204,7 +204,7 @@ def scroll_to_view(scroll_set, *view_funcs):
     return closure
 
 
-def load_main_config():
+def load_navigation_config():
     result = []
     for i in range(len(QUESTION_TYPES) - 1):
         result.append(False)
@@ -222,7 +222,7 @@ def load_main_config():
         return result
 
 
-def save_main_config(a, b, c):
+def save_navigation_config(a, b, c):
     if not os.path.exists("data"):
         os.makedirs("data")
     with open("data/navigation.config", "w", encoding="utf-8", newline="\n") as navigation_config_file:
@@ -346,32 +346,54 @@ def check_set(element, file):
         element.config(fg="red")
 
 
+def update_question_list(question_type, ls):
+    for i in range(QUESTION_TYPES[question_type]["num_questions"] + 1):
+        ls.__delitem__(0)
+
+    for i in range(QUESTION_TYPES[question_type]["num_questions"] + 1):
+        try:
+            with open("data/{}/{}.config".format(question_type, i), encoding="utf-8") as file:
+                question = file.readline()
+        except FileNotFoundError:
+            question = ""
+
+        try:
+            time_modified = metadata[question_type][str(i)]
+        except:
+            time_modified = ""
+
+        ls.add_data(["[{}] {}".format("规则文本" if i == 0 else i, question), time_modified])
+
+
+def import_csv(question_type, ls):
+    selected = select_file("CSV Files", "*.csv")
+    if not selected:
+        return
+
+
+
 def show_question_list_window(question_type):
     num_questions = QUESTION_TYPES[question_type]["num_questions"]
     title = QUESTION_TYPES[question_type]["title"]
 
-    mc = Tk()
-    mc.title(title)
-    ls = Listbox(mc, height=num_questions + 1)
-    ls.insert(0, "规则文本")
-    for i in range(1, num_questions + 1):
-        ls.insert(i, str(i))
+    window = Tk()
+    window.title(title)
 
-    edit_btn_top = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
-    edit_btn_top.pack()
+    ls = MultiListbox(window, ["Question", "Time Modified"], width=40)
+    update_question_list(question_type, ls)
 
-    ls.pack()
+    Button(window, text="Edit", command=lambda: edit_question(question_type, ls)).pack()
 
-    edit_btn_bottom = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
-    edit_btn_bottom.pack()
+    ls.pack(fill=BOTH, expand=True)
+    Label(window, text="Tip: 你可以拖拽边缘来缩放本窗口.").pack()
 
-    ls.mainloop()
+    window.mainloop()
 
 
 def edit_question(question_type, ls):
-    if not ls.curselection():
+    if ls.curselection() is None:
         return
-    index = ls.curselection()[0]
+    index = ls.curselection()
     if index == 0:
         content = ""
         if os.path.exists("data/" + question_type + "/" + str(index) + ".config"):
@@ -558,50 +580,62 @@ def edit_question(question_type, ls):
             tip.grid(row=14, columnspan=2)
 
 
-        save_btn = Button(question_edit, text="保存", command=lambda: save_question(question_type, index, SV, IV, question_edit, ls))
+        save_btn = Button(question_edit, text="Save", command=lambda: save_question(question_type, index, SV, IV, question_edit, ls))
         save_btn.grid(row=99, columnspan=2)
 
         question_edit.mainloop()
 
 
+def update_time_modified(question_type, index):
+    now = str(datetime.datetime.now())
+    metadata[question_type][str(index)] = now[:now.find(".")]
+    with open("data/metadata.json", "w", encoding="utf-8", newline="\n") as metadata_file:
+        metadata_file.write(json.dumps(metadata))
+
+
 def save_question(question_type, index, SV, IV, window, ls):
     check_dir_existance(question_type)
-    file = open("data/" + question_type + "/" + str(index) + ".config", "w", encoding="utf-8", newline="\n")
-    if question_type == "mc":
-        for e in SV:
-            file.write(e.get() + "\n")
-    elif question_type == "sq":
-        for i in range(len(SV)):
-            if i > 2:
-                file.write("N/A\n")
-            else:
-                file.write(SV[i].get() + "\n")
-    elif question_type in {"music", "tf"}:
-        for i in range(len(SV)):
-            if i > 1:
-                file.write("N/A\n")
-            else:
-                file.write(SV[i].get() + "\n")
-    elif question_type in {"pic1", "pic2"}:
-        for i in range(len(SV)):
-            if i > 0:
-                file.write("N/A\n")
-            else:
-                file.write(SV[i].get() + "\n")
+    with open("data/{}/{}.config".format(question_type, index), "w", encoding="utf-8", newline="\n") as file:
+        if question_type == "mc":
+            for e in SV:
+                file.write(e.get() + "\n")
+        elif question_type == "sq":
+            for i in range(len(SV)):
+                if i > 2:
+                    file.write("N/A\n")
+                else:
+                    file.write(SV[i].get() + "\n")
+        elif question_type in {"music", "tf"}:
+            for i in range(len(SV)):
+                if i > 1:
+                    file.write("N/A\n")
+                else:
+                    file.write(SV[i].get() + "\n")
+        elif question_type in {"pic1", "pic2"}:
+            for i in range(len(SV)):
+                if i > 0:
+                    file.write("N/A\n")
+                else:
+                    file.write(SV[i].get() + "\n")
 
-    if question_type in {"mc", "music", "tf"}:
-        file.write(str(IV.get()) + "\n")
-    elif question_type == "sq":
-        file.write("-1\n")
-    file.close()
+                    if question_type in {"mc", "music", "tf"}:
+                        file.write(str(IV.get()) + "\n")
+                    elif question_type == "sq":
+                        file.write("-1\n")
+
+    update_time_modified(question_type, index)
+    update_question_list(question_type, ls)
     window.destroy()
 
 
 def save_rule(question_type, content, window, ls):
     check_dir_existance(question_type)
-    file = open("data/" + question_type + "/0.config", "w", encoding="utf-8", newline="\n")
-    file.write(content);
-    file.close()
+
+    with open("data/{}/0.config".format(question_type), "w", encoding="utf-8", newline="\n") as file:
+        file.write(content)
+
+    update_time_modified(question_type, 0)
+    update_question_list(question_type, ls)
     window.destroy()
 
 
@@ -792,7 +826,7 @@ if (__name__ == "__main__"):
         var = []
         for i in range(len(QUESTION_TYPES) - 1):
             intvar = IntVar()
-            intvar.trace("w", save_main_config)
+            intvar.trace("w", save_navigation_config)
             var.append(intvar)
 
         BGL = Label(root)
@@ -853,11 +887,11 @@ if (__name__ == "__main__"):
         BInit = Button(root, text="!数据初始化!", command=initialize)
         BInit.grid(row=13, columnspan=2)
 
-        enable = load_main_config()
+        enable = load_navigation_config()
         for i in range(len(enable)):
             if enable[i]:
                 C[i].select()
-        save_main_config(None, None, None)
+        save_navigation_config(None, None, None)
 
         bring_to_front(root)
         root.mainloop()
