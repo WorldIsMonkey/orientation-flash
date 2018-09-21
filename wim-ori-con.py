@@ -61,8 +61,10 @@ along with this file.  If not, see <http://www.gnu.org/licenses/>.
 
 
 import base64
+import datetime
 import hashlib
 import imghdr
+import json
 import os
 import shutil
 import ssl
@@ -70,27 +72,144 @@ import struct
 import tarfile
 import urllib.request
 import webbrowser
+from itertools import cycle
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 
 
-GREEN = "#C8E6C9"
-YELLOW = "#FFF9C4"
-RED = "#FFCDD2"
-# Setting this flag to True will disable checking for update
-DEBUG = False
+# Setting this flag to True will disable checking for update.
+DEBUG = True
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
 DEPENDENCY_VERSION = "20180909"
+QUESTION_TYPES = {
+    "mc": {
+        "num_questions": 40,
+        "title": "选择题",
+    },
+    "sq": {
+        "num_questions": 20,
+        "title": "简答题",
+    },
+    "music": {
+        "num_questions": 40,
+        "title": "音乐题",
+    },
+    "tf": {
+        "num_questions": 15,
+        "title": "判断题",
+    },
+    "pic1": {
+        "num_questions": 10,
+        "title": "图片题 (遮挡)",
+    },
+    "pic2": {
+        "num_questions": 10,
+        "title": "图片题 (马赛克)",
+    },
+    "fc": {
+        "num_questions": 0,
+        "title": "冲刺题",
+    },
+}
+
+
+class MultiListbox(Frame):
+    def __init__(self, master=None, columns=2, data=[], row_select=True, **kwargs):
+        '''makes a multicolumn listbox by combining a bunch of single listboxes
+        with a single scrollbar
+        :columns:
+          (int) the number of columns
+          OR (1D list or strings) the column headers
+        :data:
+          (1D iterable) auto add some data
+        :row_select:
+          (boolean) When True, clicking a cell selects the entire row
+        All other kwargs are passed to the Listboxes'''
+        Frame.__init__(self, master, borderwidth=1, highlightthickness=1, relief=SUNKEN)
+        self.rowconfigure(1, weight=1)
+        self.columns = columns
+        if isinstance(self.columns, (list, tuple)):
+            for col, text in enumerate(self.columns):
+                Label(self, text=text).grid(row=0, column=col)
+            self.columns = len(self.columns)
+
+        self.boxes = []
+        for col in range(self.columns):
+            box = Listbox(self, exportselection=not row_select, **kwargs)
+            if row_select:
+                box.bind('<<ListboxSelect>>', self.selected)
+            box.grid(row=1, column=col, sticky='nsew')
+            self.columnconfigure(col, weight=1)
+            self.boxes.append(box)
+        vsb = Scrollbar(self, orient=VERTICAL,
+            command=multiple(*[box.yview for box in self.boxes]))
+        vsb.grid(row=1, column=col+1, sticky='ns')
+        for box in self.boxes:
+            box.config(yscrollcommand=scroll_to_view(vsb.set,
+                *[b.yview for b in self.boxes if b is not box]))
+        self.add_data(data)
+
+    def selected(self, event=None):
+        row = event.widget.curselection()[0]
+        for lbox in self.boxes:
+            lbox.select_clear(0, END)
+            lbox.select_set(row)
+
+    def add_data(self, data=[]):
+        '''takes a 1D list of data and adds it row-wise
+        If there is not enough data to fill the row, then the row is
+        filled with empty strings
+        these will not be back filled; every new call starts at column 0'''
+        # it is essential that the listboxes all have the same length.
+        # because the scroll works on "percent" ...
+        # and 100% must mean the same in all cases
+        boxes = cycle(self.boxes)
+        idx = -1
+        for idx, (item, box) in enumerate(zip(data, boxes)):
+            box.insert(END, item)
+        for _ in range(self.columns - idx%self.columns - 1):
+            next(boxes).insert(END, '')
+
+    def __getitem__(self, index):
+        '''get a row'''
+        return [box.get(index) for box in self.boxes]
+
+    def __delitem__(self, index):
+        '''delete a row'''
+        [box.delete(index) for box in self.boxes]
+
+    def curselection(self):
+        '''get the currently selected row'''
+        selection = self.boxes[0].curselection()
+        return selection[0] if selection else None
+
+
+def multiple(*func_list):
+    '''run multiple functions as one'''
+    # I can't decide if this is ugly or pretty
+    return lambda *args, **kw: [func(*args, **kw) for func in func_list]; None
+
+
+def scroll_to_view(scroll_set, *view_funcs):
+    ''' Allows one widget to control the scroll bar and other widgets
+    scroll set: the scrollbar set function
+    view_funcs: other widget's view functions
+    '''
+    def closure(start, end):
+        scroll_set(start, end)
+        for func in view_funcs:
+            func('moveto', start)
+    return closure
 
 
 def load_main_config():
     result = []
-    for i in range(8):
+    for i in range(len(QUESTION_TYPES) - 1):
         result.append(False)
     try:
-        file = open("data/main.config")
+        file = open("data/navigation.config")
         count = 0
         for e in file:
             for ee in e:
@@ -103,14 +222,25 @@ def load_main_config():
         return result
 
 
-def save_main_config(var):
+def save_main_config(a, b, c):
     if not os.path.exists("data"):
         os.makedirs("data")
-    file = open("data/main.config", "w")
-    for e in var:
-        file.write(str(IntVar.get(e)))
-    file.close()
-    messagebox.showinfo("", "主设置已保存.")
+    with open("data/navigation.config", "w", encoding="utf-8", newline="\n") as navigation_config_file:
+        for i in range(len(var)):
+            value = str(IntVar.get(var[i]))
+            if value == "0":
+                set_btn_group_state(B[i], "disabled")
+            else:
+                set_btn_group_state(B[i], "normal")
+            navigation_config_file.write(value)
+
+
+def set_btn_group_state(btns, state):
+    if isinstance(btns, tuple):
+        for btn in btns:
+            btn.config(state=state)
+    else:
+        btns.config(state=state)
 
 
 def initialize():
@@ -217,35 +347,15 @@ def check_set(element, file):
 
 
 def show_question_list_window(question_type):
-    if question_type == "mc":
-        num_questions = 40
-        title = "选择题"
-    elif question_type == "sq":
-        num_questions = 20
-        title = "简答题"
-    elif question_type == "music":
-        num_questions = 40
-        title = "音乐题"
-    elif question_type == "tf":
-        num_questions = 15
-        title = "判断题"
-    elif question_type == "pic1":
-        num_questions = 10
-        title = "图片题 (遮挡)"
-    elif question_type == "pic2":
-        num_questions = 10
-        title = "图片题 (马赛克)"
-    elif question_type == "fc":
-        num_questions = 0
-        title = "冲刺题"
+    num_questions = QUESTION_TYPES[question_type]["num_questions"]
+    title = QUESTION_TYPES[question_type]["title"]
+
     mc = Tk()
     mc.title(title)
     ls = Listbox(mc, height=num_questions + 1)
     ls.insert(0, "规则文本")
     for i in range(1, num_questions + 1):
         ls.insert(i, str(i))
-
-    check_question_completion(question_type, ls)
 
     edit_btn_top = Button(mc, text="Edit", command=lambda: edit_question(question_type, ls))
     edit_btn_top.pack()
@@ -265,7 +375,7 @@ def edit_question(question_type, ls):
     if index == 0:
         content = ""
         if os.path.exists("data/" + question_type + "/" + str(index) + ".config"):
-            file = open("data/" + question_type + "/" + str(index) + ".config", encoding="utf8")
+            file = open("data/" + question_type + "/" + str(index) + ".config", encoding="utf-8")
             content = file.read()
             file.close()
 
@@ -283,7 +393,7 @@ def edit_question(question_type, ls):
     else:
         content = None
         if os.path.exists("data/" + question_type + "/" + str(index) + ".config"):
-            file = open("data/" + question_type + "/" + str(index) + ".config", encoding="utf8")
+            file = open("data/" + question_type + "/" + str(index) + ".config", encoding="utf-8")
             content = file.readlines()
             file.close()
 
@@ -456,7 +566,7 @@ def edit_question(question_type, ls):
 
 def save_question(question_type, index, SV, IV, window, ls):
     check_dir_existance(question_type)
-    file = open("data/" + question_type + "/" + str(index) + ".config", "w", encoding="utf8", newline='\n')
+    file = open("data/" + question_type + "/" + str(index) + ".config", "w", encoding="utf-8", newline="\n")
     if question_type == "mc":
         for e in SV:
             file.write(e.get() + "\n")
@@ -485,68 +595,14 @@ def save_question(question_type, index, SV, IV, window, ls):
         file.write("-1\n")
     file.close()
     window.destroy()
-    check_question_completion(question_type, ls)
 
 
 def save_rule(question_type, content, window, ls):
     check_dir_existance(question_type)
-    file = open("data/" + question_type + "/0.config", "w", encoding="utf8")
+    file = open("data/" + question_type + "/0.config", "w", encoding="utf-8", newline="\n")
     file.write(content);
     file.close()
     window.destroy()
-    check_question_completion(question_type, ls)
-
-
-def check_question_completion(question_type, ls):
-    if question_type == "mc":
-        num_questions = 40
-    elif question_type == "sq":
-        num_questions = 20
-    elif question_type == "music":
-        num_questions = 40
-    elif question_type == "tf":
-        num_questions = 15
-    elif question_type in {"pic1", "pic2"}:
-        num_questions = 10
-    elif question_type == "fc":
-        num_questions = 0
-    greenlist = []
-    for i in range(0, num_questions + 1):
-        if i == 0:
-            try:
-                file = open("data/" + question_type + "/0.config", encoding="utf8")
-                if file.read().strip():
-                    ls.itemconfig(i, bg=GREEN)
-                else:
-                    ls.itemconfig(i, bg=RED)
-                file.close()
-            except:
-                ls.itemconfig(i, bg=RED)
-        else:
-            if os.path.exists("data/" + question_type + "/" + str(i) + ".config"):
-                ls.itemconfig(i, bg=GREEN)
-                greenlist.append(i)
-            else:
-                ls.itemconfig(i, bg=RED)
-    for e in greenlist:
-        file = open("data/" + question_type + "/" + str(e) + ".config", encoding="utf8")
-        empty = True
-        count = 0
-        for l in file:
-            if not l.strip():
-                if question_type == "music":
-                    ls.itemconfig(e, bg=YELLOW)
-                else:
-                    if count != 1:  # 问题第二行可以为空
-                        ls.itemconfig(e, bg=YELLOW)
-            elif count == 6 and l.strip() == "0":
-                ls.itemconfig(e, bg=YELLOW)
-            else:
-                empty = False
-            count += 1
-        if empty:
-            ls.itemconfig(e, bg=RED)
-        file.close()
 
 
 def open_browser(url):
@@ -612,7 +668,7 @@ def first_time_run():
         set_str_var(root, text, "初始化失败.")
         root.mainloop()
     else:
-        with open("__version__", "w") as file:
+        with open("__version__", "w", encoding="utf-8", newline="\n") as file:
             file.write(DEPENDENCY_VERSION)
 
 
@@ -690,7 +746,7 @@ if (__name__ == "__main__"):
         try:
             with urllib.request.urlopen("https://raw.githubusercontent.com/A-Kun/wim-ori-con/master/wim-ori-con.py") as latest_code_reader:
                 latest_code = latest_code_reader.read().decode("utf-8").strip()
-            with open("wim-ori-con.py", encoding="utf8") as current_code_reader:
+            with open("wim-ori-con.py", encoding="utf-8") as current_code_reader:
                 current_code = current_code_reader.read().strip()
             if latest_code != current_code:
                 needs_update = True
@@ -710,16 +766,34 @@ if (__name__ == "__main__"):
         root.mainloop()
 
     if not error:
+        if not os.path.exists("data"):
+            os.makedirs("data")
+        try:
+            navigation_config_file = open("data/navigation.config", encoding="utf-8", newline="\n")
+            navigation_config_file.close()
+        except FileNotFoundError:
+            with open("data/navigation.config", "w", encoding="utf-8", newline="\n") as navigation_config_file:
+                navigation_config_file.write("0" * (len(QUESTION_TYPES) - 1))
+        try:
+            with open("data/metadata.json", encoding="utf-8", newline="\n") as metadata_file:
+                metadata = json.loads(metadata_file.read())
+        except FileNotFoundError:
+            with open("data/metadata.json", "w", encoding="utf-8", newline="\n") as metadata_file:
+                metadata = {}
+                for next_question_type in QUESTION_TYPES:
+                    metadata[next_question_type] = {}
+                metadata_file.write(json.dumps(metadata))
+
         root = Tk()
         root.title("")
 
         B = []
         C = []
         var = []
-        for i in range(7):
-            B.append(None)
-            C.append(None)
-            var.append(IntVar())
+        for i in range(len(QUESTION_TYPES) - 1):
+            intvar = IntVar()
+            intvar.trace("w", save_main_config)
+            var.append(intvar)
 
         BGL = Label(root)
         BGL.grid(row=0, column=0)
@@ -728,62 +802,62 @@ if (__name__ == "__main__"):
 
         check_set(BGL, "data/bg.jpg")
 
-        B[0] = Button(root, text="选择题", command=lambda: show_question_list_window("mc"))
-        B[0].grid(row=1, columnspan=2)
-        #C[0] = Checkbutton(root, text="启用", variable=var[0])
-        #C[0].grid(row=1, column=1)
+        B.append(Button(root, text="选择题", command=lambda: show_question_list_window("mc")))
+        B[0].grid(row=1, column=1)
+        C.append(Checkbutton(root, text="启用", variable=var[0]))
+        C[0].grid(row=1, column=0)
 
-        B[1] = Button(root, text="简答题", command=lambda: show_question_list_window("sq"))
-        B[1].grid(row=2, columnspan=2)
-        #C[1] = Checkbutton(root, text="启用", variable=var[1])
-        #C[1].grid(row=2, column=0)
+        B.append(Button(root, text="简答题", command=lambda: show_question_list_window("sq")))
+        B[1].grid(row=2, column=1)
+        C.append(Checkbutton(root, text="启用", variable=var[1]))
+        C[1].grid(row=2, column=0)
 
-        B[2] = Button(root, text="是非题", command=lambda: show_question_list_window("tf"))
-        B[2].grid(row=3, columnspan=2)
-        #C[2] = Checkbutton(root, text="启用", variable=var[2])
-        #C[2].grid(row=3, column=0)
+        B.append(Button(root, text="是非题", command=lambda: show_question_list_window("tf")))
+        B[2].grid(row=3, column=1)
+        C.append(Checkbutton(root, text="启用", variable=var[2]))
+        C[2].grid(row=3, column=0)
 
-        B[3] = Button(root, text="图片题 (遮挡)", command=lambda: show_question_list_window("pic1"))
-        B[3].grid(row=4, columnspan=2)
-        #C[3] = Checkbutton(root, text="启用", variable=var[3])
-        #C[3].grid(row=4, column=0)
+        Bpic1 = Button(root, text="图片题 (遮挡)", command=lambda: show_question_list_window("pic1"))
+        Bpic1.grid(row=4, column=1)
+        C.append(Checkbutton(root, text="启用", variable=var[3]))
+        C[3].grid(row=4, column=0, rowspan=2)
 
-        B[4] = Button(root, text="图片题 (马赛克)", command=lambda: show_question_list_window("pic2"))
-        B[4].grid(row=5, columnspan=2)
-        #C[4] = Checkbutton(root, text="启用", variable=var[3])
-        #C[4].grid(row=4, column=0)
+        Bpic2 = Button(root, text="图片题 (马赛克)", command=lambda: show_question_list_window("pic2"))
+        Bpic2.grid(row=5, column=1)
+        B.append((Bpic1, Bpic2))
 
-        B[5] = Button(root, text="音乐题", command=lambda: show_question_list_window("music"))
-        B[5].grid(row=6, columnspan=2)
-        #C[5] = Checkbutton(root, text="启用", variable=var[5])
-        #C[5].grid(row=6, column=0)
+        B.append(Button(root, text="音乐题", command=lambda: show_question_list_window("music")))
+        B[4].grid(row=6, column=1)
+        C.append(Checkbutton(root, text="启用", variable=var[4]))
+        C[4].grid(row=6, column=0)
 
-        B[6] = Button(root, text="冲刺题", command=lambda: show_question_list_window("fc"))
-        B[6].grid(row=7, columnspan=2)
-        #C[6] = Checkbutton(root, text="启用", variable=var[6])
-        #C[6].grid(row=7, column=0)
+        B.append(Button(root, text="冲刺题", command=lambda: show_question_list_window("fc")))
+        B[5].grid(row=7, column=1)
+        C.append(Checkbutton(root, text="启用", variable=var[5]))
+        C[5].grid(row=7, column=0)
 
         space1 = Label(root, text="")
         space1.grid(row=8, columnspan=2)
 
         BExport = Button(root, text="导入数据", command=import_data)
-        BExport.grid(row=10, columnspan=2)
+        BExport.grid(row=9, columnspan=2)
         BExport = Button(root, text="导出数据", command=export_data)
-        BExport.grid(row=11, columnspan=2)
+        BExport.grid(row=10, columnspan=2)
 
         BRun = Button(root, text="测试运行", command=run_flash)
-        BRun.grid(row=12, columnspan=2)
+        BRun.grid(row=11, columnspan=2)
 
         space2 = Label(root, text="")
-        space2.grid(row=13, columnspan=2)
+        space2.grid(row=12, columnspan=2)
 
         BInit = Button(root, text="!数据初始化!", command=initialize)
-        BInit.grid(row=14, columnspan=2)
+        BInit.grid(row=13, columnspan=2)
 
-        #enable = load_main_config()
-        #for i in range(len(enable)):
-            #if enable[i]:
-                #C[i].select()
+        enable = load_main_config()
+        for i in range(len(enable)):
+            if enable[i]:
+                C[i].select()
+        save_main_config(None, None, None)
 
         bring_to_front(root)
         root.mainloop()

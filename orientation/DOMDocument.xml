@@ -1,4 +1,4 @@
-<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#000000" width="1280" height="960" currentTimeline="15" xflVersion="2.3" creatorInfo="Adobe Flash Professional CC" platform="Macintosh" versionInfo="Saved by Adobe Flash Macintosh 13.0 build 759" majorVersion="13" buildNumber="759" guidesVisible="false" rulerVisible="true" objectsSnapTo="false" viewAngle3D="100.925968316201" nextSceneIdentifier="119" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#000000" width="1280" height="960" currentTimeline="1" xflVersion="2.3" creatorInfo="Adobe Flash Professional CC" platform="Macintosh" versionInfo="Saved by Adobe Flash Macintosh 13.0 build 759" majorVersion="13" buildNumber="759" guidesVisible="false" rulerVisible="true" objectsSnapTo="false" viewAngle3D="100.925968316201" nextSceneIdentifier="119" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
      <folders>
           <DOMFolderItem name="Dynamic Image" itemID="59b238da-000002fe"/>
           <DOMFolderItem name="Font" itemID="572f909b-00000167"/>
@@ -10,12 +10,12 @@
           <DOMFolderItem name="UI" itemID="58f27b4a-000004df" isExpanded="true"/>
      </folders>
      <fonts>
-          <DOMFontItem name="Font/Font 2" itemID="540a73a6-000000c0" font="KozGoPr6N-ExtraLight" size="0" id="4" sourceLastImported="1409971110" embedRanges="9999"/>
-          <DOMFontItem name="Font/Font 3" itemID="540617fc-00000161" font="STHeitiSC-Light" size="0" id="3" sourceLastImported="1409685500" embedRanges="9999"/>
-          <DOMFontItem name="Font/Font 1" itemID="54056c62-00000031" font="sao" size="0" id="1" sourceLastImported="1409641570" embedRanges="9999"/>
-          <DOMFontItem name="Font/圆体" itemID="5574bfc9-00000299" font="STYuanti-SC-Bold" size="0" id="7" sourceLastImported="1433714633" embedRanges="9999"/>
-          <DOMFontItem name="Font/圆体 1" itemID="5574bfc9-0000029b" font="STYuanti-SC-Light" size="0" id="8" sourceLastImported="1433714633" embedRanges="9999"/>
           <DOMFontItem name="Font/圆体 2" itemID="5574bfc9-0000029d" font="STYuanti-SC-Regular" size="0" id="9" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/圆体 1" itemID="5574bfc9-0000029b" font="STYuanti-SC-Light" size="0" id="8" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/圆体" itemID="5574bfc9-00000299" font="STYuanti-SC-Bold" size="0" id="7" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 1" itemID="54056c62-00000031" font="sao" size="0" id="1" sourceLastImported="1409641570" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 3" itemID="540617fc-00000161" font="STHeitiSC-Light" size="0" id="3" sourceLastImported="1409685500" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 2" itemID="540a73a6-000000c0" font="KozGoPr6N-ExtraLight" size="0" id="4" sourceLastImported="1409971110" embedRanges="9999"/>
      </fonts>
      <media>
           <DOMBitmapItem name="Spinner/b0.png" itemID="540572d2-00000082" sourceExternalFilepath="../orientation/LIBRARY/Spinner/b0.png" sourceLastImported="1379434525" sourcePlatform="macintosh" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Spinner/b0.png" bitmapDataHRef="M 31 1409643218.dat" frameRight="2400" frameBottom="2400"/>
@@ -636,6 +636,7 @@ import flash.display.IBitmapDrawable;
 import flash.events.Event;
 import flash.display.Loader;
 
+var i;
 var picLoader:Loader;
 var bgLoader:Loader = new Loader();
 bgLoader.load(new URLRequest('data/bg.jpg'));
@@ -670,7 +671,6 @@ function fl_Fullscreen(event: MouseEvent):void {
 	}
 }
 
-// LOL I know this is bullshit but I didn't get a change to refactor
 var E1Value:Boolean = false;
 var E2Value:Boolean = false;
 var E3Value:Boolean = false;
@@ -737,11 +737,19 @@ function BackToMusic4(event:MouseEvent):void
 	MovieClip(this.root).gotoAndStop(1, 'Music4');
 }
 
-// Define the path to the text file.
 var url:URLRequest;
-
-// Define the URLLoader.
 var loader:URLLoader;
+
+function navigationLoaderComplete(e:Event):void {
+	var data:String = loader.data;
+	for (i = 0; i < data.length; i++) {
+		var char = data.charAt(i);
+		if (char == '0') {
+			hideNavigationList(i + 1);
+		}
+	}
+	play();
+}
 
 function ruleLoaderComplete(e:Event):void {
 	var data:String = loader.data;
@@ -859,7 +867,7 @@ function revealFalse(e:Event):void {
 	falseSymbol.visible = true;
 }
 
-function loaderIOErrorHandler(e):void {
+function loaderIOErrorHandler(e:Event):void {
 	nextFrame();
 }
 
@@ -869,6 +877,10 @@ function hideMusicList(i):void {
 	this['E' + i + 'Title'].visible = false;
 	this['E' + i + 'PlayBtn'].visible = false;
 	this['E' + i + 'AnswerBtn'].visible = false;
+}
+
+function hideNavigationList(i):void {
+	this['N' + i + 'Btn'].visible = false;
 }
 
 function checkMusicExist(start, end):void {
@@ -889,6 +901,10 @@ function checkMusicExist(start, end):void {
 			});
 		}
 	}
+}
+
+function playWrapper(e:Event):void {
+	play();
 }]]></script>
                                    </Actionscript>
                                    <elements>
@@ -909,11 +925,20 @@ function checkMusicExist(start, end):void {
                     </DOMLayer>
                </layers>
           </DOMTimeline>
-          <DOMTimeline name="Navigation" currentFrame="14">
+          <DOMTimeline name="Navigation">
                <layers>
-                    <DOMLayer name="Actions" color="#FF4FFF" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Actions" color="#FF4FFF" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" duration="14" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[url = new URLRequest('data/navigation.config');
+
+loader = new URLLoader();
+loader.load(url);
+
+loader.addEventListener(Event.COMPLETE, navigationLoaderComplete);
+]]></script>
+                                   </Actionscript>
                                    <elements/>
                               </DOMFrame>
                               <DOMFrame index="14" keyMode="9728">
@@ -932,16 +957,16 @@ function N2f(event:MouseEvent):void
     MovieClip(this.root).gotoAndPlay(1, 'SQ');
 }
 
-N3Btn.addEventListener(MouseEvent.CLICK, N3f);
+N4Btn.addEventListener(MouseEvent.CLICK, N4f);
 
-function N3f(event:MouseEvent):void
+function N4f(event:MouseEvent):void
 {
     MovieClip(this.root).gotoAndPlay(1, 'PIC_intro');
 }
 
-N4Btn.addEventListener(MouseEvent.CLICK, N4f);
+N3Btn.addEventListener(MouseEvent.CLICK, N3f);
 
-function N4f(event:MouseEvent):void
+function N3f(event:MouseEvent):void
 {
     MovieClip(this.root).gotoAndPlay(1, 'TF');
 }
@@ -959,35 +984,6 @@ function N6f(event:MouseEvent):void
 {
     MovieClip(this.root).gotoAndPlay(1, 'FC_intro');
 }
-/*
-G7Btn.addEventListener(MouseEvent.CLICK, G7f);
-
-function G7f(event:MouseEvent):void
-{
-    MovieClip(this.root).gotoAndPlay(1, 'FCQ7');
-}
-
-G8Btn.addEventListener(MouseEvent.CLICK, G8f);
-
-function G8f(event:MouseEvent):void
-{
-    MovieClip(this.root).gotoAndPlay(1, 'FCQ8');
-}
-
-G9Btn.addEventListener(MouseEvent.CLICK, G9f);
-
-function G9f(event:MouseEvent):void
-{
-    MovieClip(this.root).gotoAndPlay(1, 'FCQ9');
-}
-
-G10Btn.addEventListener(MouseEvent.CLICK, G10f);
-
-function G10f(event:MouseEvent):void
-{
-    MovieClip(this.root).gotoAndPlay(1, 'FCQ10');
-}
-*/
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -1060,7 +1056,7 @@ function G10f(event:MouseEvent):void
                          <frames>
                               <DOMFrame index="0" duration="14" tweenType="motion" motionTweenSnap="true" keyMode="22017" acceleration="-100">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="UI/Navi4Btn" name="N4Btn">
+                                        <DOMSymbolInstance libraryItemName="UI/Navi4Btn" name="N3Btn">
                                              <matrix>
                                                   <Matrix tx="-326" ty="138.65"/>
                                              </matrix>
@@ -1075,7 +1071,7 @@ function G10f(event:MouseEvent):void
                               </DOMFrame>
                               <DOMFrame index="14" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="UI/Navi4Btn" name="N4Btn">
+                                        <DOMSymbolInstance libraryItemName="UI/Navi4Btn" name="N3Btn">
                                              <matrix>
                                                   <Matrix tx="703.7" ty="138.65"/>
                                              </matrix>
@@ -1087,11 +1083,11 @@ function G10f(event:MouseEvent):void
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Layer 3" color="#FF800A">
+                    <DOMLayer name="Layer 3" color="#FF800A" current="true" isSelected="true">
                          <frames>
                               <DOMFrame index="0" duration="14" tweenType="motion" motionTweenSnap="true" keyMode="22017" acceleration="-100">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="UI/Navi3Btn" name="N3Btn">
+                                        <DOMSymbolInstance libraryItemName="UI/Navi3Btn" name="N4Btn">
                                              <matrix>
                                                   <Matrix tx="1280" ty="508.35"/>
                                              </matrix>
@@ -1106,7 +1102,7 @@ function G10f(event:MouseEvent):void
                               </DOMFrame>
                               <DOMFrame index="14" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="UI/Navi3Btn" name="N3Btn">
+                                        <DOMSymbolInstance libraryItemName="UI/Navi3Btn" name="N4Btn">
                                              <matrix>
                                                   <Matrix tx="251" ty="508.35"/>
                                              </matrix>
@@ -1263,7 +1259,7 @@ function fl_ClickToGoToScene_intro(event: MouseEvent): void {
                          <frames>
                               <DOMFrame index="0" duration="14" keyMode="9728">
                                    <Actionscript>
-                                        <script><![CDATA[play();]]></script>
+                                        <script><![CDATA[stop();]]></script>
                                    </Actionscript>
                                    <elements/>
                               </DOMFrame>
@@ -1288,8 +1284,8 @@ function fl_ClickToGoToScene_intro(event: MouseEvent): void {
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
+loader.addEventListener(IOErrorEvent.IO_ERROR, playWrapper);
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -1301,7 +1297,6 @@ loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1315,7 +1310,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1329,7 +1323,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1343,7 +1336,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1357,7 +1349,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1371,7 +1362,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1385,7 +1375,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1399,7 +1388,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1413,7 +1401,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1427,7 +1414,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1441,7 +1427,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1455,7 +1440,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1469,7 +1453,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1483,7 +1466,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1497,7 +1479,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1511,7 +1492,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1525,7 +1505,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1539,7 +1518,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1553,7 +1531,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1567,7 +1544,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1581,7 +1557,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1595,7 +1570,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1609,7 +1583,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1623,7 +1596,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1637,7 +1609,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1651,7 +1622,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1665,7 +1635,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1679,7 +1648,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1693,7 +1661,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1707,7 +1674,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1721,7 +1687,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1735,7 +1700,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1749,7 +1713,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1763,7 +1726,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1777,7 +1739,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1791,7 +1752,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1805,7 +1765,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1819,7 +1778,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1833,7 +1791,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -1847,7 +1804,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, mcLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8467,7 +8423,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);]]></script
                     </DOMLayer>
                </layers>
           </DOMTimeline>
-          <DOMTimeline name="SQ" currentFrame="20">
+          <DOMTimeline name="SQ">
                <layers>
                     <DOMLayer name="Actions" color="#FF800A" current="true" isSelected="true" autoNamed="false">
                          <frames>
@@ -8478,8 +8434,8 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);]]></script
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
+loader.addEventListener(IOErrorEvent.IO_ERROR, playWrapper);
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -8493,7 +8449,6 @@ url = new URLRequest('data/sq/1.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8509,7 +8464,6 @@ url = new URLRequest('data/sq/2.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8525,7 +8479,6 @@ url = new URLRequest('data/sq/3.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8541,7 +8494,6 @@ url = new URLRequest('data/sq/4.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8557,7 +8509,6 @@ url = new URLRequest('data/sq/5.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8573,7 +8524,6 @@ url = new URLRequest('data/sq/6.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8589,7 +8539,6 @@ url = new URLRequest('data/sq/7.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8605,7 +8554,6 @@ url = new URLRequest('data/sq/8.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8621,7 +8569,6 @@ url = new URLRequest('data/sq/9.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8637,7 +8584,6 @@ url = new URLRequest('data/sq/10.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8653,7 +8599,6 @@ url = new URLRequest('data/sq/11.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8669,7 +8614,6 @@ url = new URLRequest('data/sq/12.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8685,7 +8629,6 @@ url = new URLRequest('data/sq/13.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8701,7 +8644,6 @@ url = new URLRequest('data/sq/14.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8717,7 +8659,6 @@ url = new URLRequest('data/sq/15.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8733,7 +8674,6 @@ url = new URLRequest('data/sq/16.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8749,7 +8689,6 @@ url = new URLRequest('data/sq/17.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8765,7 +8704,6 @@ url = new URLRequest('data/sq/18.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8781,7 +8719,6 @@ url = new URLRequest('data/sq/19.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -8797,7 +8734,6 @@ url = new URLRequest('data/sq/20.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, sqLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11504,7 +11440,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
                     </DOMLayer>
                </layers>
           </DOMTimeline>
-          <DOMTimeline name="TF" currentFrame="15">
+          <DOMTimeline name="TF">
                <layers>
                     <DOMLayer name="Actions" color="#FF800A" current="true" isSelected="true" autoNamed="false">
                          <frames>
@@ -11515,8 +11451,8 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
+loader.addEventListener(IOErrorEvent.IO_ERROR, playWrapper);
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -11531,7 +11467,6 @@ url = new URLRequest('data/tf/1.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11548,7 +11483,6 @@ url = new URLRequest('data/tf/2.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11565,7 +11499,6 @@ url = new URLRequest('data/tf/3.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11582,7 +11515,6 @@ url = new URLRequest('data/tf/4.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11599,7 +11531,6 @@ url = new URLRequest('data/tf/5.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11616,7 +11547,6 @@ url = new URLRequest('data/tf/6.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11633,7 +11563,6 @@ url = new URLRequest('data/tf/7.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11650,7 +11579,6 @@ url = new URLRequest('data/tf/8.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11667,7 +11595,6 @@ url = new URLRequest('data/tf/9.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11684,7 +11611,6 @@ url = new URLRequest('data/tf/10.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11701,7 +11627,6 @@ url = new URLRequest('data/tf/11.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11718,7 +11643,6 @@ url = new URLRequest('data/tf/12.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11735,7 +11659,6 @@ url = new URLRequest('data/tf/13.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11752,7 +11675,6 @@ url = new URLRequest('data/tf/14.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -11769,7 +11691,6 @@ url = new URLRequest('data/tf/15.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, tfLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13547,7 +13468,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
           </DOMTimeline>
           <DOMTimeline name="PIC_intro">
                <layers>
-                    <DOMLayer name="Actions" color="#4F80FF" autoNamed="false">
+                    <DOMLayer name="Actions" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -13556,8 +13477,8 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
+loader.addEventListener(IOErrorEvent.IO_ERROR, playWrapper);
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -13681,7 +13602,7 @@ loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="BG" color="#4F80FF" locked="true" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="BG" color="#4F80FF" locked="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -13724,9 +13645,9 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
                     </DOMLayer>
                </layers>
           </DOMTimeline>
-          <DOMTimeline name="PIC" currentFrame="19">
+          <DOMTimeline name="PIC">
                <layers>
-                    <DOMLayer name="Action" color="#4F80FF" autoNamed="false">
+                    <DOMLayer name="Action" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -13735,7 +13656,6 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13748,7 +13668,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13762,7 +13681,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13775,7 +13693,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13789,7 +13706,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13802,7 +13718,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13816,7 +13731,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13829,7 +13743,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13843,7 +13756,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13856,7 +13768,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13870,7 +13781,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13883,7 +13793,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13897,7 +13806,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13910,7 +13818,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13924,7 +13831,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13937,7 +13843,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13951,7 +13856,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13964,7 +13868,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -13978,7 +13881,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 ]]></script>
                                    </Actionscript>
@@ -13991,7 +13893,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip2Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -15214,7 +15115,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Image" color="#9933CC" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Image" color="#9933CC" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -16197,7 +16098,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);]]></script
           </DOMTimeline>
           <DOMTimeline name="PIC2_intro">
                <layers>
-                    <DOMLayer name="Actions" color="#4F80FF" autoNamed="false">
+                    <DOMLayer name="Actions" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -16206,8 +16107,8 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);]]></script
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
+loader.addEventListener(IOErrorEvent.IO_ERROR, playWrapper);
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -16331,7 +16232,7 @@ loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="BG" color="#4F80FF" locked="true" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="BG" color="#4F80FF" locked="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -16374,9 +16275,9 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
                     </DOMLayer>
                </layers>
           </DOMTimeline>
-          <DOMTimeline name="PIC2" currentFrame="49" guides='&lt;guidelines&gt;&lt;guideline direction="h"&gt;-11&lt;/guideline&gt;&lt;/guidelines&gt;'>
+          <DOMTimeline name="PIC2" guides='&lt;guidelines&gt;&lt;guideline direction="h"&gt;-11&lt;/guideline&gt;&lt;/guidelines&gt;'>
                <layers>
-                    <DOMLayer name="Action" color="#4F80FF" autoNamed="false">
+                    <DOMLayer name="Action" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -16385,7 +16286,6 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16407,7 +16307,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16421,7 +16320,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16443,7 +16341,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16457,7 +16354,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16479,7 +16375,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16493,7 +16388,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16515,7 +16409,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16529,7 +16422,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16551,7 +16443,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16565,7 +16456,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16587,7 +16477,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16601,7 +16490,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16623,7 +16511,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16637,7 +16524,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16659,7 +16545,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16673,7 +16558,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16695,7 +16579,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -16709,7 +16592,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 ]]></script>
                                    </Actionscript>
@@ -16731,7 +16613,6 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, fl_Skip5Frames);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, picLoaderComplete);
 loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
 ]]></script>
@@ -19528,7 +19409,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Image" color="#9933CC" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Image" color="#9933CC" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -21949,12 +21830,9 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);]]></script
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Control" color="#FF4FFF" autoNamed="false">
+                    <DOMLayer name="Control" color="#FF4FFF" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
-                                   <Actionscript>
-                                        <script><![CDATA[fl_ClickToGoToNextFrame]]></script>
-                                   </Actionscript>
                                    <elements>
                                         <DOMSymbolInstance libraryItemName="UI/Navigation" name="Navigation" symbolType="button">
                                              <matrix>
@@ -22052,7 +21930,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);]]></script
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Global Action" color="#669900" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Global Action" color="#669900" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -22089,8 +21967,8 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
+loader.addEventListener(IOErrorEvent.IO_ERROR, playWrapper);
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -25844,7 +25722,6 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, ruleLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -26041,7 +25918,6 @@ url = new URLRequest('data/music/1.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -26180,7 +26056,6 @@ url = new URLRequest('data/music/2.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -26319,7 +26194,6 @@ url = new URLRequest('data/music/3.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -26458,7 +26332,6 @@ url = new URLRequest('data/music/4.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -26597,7 +26470,6 @@ url = new URLRequest('data/music/5.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -26736,7 +26608,6 @@ url = new URLRequest('data/music/6.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -26875,7 +26746,6 @@ url = new URLRequest('data/music/7.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27014,7 +26884,6 @@ url = new URLRequest('data/music/8.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27153,7 +27022,6 @@ url = new URLRequest('data/music/9.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27292,7 +27160,6 @@ url = new URLRequest('data/music/10.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27431,7 +27298,6 @@ url = new URLRequest('data/music/11.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27570,7 +27436,6 @@ url = new URLRequest('data/music/12.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27709,7 +27574,6 @@ url = new URLRequest('data/music/13.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27848,7 +27712,6 @@ url = new URLRequest('data/music/14.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -27987,7 +27850,6 @@ url = new URLRequest('data/music/15.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -28126,7 +27988,6 @@ url = new URLRequest('data/music/16.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -28265,7 +28126,6 @@ url = new URLRequest('data/music/17.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -28404,7 +28264,6 @@ url = new URLRequest('data/music/18.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -28543,7 +28402,6 @@ url = new URLRequest('data/music/19.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -28682,7 +28540,6 @@ url = new URLRequest('data/music/20.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -28821,7 +28678,6 @@ url = new URLRequest('data/music/21.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -28960,7 +28816,6 @@ url = new URLRequest('data/music/22.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -29099,7 +28954,6 @@ url = new URLRequest('data/music/23.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -29238,7 +29092,6 @@ url = new URLRequest('data/music/24.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -29377,7 +29230,6 @@ url = new URLRequest('data/music/25.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -29516,7 +29368,6 @@ url = new URLRequest('data/music/26.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -29655,7 +29506,6 @@ url = new URLRequest('data/music/27.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -29794,7 +29644,6 @@ url = new URLRequest('data/music/28.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -29933,7 +29782,6 @@ url = new URLRequest('data/music/29.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -30072,7 +29920,6 @@ url = new URLRequest('data/music/30.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -30211,7 +30058,6 @@ url = new URLRequest('data/music/31.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -30350,7 +30196,6 @@ url = new URLRequest('data/music/32.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -30489,7 +30334,6 @@ url = new URLRequest('data/music/33.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -30628,7 +30472,6 @@ url = new URLRequest('data/music/34.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -30767,7 +30610,6 @@ url = new URLRequest('data/music/35.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -30906,7 +30748,6 @@ url = new URLRequest('data/music/36.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -31045,7 +30886,6 @@ url = new URLRequest('data/music/37.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -31184,7 +31024,6 @@ url = new URLRequest('data/music/38.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -31323,7 +31162,6 @@ url = new URLRequest('data/music/39.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -31462,7 +31300,6 @@ url = new URLRequest('data/music/40.config');
 loader = new URLLoader();
 loader.load(url);
 
-// Listen for when the file has finished loading.
 loader.addEventListener(Event.COMPLETE, musicLoaderComplete);
 ]]></script>
                                    </Actionscript>
@@ -31853,35 +31690,35 @@ BackToMusicBtn.addEventListener(MouseEvent.CLICK, BackToMusic4);]]></script>
           <PD n="Stop at this Frame" t="i" v="3"/>
           <PD n="snippetCounter" t="i" v="4"/>
           <PD n="Click to Go to Frame and Stop" t="i" v="3"/>
-          <PD n="Click to Go to Next Frame and Stop" t="i" v="3"/>
           <PD n="Click to Go to Frame and Play" t="i" v="2"/>
+          <PD n="Click to Go to Next Frame and Stop" t="i" v="3"/>
           <PD n="Click to Go to Previous Frame and Stop" t="i" v="2"/>
           <PD n="Click to Go to Scene and Play" t="i" v="9"/>
-          <PD n="Click to Go to Web Page" t="i" v="2"/>
           <PD n="Click to Hide an Object" t="i" v="3"/>
+          <PD n="Click to Go to Web Page" t="i" v="2"/>
      </persistentData>
      <PrinterSettings platform="macintosh"/>
      <publishHistory>
+          <PublishItem publishSize="43657019" publishTime="1537489695"/>
+          <PublishItem publishSize="43657224" publishTime="1537474357"/>
+          <PublishItem publishSize="43657113" publishTime="1537474295"/>
+          <PublishItem publishSize="43657232" publishTime="1537474192"/>
+          <PublishItem publishSize="43657232" publishTime="1537474094"/>
+          <PublishItem publishSize="43657157" publishTime="1537473383"/>
+          <PublishItem publishSize="43657001" publishTime="1537473266"/>
+          <PublishItem publishSize="43657909" publishTime="1537472990"/>
+          <PublishItem publishSize="43657909" publishTime="1537466241"/>
+          <PublishItem publishSize="43656907" publishTime="1537465876"/>
+          <PublishItem publishSize="43657248" publishTime="1537465567"/>
+          <PublishItem publishSize="43657248" publishTime="1537463260"/>
+          <PublishItem publishSize="43601242" publishTime="1537463221"/>
+          <PublishItem publishSize="43661189" publishTime="1537460918"/>
           <PublishItem publishSize="43656749" publishTime="1536559250"/>
           <PublishItem publishSize="43656749" publishTime="1536559200"/>
           <PublishItem publishSize="43656749" publishTime="1536559157"/>
           <PublishItem publishSize="43656749" publishTime="1536559137"/>
           <PublishItem publishSize="43657824" publishTime="1536559007"/>
           <PublishItem publishSize="43658185" publishTime="1536558859"/>
-          <PublishItem publishSize="43658185" publishTime="1536558794"/>
-          <PublishItem publishSize="43656749" publishTime="1536557764"/>
-          <PublishItem publishSize="43656748" publishTime="1536557674"/>
-          <PublishItem publishSize="43656991" publishTime="1536557396"/>
-          <PublishItem publishSize="43656575" publishTime="1536557286"/>
-          <PublishItem publishSize="43656915" publishTime="1536557186"/>
-          <PublishItem publishSize="43657131" publishTime="1536556976"/>
-          <PublishItem publishSize="43657494" publishTime="1536556763"/>
-          <PublishItem publishSize="43656877" publishTime="1536556609"/>
-          <PublishItem publishSize="43656658" publishTime="1536556341"/>
-          <PublishItem publishSize="43656745" publishTime="1536556291"/>
-          <PublishItem publishSize="43656638" publishTime="1536556232"/>
-          <PublishItem publishSize="43656745" publishTime="1536556126"/>
-          <PublishItem publishSize="43656194" publishTime="1536124862"/>
      </publishHistory>
      <swcCache>
           <Swc hashKey="5hQS0VF2RpEUrBqYgohhO." href="78140421507878.swc">
