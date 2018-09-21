@@ -83,7 +83,7 @@ from tkinter import messagebox
 DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20180920"
+DEPENDENCY_VERSION = "20180921"
 QUESTION_TYPES = {
     "mc": {
         "num_questions": 40,
@@ -206,8 +206,7 @@ def scroll_to_view(scroll_set, *view_funcs):
 
 
 def mkdir(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+    os.makedirs(path, exist_ok=True)
 
 
 def load_navigation_config():
@@ -309,12 +308,7 @@ def get_image_size(fname):
 
 
 def check_dir_existance(question_type):
-    if not os.path.exists("data"):
-        os.makedirs("data")
-    if not os.path.exists("data/" + question_type):
-        os.makedirs("data/" + question_type)
-    if not os.path.exists("data/" + question_type + "/media"):
-        os.makedirs("data/" + question_type + "/media")
+    mkdir("data/" + question_type + "/media")
 
 
 def add_media(elem, question_type, filename, description, file_type, width=None, height=None):
@@ -327,7 +321,7 @@ def add_media(elem, question_type, filename, description, file_type, width=None,
             check_set(elem, target)
             messagebox.showinfo("", "设定成功!")
         else:
-            messagebox.showerror("", "图片分辨率必须为{} x {}.".format(width, height))
+            messagebox.showerror("", "图片分辨率必须为 {} x {}.".format(width, height))
 
 
 def select_file(description, file_type):
@@ -350,7 +344,7 @@ def select_bg():
             shutil.copy(filename, "data/bg.jpg")
             messagebox.showinfo("", "设定成功!")
         else:
-            messagebox.showerror("", "图片分辨率必须为1280 x 800.")
+            messagebox.showerror("", "图片分辨率必须为 1280 x 800.")
         check_set(BGL, "data/bg.jpg")
 
 
@@ -840,7 +834,7 @@ def run_flash():
 def import_data():
     selected = select_file("TAR GZ Files", "*.gz")
     if selected:
-        if messagebox.askyesno("", "你确定要导入数据吗?\n导入的数据会覆盖当前的题目."):
+        if messagebox.askyesno("", "你确定要导入数据吗?\n导入的数据会与当前数据合并.\n如果导入的数据包含当前数据中已有的题目,\n导入的题目会覆盖当前的题目."):
             try:
                 extract_tar_gz(selected, './data/')
                 refresh_main_window()
