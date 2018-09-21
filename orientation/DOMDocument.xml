@@ -10,12 +10,12 @@
           <DOMFolderItem name="UI" itemID="58f27b4a-000004df" isExpanded="true"/>
      </folders>
      <fonts>
-          <DOMFontItem name="Font/圆体 2" itemID="5574bfc9-0000029d" font="STYuanti-SC-Regular" size="0" id="9" sourceLastImported="1433714633" embedRanges="9999"/>
-          <DOMFontItem name="Font/圆体 1" itemID="5574bfc9-0000029b" font="STYuanti-SC-Light" size="0" id="8" sourceLastImported="1433714633" embedRanges="9999"/>
-          <DOMFontItem name="Font/圆体" itemID="5574bfc9-00000299" font="STYuanti-SC-Bold" size="0" id="7" sourceLastImported="1433714633" embedRanges="9999"/>
-          <DOMFontItem name="Font/Font 1" itemID="54056c62-00000031" font="sao" size="0" id="1" sourceLastImported="1409641570" embedRanges="9999"/>
-          <DOMFontItem name="Font/Font 3" itemID="540617fc-00000161" font="STHeitiSC-Light" size="0" id="3" sourceLastImported="1409685500" embedRanges="9999"/>
           <DOMFontItem name="Font/Font 2" itemID="540a73a6-000000c0" font="KozGoPr6N-ExtraLight" size="0" id="4" sourceLastImported="1409971110" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 3" itemID="540617fc-00000161" font="STHeitiSC-Light" size="0" id="3" sourceLastImported="1409685500" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 1" itemID="54056c62-00000031" font="sao" size="0" id="1" sourceLastImported="1409641570" embedRanges="9999"/>
+          <DOMFontItem name="Font/圆体" itemID="5574bfc9-00000299" font="STYuanti-SC-Bold" size="0" id="7" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/圆体 1" itemID="5574bfc9-0000029b" font="STYuanti-SC-Light" size="0" id="8" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/圆体 2" itemID="5574bfc9-0000029d" font="STYuanti-SC-Regular" size="0" id="9" sourceLastImported="1433714633" embedRanges="9999"/>
      </fonts>
      <media>
           <DOMBitmapItem name="Spinner/b0.png" itemID="540572d2-00000082" sourceExternalFilepath="../orientation/LIBRARY/Spinner/b0.png" sourceLastImported="1379434525" sourcePlatform="macintosh" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Spinner/b0.png" bitmapDataHRef="M 31 1409643218.dat" frameRight="2400" frameBottom="2400"/>
@@ -751,6 +751,19 @@ function navigationLoaderComplete(e:Event):void {
 	play();
 }
 
+function navigationLoaderError(e:Event):void {
+	var txt:TextField = new TextField();
+
+	txt.x = 0;
+	txt.y = 450;
+	txt.width = 1280;
+	txt.textColor = 0xffffff;
+	txt.text = 'No data';
+	txt.autoSize = 'center';
+
+	addChild(txt);
+}
+
 function ruleLoaderComplete(e:Event):void {
 	var data:String = loader.data;
 	Rule.text = data;
@@ -910,7 +923,7 @@ function playWrapper(e:Event):void {
                                    <elements>
                                         <DOMSymbolInstance libraryItemName="Spinner/clock">
                                              <matrix>
-                                                  <Matrix tx="640" ty="485.1"/>
+                                                  <Matrix tx="640" ty="485"/>
                                              </matrix>
                                              <transformationPoint>
                                                   <Point/>
@@ -927,7 +940,7 @@ function playWrapper(e:Event):void {
           </DOMTimeline>
           <DOMTimeline name="Navigation">
                <layers>
-                    <DOMLayer name="Actions" color="#FF4FFF" autoNamed="false">
+                    <DOMLayer name="Actions" color="#FF4FFF" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" duration="14" keyMode="9728">
                                    <Actionscript>
@@ -937,6 +950,7 @@ loader = new URLLoader();
 loader.load(url);
 
 loader.addEventListener(Event.COMPLETE, navigationLoaderComplete);
+loader.addEventListener(IOErrorEvent.IO_ERROR, navigationLoaderError);
 ]]></script>
                                    </Actionscript>
                                    <elements/>
@@ -1083,7 +1097,7 @@ function N6f(event:MouseEvent):void
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Layer 3" color="#FF800A" current="true" isSelected="true">
+                    <DOMLayer name="Layer 3" color="#FF800A">
                          <frames>
                               <DOMFrame index="0" duration="14" tweenType="motion" motionTweenSnap="true" keyMode="22017" acceleration="-100">
                                    <elements>
@@ -31690,15 +31704,21 @@ BackToMusicBtn.addEventListener(MouseEvent.CLICK, BackToMusic4);]]></script>
           <PD n="Stop at this Frame" t="i" v="3"/>
           <PD n="snippetCounter" t="i" v="4"/>
           <PD n="Click to Go to Frame and Stop" t="i" v="3"/>
-          <PD n="Click to Go to Frame and Play" t="i" v="2"/>
           <PD n="Click to Go to Next Frame and Stop" t="i" v="3"/>
+          <PD n="Click to Go to Frame and Play" t="i" v="2"/>
           <PD n="Click to Go to Previous Frame and Stop" t="i" v="2"/>
           <PD n="Click to Go to Scene and Play" t="i" v="9"/>
-          <PD n="Click to Hide an Object" t="i" v="3"/>
           <PD n="Click to Go to Web Page" t="i" v="2"/>
+          <PD n="Click to Hide an Object" t="i" v="3"/>
      </persistentData>
      <PrinterSettings platform="macintosh"/>
      <publishHistory>
+          <PublishItem publishSize="43656712" publishTime="1537510175"/>
+          <PublishItem publishSize="43656712" publishTime="1537503026"/>
+          <PublishItem publishSize="43656712" publishTime="1537502986"/>
+          <PublishItem publishSize="43656879" publishTime="1537502926"/>
+          <PublishItem publishSize="43601242" publishTime="1537502820"/>
+          <PublishItem publishSize="43656712" publishTime="1537502779"/>
           <PublishItem publishSize="43657019" publishTime="1537489695"/>
           <PublishItem publishSize="43657224" publishTime="1537474357"/>
           <PublishItem publishSize="43657113" publishTime="1537474295"/>
@@ -31713,12 +31733,6 @@ BackToMusicBtn.addEventListener(MouseEvent.CLICK, BackToMusic4);]]></script>
           <PublishItem publishSize="43657248" publishTime="1537463260"/>
           <PublishItem publishSize="43601242" publishTime="1537463221"/>
           <PublishItem publishSize="43661189" publishTime="1537460918"/>
-          <PublishItem publishSize="43656749" publishTime="1536559250"/>
-          <PublishItem publishSize="43656749" publishTime="1536559200"/>
-          <PublishItem publishSize="43656749" publishTime="1536559157"/>
-          <PublishItem publishSize="43656749" publishTime="1536559137"/>
-          <PublishItem publishSize="43657824" publishTime="1536559007"/>
-          <PublishItem publishSize="43658185" publishTime="1536558859"/>
      </publishHistory>
      <swcCache>
           <Swc hashKey="5hQS0VF2RpEUrBqYgohhO." href="78140421507878.swc">
