@@ -763,11 +763,11 @@ def first_time_run():
             print(e)
         if sys.platform == "win32":
             set_str_var(root, text, "Downloading Adobe Flash Player...")
-            download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flashplayer_29_sa.exe", "flashplayer.exe")
+            download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/31/flashplayer_31_sa.exe", "flashplayer.exe")
         else:
             set_str_var(root, text, "Downloading Adobe Flash Player...")
             if sys.platform == "darwin":
-                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flashplayer_29_sa.dmg", "tmp/flashplayer.dmg")
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/31/flashplayer_31_sa.dmg", "tmp/flashplayer.dmg")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 os.system("hdiutil attach -nobrowse -mountpoint ./tmp/flashplayer ./tmp/flashplayer.dmg")
                 if os.path.exists("Flash Player.app"):
@@ -775,7 +775,7 @@ def first_time_run():
                 os.system("cp -r ./tmp/flashplayer/Flash\\ Player.app .")
                 os.system("hdiutil detach ./tmp/flashplayer")
             else:
-                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/29/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
+                download("https://fpdownload.macromedia.com/pub/flashplayer/updaters/31/flash_player_sa_linux.x86_64.tar.gz", "tmp/flashplayer.tar.gz")
                 set_str_var(root, text, "Extracting Adobe Flash Player...")
                 extract_tar_gz("tmp/flashplayer.tar.gz", "tmp/")
                 os.system("cp ./tmp/flashplayer ./flashplayer")
