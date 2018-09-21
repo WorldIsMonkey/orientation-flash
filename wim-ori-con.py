@@ -61,6 +61,7 @@ along with this file.  If not, see <http://www.gnu.org/licenses/>.
 
 
 import base64
+import csv
 import datetime
 import hashlib
 import imghdr
@@ -79,10 +80,10 @@ from tkinter import messagebox
 
 
 # Setting this flag to True will disable checking for update.
-DEBUG = True
+DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20180909"
+DEPENDENCY_VERSION = "20180920"
 QUESTION_TYPES = {
     "mc": {
         "num_questions": 40,
@@ -204,6 +205,11 @@ def scroll_to_view(scroll_set, *view_funcs):
     return closure
 
 
+def mkdir(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+
 def load_navigation_config():
     result = []
     for i in range(len(QUESTION_TYPES) - 1):
@@ -243,13 +249,24 @@ def set_btn_group_state(btns, state):
         btns.config(state=state)
 
 
+def refresh_main_window():
+    check_set(BGL, "data/bg.jpg")
+    if os.path.exists("data/navigation.config"):
+        load_navigation_config()
+    else:
+        for v in var:
+            v.set(0)
+
+
 def initialize():
     if messagebox.askyesno("", "你确定要初始化数据吗?"):
         if messagebox.askyesno("", "你真的要初始化数据吗?\n这将清除所有已输入的数据!"):
             if os.path.exists("data"):
                 try:
                     shutil.rmtree("data")
+                    refresh_main_window()
                     messagebox.showinfo("", "数据初始化成功!")
+
                 except:
                     messagebox.showerror("", "数据初始化失败.")
             else:
@@ -365,11 +382,77 @@ def update_question_list(question_type, ls):
         ls.add_data(["[{}] {}".format("规则文本" if i == 0 else i, question), time_modified])
 
 
+def parse_multiple_choice(filename):
+    mkdir("data/mc")
+    with open(filename, encoding="utf-8") as file:
+        reader = csv.reader(file)
+        i = 0
+        for line in reader:
+            i = i + 1
+            question = line[0]
+            option_a = line[1]
+            option_b = line[2]
+            option_c = line[3]
+            option_d = line[4]
+            correct_answer = ord(line[5]) - ord('A') + 1
+            with open("data/mc/%s.config" % i, "wb") as config_file:
+                string = "%s\n\n%s\n%s\n%s\n%s\n%s\n" % (question, option_a, option_b, option_c, option_d, correct_answer)
+                config_file.write(string.encode("utf-8"))
+            update_time_modified("mc", i)
+
+
+def parse_short_answer(filename):
+    mkdir("data/sq")
+    with open(filename, encoding="utf8") as file:
+        reader = csv.reader(file)
+        i = 0
+        for line in reader:
+            i += 1
+            question = line[0]
+            answer = line[1]
+            configString = "{0}\n\n{1}\nN/A\nN/A\nN/A\n-1".format(question, answer)
+            with open("data/sq/{}.config".format(i), 'w', encoding="utf8") as config_file:
+                config_file.write(configString)
+            update_time_modified("sq", i)
+
+
+def parse_true_or_false(filename):
+    mkdir("data/tf")
+    with open(filename, encoding="utf8") as file:
+        reader = csv.reader(file)
+        i = 0
+        for line in reader:
+            i += 1
+            question = line[0]
+            answer_string = line[1]
+            if answer_string in {"T", "对"}:
+                answer = "1"
+            else:
+                answer = "2"
+            config_string = "{}\n\nN/A\nN/A\nN/A\nN/A\n{}\n".format(question, answer)
+            with open("data/tf/{}.config".format(i), "w", encoding="utf8", newline="\n") as file:
+                file.write(config_string)
+            update_time_modified("tf", i)
+
+
 def import_csv(question_type, ls):
     selected = select_file("CSV Files", "*.csv")
-    if not selected:
-        return
 
+    try:
+        if not selected:
+            return
+        elif question_type == "mc":
+            parse_multiple_choice(selected)
+        elif question_type == "sq":
+            parse_short_answer(selected)
+        elif question_type == "tf":
+            parse_true_or_false(selected)
+        else:
+            raise Exception("Unsupported question type")
+    except Exception as e:
+        messagebox.showerror("", str(e))
+
+    update_question_list(question_type, ls)
 
 
 def show_question_list_window(question_type):
@@ -382,8 +465,14 @@ def show_question_list_window(question_type):
     ls = MultiListbox(window, ["Question", "Time Modified"], width=40)
     update_question_list(question_type, ls)
 
-    Button(window, text="Edit", command=lambda: edit_question(question_type, ls)).pack()
-
+    frame = Frame(window)
+    Button(frame, text="Edit", command=lambda: edit_question(question_type, ls)).pack(side=LEFT)
+    if question_type in {"mc", "sq", "tf"}:
+        Button(frame, text="Import CSV", command=lambda: import_csv(question_type, ls)).pack(side=LEFT)
+        help = Label(frame, text="Help?", fg="blue", cursor="hand2")
+        help.bind("<Button-1>", lambda e: open_browser("https://github.com/A-Kun/wim-ori-con/blob/master/QuestionReviewGuideline.md"))
+        help.pack()
+    frame.pack()
     ls.pack(fill=BOTH, expand=True)
     Label(window, text="Tip: 你可以拖拽边缘来缩放本窗口.").pack()
 
@@ -402,7 +491,7 @@ def edit_question(question_type, ls):
             file.close()
 
         rule_edit = Tk()
-        rule_edit.title("编辑[规则文本]")
+        rule_edit.title("编辑 [规则文本]")
 
         box = Text(rule_edit)
         box.pack()
@@ -420,7 +509,7 @@ def edit_question(question_type, ls):
             file.close()
 
         question_edit = Tk()
-        question_edit.title("编辑[第" + str(index) + "题]")
+        question_edit.title("编辑 [第" + str(index) + "题]")
 
         SV = []
         IV = IntVar(question_edit)
@@ -751,12 +840,14 @@ def run_flash():
 def import_data():
     selected = select_file("TAR GZ Files", "*.gz")
     if selected:
-        if messagebox.askyesno("", "你确定要导入数据吗?\n如果要导入的数据会覆盖当前数据中的相同题目."):
+        if messagebox.askyesno("", "你确定要导入数据吗?\n导入的数据会覆盖当前的题目."):
             try:
                 extract_tar_gz(selected, './data/')
+                refresh_main_window()
                 messagebox.showinfo("", "导入成功.")
             except:
-                messagenbox.showerror("", "导入失败.")
+                refresh_main_window()
+                messagebox.showerror("", "导入失败.")
 
 
 if (__name__ == "__main__"):
