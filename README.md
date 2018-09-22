@@ -1,7 +1,7 @@
 # WIM Orientation Contribution
 
 A platform for editing content for WIM Orientation front-end.
-Casually maintained by [Andrew Wang](https://github.com/A-Kun). Thanks to [Zhongyang Xia](https://github.com/XIAZY) for contribution.
+Casually maintained by [Andrew Wang](https://github.com/A-Kun). Thanks to [Zhongyang Xia](https://github.com/XIAZY) for contributing.
 
 For question reviewers, please read [this](/QuestionReviewGuideline.md).
 
