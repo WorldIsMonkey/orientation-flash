@@ -83,7 +83,7 @@ from tkinter import messagebox
 DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-DEPENDENCY_VERSION = "20180921"
+DEPENDENCY_VERSION = "20180924"
 QUESTION_TYPES = {
     "mc": {
         "num_questions": 40,
@@ -397,7 +397,7 @@ def parse_multiple_choice(filename):
 
 def parse_short_answer(filename):
     mkdir("data/sq")
-    with open(filename, encoding="utf8") as file:
+    with open(filename, encoding="utf-8") as file:
         reader = csv.reader(file)
         i = 0
         for line in reader:
@@ -405,14 +405,14 @@ def parse_short_answer(filename):
             question = line[0]
             answer = line[1]
             configString = "{0}\n\n{1}\nN/A\nN/A\nN/A\n-1".format(question, answer)
-            with open("data/sq/{}.config".format(i), 'w', encoding="utf8") as config_file:
+            with open("data/sq/{}.config".format(i), "w", encoding="utf-8", newline="\n") as config_file:
                 config_file.write(configString)
             update_time_modified("sq", i)
 
 
 def parse_true_or_false(filename):
     mkdir("data/tf")
-    with open(filename, encoding="utf8") as file:
+    with open(filename, encoding="utf-8") as file:
         reader = csv.reader(file)
         i = 0
         for line in reader:
@@ -424,8 +424,8 @@ def parse_true_or_false(filename):
             else:
                 answer = "2"
             config_string = "{}\n\nN/A\nN/A\nN/A\nN/A\n{}\n".format(question, answer)
-            with open("data/tf/{}.config".format(i), "w", encoding="utf8", newline="\n") as file:
-                file.write(config_string)
+            with open("data/tf/{}.config".format(i), "w", encoding="utf-8", newline="\n") as config_file:
+                config_file.write(config_string)
             update_time_modified("tf", i)
 
 
