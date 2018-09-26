@@ -701,10 +701,10 @@ def save_question(question_type, index, SV, IV, window, ls):
                 else:
                     file.write(SV[i].get() + "\n")
 
-                    if question_type in {"mc", "music", "tf"}:
-                        file.write(str(IV.get()) + "\n")
-                    elif question_type == "sq":
-                        file.write("-1\n")
+        if question_type in {"mc", "music", "tf"}:
+            file.write(str(IV.get()) + "\n")
+        elif question_type == "sq":
+            file.write("-1\n")
 
     update_time_modified(question_type, index)
     update_question_list(question_type, ls)
