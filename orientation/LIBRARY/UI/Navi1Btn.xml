@@ -1,4 +1,4 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="UI/Navi1Btn" itemID="557531b6-000004fd" lastModified="1492979999">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="UI/Navi1Btn" itemID="557531b6-000004fd" lastModified="1557694422">
   <timeline>
     <DOMTimeline name="Navi1Btn">
       <layers>
@@ -6,7 +6,7 @@
           <frames>
             <DOMFrame index="0" keyMode="9728">
               <elements>
-                <DOMSymbolInstance libraryItemName="UI/List" symbolType="button">
+                <DOMSymbolInstance libraryItemName="UI/List" name="N1Btn_btn" symbolType="button">
                   <matrix>
                     <Matrix a="2" d="2" tx="163" ty="46"/>
                   </matrix>
@@ -14,7 +14,12 @@
                     <Point/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMStaticText width="146.55" height="44.8" isSelectable="false">
+                <DOMBitmapInstance libraryItemName="UI/run_normal.png">
+                  <matrix>
+                    <Matrix a="1.34614562988281" d="1.34614562988281" tx="19.15" ty="28.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMDynamicText name="Title1" width="226" height="44.8" isSelectable="false">
                   <matrix>
                     <Matrix tx="67" ty="21.25"/>
                   </matrix>
@@ -25,19 +30,8 @@
                         <DOMTextAttrs aliasText="false" size="32" bitmapSize="640" face="STYuanti-SC-Bold"/>
                       </textAttrs>
                     </DOMTextRun>
-                    <DOMTextRun>
-                      <characters></characters>
-                      <textAttrs>
-                        <DOMTextAttrs aliasText="false" size="32" bitmapSize="640" face="STYuanti-SC-Bold"/>
-                      </textAttrs>
-                    </DOMTextRun>
                   </textRuns>
-                </DOMStaticText>
-                <DOMBitmapInstance libraryItemName="UI/run_normal.png">
-                  <matrix>
-                    <Matrix a="1.34614562988281" d="1.34614562988281" tx="19.15" ty="28.05"/>
-                  </matrix>
-                </DOMBitmapInstance>
+                </DOMDynamicText>
               </elements>
             </DOMFrame>
           </frames>

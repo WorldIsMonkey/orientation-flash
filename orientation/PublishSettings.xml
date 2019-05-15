@@ -95,7 +95,7 @@
     <ExportSwc>0</ExportSwc>
     <ScriptStuckDelay>15</ScriptStuckDelay>
     <IncludeXMP>1</IncludeXMP>
-    <HardwareAcceleration>0</HardwareAcceleration>
+    <HardwareAcceleration>2</HardwareAcceleration>
     <AS3Flags>4102</AS3Flags>
     <DefaultLibraryLinkage>rsl</DefaultLibraryLinkage>
     <RSLPreloaderMethod>wrap</RSLPreloaderMethod>

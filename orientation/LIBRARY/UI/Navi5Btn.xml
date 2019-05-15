@@ -1,4 +1,4 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="UI/Navi5Btn" itemID="557952d5-0000017c" lastModified="1492980015">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="UI/Navi5Btn" itemID="557952d5-0000017c" lastModified="1557694468">
   <timeline>
     <DOMTimeline name="Navi5Btn">
       <layers>
@@ -14,7 +14,7 @@
                     <Point/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMStaticText width="152.85" height="44.8" isSelectable="false">
+                <DOMDynamicText name="Title5" width="226" height="44.8" isSelectable="false">
                   <matrix>
                     <Matrix tx="66.95" ty="21.5"/>
                   </matrix>
@@ -25,14 +25,8 @@
                         <DOMTextAttrs aliasText="false" size="32" bitmapSize="640" face="STYuanti-SC-Bold"/>
                       </textAttrs>
                     </DOMTextRun>
-                    <DOMTextRun>
-                      <characters></characters>
-                      <textAttrs>
-                        <DOMTextAttrs aliasText="false" size="32" bitmapSize="640" face="STYuanti-SC-Bold"/>
-                      </textAttrs>
-                    </DOMTextRun>
                   </textRuns>
-                </DOMStaticText>
+                </DOMDynamicText>
                 <DOMBitmapInstance libraryItemName="UI/run_normal.png copy">
                   <matrix>
                     <Matrix a="1.34614562988281" d="1.34614562988281" tx="19.15" ty="28.05"/>

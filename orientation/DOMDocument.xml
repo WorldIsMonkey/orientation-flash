@@ -7,15 +7,15 @@
           <DOMFolderItem name="Spinner" itemID="572f9280-000001a3"/>
           <DOMFolderItem name="TFAsset" itemID="58fce186-000001ae"/>
           <DOMFolderItem name="Timer" itemID="572f907f-00000160"/>
-          <DOMFolderItem name="UI" itemID="58f27b4a-000004df" isExpanded="true"/>
+          <DOMFolderItem name="UI" itemID="58f27b4a-000004df"/>
      </folders>
      <fonts>
-          <DOMFontItem name="Font/Font 2" itemID="540a73a6-000000c0" font="KozGoPr6N-ExtraLight" size="0" id="4" sourceLastImported="1409971110" embedRanges="9999"/>
-          <DOMFontItem name="Font/Font 3" itemID="540617fc-00000161" font="STHeitiSC-Light" size="0" id="3" sourceLastImported="1409685500" embedRanges="9999"/>
-          <DOMFontItem name="Font/Font 1" itemID="54056c62-00000031" font="sao" size="0" id="1" sourceLastImported="1409641570" embedRanges="9999"/>
-          <DOMFontItem name="Font/圆体" itemID="5574bfc9-00000299" font="STYuanti-SC-Bold" size="0" id="7" sourceLastImported="1433714633" embedRanges="9999"/>
-          <DOMFontItem name="Font/圆体 1" itemID="5574bfc9-0000029b" font="STYuanti-SC-Light" size="0" id="8" sourceLastImported="1433714633" embedRanges="9999"/>
           <DOMFontItem name="Font/圆体 2" itemID="5574bfc9-0000029d" font="STYuanti-SC-Regular" size="0" id="9" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/圆体 1" itemID="5574bfc9-0000029b" font="STYuanti-SC-Light" size="0" id="8" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/圆体" itemID="5574bfc9-00000299" font="STYuanti-SC-Bold" size="0" id="7" sourceLastImported="1433714633" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 1" itemID="54056c62-00000031" font="sao" size="0" id="1" sourceLastImported="1409641570" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 3" itemID="540617fc-00000161" font="STHeitiSC-Light" size="0" id="3" sourceLastImported="1409685500" embedRanges="9999"/>
+          <DOMFontItem name="Font/Font 2" itemID="540a73a6-000000c0" font="KozGoPr6N-ExtraLight" size="0" id="4" sourceLastImported="1409971110" embedRanges="9999"/>
      </fonts>
      <media>
           <DOMBitmapItem name="Spinner/b0.png" itemID="540572d2-00000082" sourceExternalFilepath="../orientation/LIBRARY/Spinner/b0.png" sourceLastImported="1379434525" sourcePlatform="macintosh" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Spinner/b0.png" bitmapDataHRef="M 31 1409643218.dat" frameRight="2400" frameBottom="2400"/>
@@ -606,15 +606,15 @@
           <Include href="UI/cd_icon.xml" loadImmediate="false" itemID="5b8f6852-000000df" lastModified="1536125010"/>
           <Include href="UI/clock_holder.xml" loadImmediate="false" itemID="55754b83-00000732" lastModified="1433799378"/>
           <Include href="UI/Fullscreen.xml" itemIcon="0" loadImmediate="false" itemID="540544cb-00000053" lastModified="1412320746"/>
-          <Include href="UI/List.xml" itemIcon="0" loadImmediate="false" itemID="58fd12b2-000007c9" lastModified="1492980402"/>
+          <Include href="UI/List.xml" itemIcon="0" loadImmediate="false" itemID="58fd12b2-000007c9" lastModified="1557694340"/>
           <Include href="UI/List_progress.xml" loadImmediate="false" itemID="5753e182-000001e0" lastModified="1492980470"/>
           <Include href="UI/MusicAnswer.xml" loadImmediate="false" itemID="540619bc-0000016d" lastModified="1409810757"/>
-          <Include href="UI/Navi1Btn.xml" loadImmediate="false" itemID="557531b6-000004fd" lastModified="1492979999"/>
-          <Include href="UI/Navi2Btn.xml" loadImmediate="false" itemID="557531ba-000004fe" lastModified="1492980004"/>
-          <Include href="UI/Navi3Btn.xml" loadImmediate="false" itemID="55794b38-00000a49" lastModified="1492980021"/>
-          <Include href="UI/Navi4Btn.xml" loadImmediate="false" itemID="55794b6a-00000ad2" lastModified="1492980011"/>
-          <Include href="UI/Navi5Btn.xml" loadImmediate="false" itemID="557952d5-0000017c" lastModified="1492980015"/>
-          <Include href="UI/Navi6Btn.xml" loadImmediate="false" itemID="557a6b5b-000002eb" lastModified="1492980032"/>
+          <Include href="UI/Navi1Btn.xml" loadImmediate="false" itemID="557531b6-000004fd" lastModified="1557694422"/>
+          <Include href="UI/Navi2Btn.xml" loadImmediate="false" itemID="557531ba-000004fe" lastModified="1557694434"/>
+          <Include href="UI/Navi3Btn.xml" loadImmediate="false" itemID="55794b38-00000a49" lastModified="1557694449"/>
+          <Include href="UI/Navi4Btn.xml" loadImmediate="false" itemID="55794b6a-00000ad2" lastModified="1557694459"/>
+          <Include href="UI/Navi5Btn.xml" loadImmediate="false" itemID="557952d5-0000017c" lastModified="1557694468"/>
+          <Include href="UI/Navi6Btn.xml" loadImmediate="false" itemID="557a6b5b-000002eb" lastModified="1557694475"/>
           <Include href="UI/Navigation.xml" itemIcon="0" loadImmediate="false" itemID="54041b33-00000015" lastModified="1409638145"/>
           <Include href="UI/Next.xml" itemIcon="0" loadImmediate="false" itemID="54056221-000001af" lastModified="1409638945"/>
           <Include href="UI/OK.xml" itemIcon="0" loadImmediate="false" itemID="53d45926-00000009" lastModified="1412167435"/>
@@ -626,6 +626,30 @@
      <timelines>
           <DOMTimeline name="Loading">
                <layers>
+                    <DOMLayer name="Layer 2" color="#9933CC">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMDynamicText left="-485.6" width="1276" height="42">
+                                             <matrix>
+                                                  <Matrix tx="487.6" ty="602"/>
+                                             </matrix>
+                                             <textRuns>
+                                                  <DOMTextRun>
+                                                       <characters>Please click on the [Dismiss All] button in the pop-up window.</characters>
+                                                       <textAttrs>
+                                                            <DOMTextAttrs alignment="center" aliasText="false" size="30" bitmapSize="600" face="圆体*" fillColor="#FFFFFF"/>
+                                                       </textAttrs>
+                                                  </DOMTextRun>
+                                             </textRuns>
+                                        </DOMDynamicText>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="1" duration="24" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
                     <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
                          <frames>
                               <DOMFrame index="0" duration="25" keyMode="9728">
@@ -635,6 +659,7 @@
 import flash.display.IBitmapDrawable;
 import flash.events.Event;
 import flash.display.Loader;
+import flash.net.URLLoader;
 
 var i;
 var picLoader:Loader;
@@ -739,6 +764,7 @@ function BackToMusic4(event:MouseEvent):void
 
 var url:URLRequest;
 var loader:URLLoader;
+var loader2:URLLoader;
 
 function navigationLoaderComplete(e:Event):void {
 	var data:String = loader.data;
@@ -748,6 +774,29 @@ function navigationLoaderComplete(e:Event):void {
 			hideNavigationList(i + 1);
 		}
 	}
+	
+	loader2 = new URLLoader();
+	loader2.load(new URLRequest('data/title.config'));
+	loader2.addEventListener(Event.COMPLETE, titleLoaderComplete);
+}
+
+function titleLoaderComplete(e:Event):void {
+    var data:Array = loader2.data.split('\n');
+
+	N1Btn.Title1.mouseEnabled = false;
+	N2Btn.Title2.mouseEnabled = false;
+	N3Btn.Title3.mouseEnabled = false;
+	N4Btn.Title4.mouseEnabled = false;
+	N5Btn.Title5.mouseEnabled = false;
+	N6Btn.Title6.mouseEnabled = false;
+
+	N1Btn.Title1.text = data[0];
+	N2Btn.Title2.text = data[1];
+	N3Btn.Title3.text = data[2];
+	N4Btn.Title4.text = data[3];
+	N5Btn.Title5.text = data[4];
+	N6Btn.Title6.text = data[5];
+
 	play();
 }
 
@@ -869,7 +918,10 @@ function tfLoaderComplete(e:Event):void {
 function picLoaderComplete(e:Event):void {
 	var data:Array = loader.data.split('\n');
 	var answer:String = data[0];
+	var format:TextFormat = new TextFormat();
+	format.size = data[6];
 	Answer.text = answer;
+	Answer.setTextFormat(format);
 }
 
 function revealTrue(e:Event):void {
@@ -938,9 +990,9 @@ function playWrapper(e:Event):void {
                     </DOMLayer>
                </layers>
           </DOMTimeline>
-          <DOMTimeline name="Navigation">
+          <DOMTimeline name="Navigation" currentFrame="14">
                <layers>
-                    <DOMLayer name="Actions" color="#FF4FFF" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Actions" color="#FF4FFF" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" duration="14" keyMode="9728">
                                    <Actionscript>
@@ -1004,7 +1056,7 @@ function N6f(event:MouseEvent):void
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Layer 6" color="#808080">
+                    <DOMLayer name="Layer 6" color="#808080" current="true" isSelected="true">
                          <frames>
                               <DOMFrame index="0" duration="14" tweenType="motion" motionTweenSnap="true" keyMode="22017" acceleration="-100">
                                    <elements>
@@ -1289,7 +1341,7 @@ function fl_ClickToGoToScene_intro(event: MouseEvent): void {
           </DOMTimeline>
           <DOMTimeline name="MC">
                <layers>
-                    <DOMLayer name="Actions" color="#FF4FFF" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Actions" color="#FF4FFF" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -1829,7 +1881,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Content" color="#9933CC" autoNamed="false">
+                    <DOMLayer name="Content" color="#9933CC" locked="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
@@ -5160,6 +5212,776 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
+                    <DOMLayer name="Image" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                              <DOMFrame index="1" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="2" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="3" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="4" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="5" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="6" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="7" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="8" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="9" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="10" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="11" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="12" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="13" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="14" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="15" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="16" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="17" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="18" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="19" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="20" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="21" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="22" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="23" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="24" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="25" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="26" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="27" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="28" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="29" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="30" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="31" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="32" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="33" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="34" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="35" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="36" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="37" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="38" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="39" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="40" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/mc/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" selected="true" centerPoint3DX="30" centerPoint3DY="320">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="320"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="41" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
                     <DOMLayer name="Timer" color="#009999" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
@@ -8439,7 +9261,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);]]></script
           </DOMTimeline>
           <DOMTimeline name="SQ">
                <layers>
-                    <DOMLayer name="Actions" color="#FF800A" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Actions" color="#FF800A" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -8759,7 +9581,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Content" color="#9933CC" autoNamed="false">
+                    <DOMLayer name="Content" color="#9933CC" locked="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
@@ -9667,6 +10489,396 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                                              </textRuns>
                                         </DOMStaticText>
                                    </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="Image" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                              <DOMFrame index="1" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="2" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="3" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="4" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" selected="true" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="5" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="6" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="7" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="8" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="9" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="10" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="11" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="12" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="13" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="14" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="15" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="16" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="17" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="18" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="19" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="20" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/sq/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="1000" centerPoint3DY="16">
+                                             <matrix>
+                                                  <Matrix tx="1000" ty="16"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="21" keyMode="9728">
+                                   <elements/>
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
@@ -11456,7 +12668,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
           </DOMTimeline>
           <DOMTimeline name="TF">
                <layers>
-                    <DOMLayer name="Actions" color="#FF800A" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Actions" color="#FF800A" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -11716,7 +12928,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="True" color="#4F80FF" autoNamed="false">
+                    <DOMLayer name="True" color="#4F80FF" locked="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements/>
@@ -11738,7 +12950,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="False" color="#9933CC" autoNamed="false">
+                    <DOMLayer name="False" color="#9933CC" locked="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements/>
@@ -11760,7 +12972,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Content" color="#9933CC" autoNamed="false">
+                    <DOMLayer name="Content" color="#9933CC" locked="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
@@ -12258,6 +13470,301 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                                              </textRuns>
                                         </DOMStaticText>
                                    </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="Image" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                              <DOMFrame index="1" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="2" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="3" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="4" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="5" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="6" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="7" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="8" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="9" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="10" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="11" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="12" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="13" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="14" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="15" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[picLoader = new Loader();
+
+Pic.addChild(picLoader);
+picLoader.load(new URLRequest('data/tf/media/' + (this.currentFrame - 1) + '.jpg'));
+]]></script>
+                                   </Actionscript>
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" centerPoint3DX="30" centerPoint3DY="368">
+                                             <matrix>
+                                                  <Matrix tx="30" ty="368"/>
+                                             </matrix>
+                                             <transformationPoint>
+                                                  <Point/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                              <DOMFrame index="16" keyMode="9728">
+                                   <elements/>
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
@@ -13661,7 +15168,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
           </DOMTimeline>
           <DOMTimeline name="PIC">
                <layers>
-                    <DOMLayer name="Action" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Action" color="#4F80FF" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -15129,7 +16636,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Image" color="#9933CC" autoNamed="false">
+                    <DOMLayer name="Image" color="#9933CC" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -15140,7 +16647,7 @@ picLoader.load(new URLRequest('data/pic1/media/1-1.jpg'));
 ]]></script>
                                    </Actionscript>
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic">
+                                        <DOMSymbolInstance libraryItemName="Dynamic Image/pic" name="Pic" selected="true">
                                              <matrix>
                                                   <Matrix ty="80"/>
                                              </matrix>
@@ -16291,7 +17798,7 @@ Prev.addEventListener(MouseEvent.CLICK, fl_ClickToGoToPreviousFrame);
           </DOMTimeline>
           <DOMTimeline name="PIC2" guides='&lt;guidelines&gt;&lt;guideline direction="h"&gt;-11&lt;/guideline&gt;&lt;/guidelines&gt;'>
                <layers>
-                    <DOMLayer name="Action" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="Action" color="#4F80FF" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <Actionscript>
@@ -18439,7 +19946,7 @@ loader.addEventListener(IOErrorEvent.IO_ERROR, loaderIOErrorHandler);
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Content" color="#9933CC" autoNamed="false" heightLiteral="18">
+                    <DOMLayer name="Content" color="#9933CC" current="true" isSelected="true" autoNamed="false" heightLiteral="18">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
@@ -31704,35 +33211,35 @@ BackToMusicBtn.addEventListener(MouseEvent.CLICK, BackToMusic4);]]></script>
           <PD n="Stop at this Frame" t="i" v="3"/>
           <PD n="snippetCounter" t="i" v="4"/>
           <PD n="Click to Go to Frame and Stop" t="i" v="3"/>
-          <PD n="Click to Go to Next Frame and Stop" t="i" v="3"/>
           <PD n="Click to Go to Frame and Play" t="i" v="2"/>
+          <PD n="Click to Go to Next Frame and Stop" t="i" v="3"/>
           <PD n="Click to Go to Previous Frame and Stop" t="i" v="2"/>
           <PD n="Click to Go to Scene and Play" t="i" v="9"/>
-          <PD n="Click to Go to Web Page" t="i" v="2"/>
           <PD n="Click to Hide an Object" t="i" v="3"/>
+          <PD n="Click to Go to Web Page" t="i" v="2"/>
      </persistentData>
      <PrinterSettings platform="macintosh"/>
      <publishHistory>
-          <PublishItem publishSize="43656712" publishTime="1537510175"/>
-          <PublishItem publishSize="43656712" publishTime="1537503026"/>
-          <PublishItem publishSize="43656712" publishTime="1537502986"/>
-          <PublishItem publishSize="43656879" publishTime="1537502926"/>
-          <PublishItem publishSize="43601242" publishTime="1537502820"/>
-          <PublishItem publishSize="43656712" publishTime="1537502779"/>
-          <PublishItem publishSize="43657019" publishTime="1537489695"/>
-          <PublishItem publishSize="43657224" publishTime="1537474357"/>
-          <PublishItem publishSize="43657113" publishTime="1537474295"/>
-          <PublishItem publishSize="43657232" publishTime="1537474192"/>
-          <PublishItem publishSize="43657232" publishTime="1537474094"/>
-          <PublishItem publishSize="43657157" publishTime="1537473383"/>
-          <PublishItem publishSize="43657001" publishTime="1537473266"/>
-          <PublishItem publishSize="43657909" publishTime="1537472990"/>
-          <PublishItem publishSize="43657909" publishTime="1537466241"/>
-          <PublishItem publishSize="43656907" publishTime="1537465876"/>
-          <PublishItem publishSize="43657248" publishTime="1537465567"/>
-          <PublishItem publishSize="43657248" publishTime="1537463260"/>
-          <PublishItem publishSize="43601242" publishTime="1537463221"/>
-          <PublishItem publishSize="43661189" publishTime="1537460918"/>
+          <PublishItem publishSize="43662928" publishTime="1557900254"/>
+          <PublishItem publishSize="43658333" publishTime="1557713516"/>
+          <PublishItem publishSize="43657667" publishTime="1557711630"/>
+          <PublishItem publishSize="43657673" publishTime="1557711577"/>
+          <PublishItem publishSize="43657669" publishTime="1557711157"/>
+          <PublishItem publishSize="43657529" publishTime="1557709993"/>
+          <PublishItem publishSize="43657711" publishTime="1557709855"/>
+          <PublishItem publishSize="43658222" publishTime="1557709791"/>
+          <PublishItem publishSize="43657319" publishTime="1557695380"/>
+          <PublishItem publishSize="43658617" publishTime="1557695288"/>
+          <PublishItem publishSize="43602561" publishTime="1557695261"/>
+          <PublishItem publishSize="43658660" publishTime="1557695189"/>
+          <PublishItem publishSize="43659323" publishTime="1557694136"/>
+          <PublishItem publishSize="43657866" publishTime="1557694112"/>
+          <PublishItem publishSize="43658666" publishTime="1557693875"/>
+          <PublishItem publishSize="43658421" publishTime="1557693628"/>
+          <PublishItem publishSize="43602932" publishTime="1557693601"/>
+          <PublishItem publishSize="43659230" publishTime="1557692957"/>
+          <PublishItem publishSize="43657254" publishTime="1557692681"/>
+          <PublishItem publishSize="43656351" publishTime="1557692422"/>
      </publishHistory>
      <swcCache>
           <Swc hashKey="5hQS0VF2RpEUrBqYgohhO." href="78140421507878.swc">

@@ -1,4 +1,4 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="UI/Navi2Btn" itemID="557531ba-000004fe" lastModified="1492980004">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="UI/Navi2Btn" itemID="557531ba-000004fe" lastModified="1557694434">
   <timeline>
     <DOMTimeline name="Navi2Btn">
       <layers>
@@ -14,7 +14,7 @@
                     <Point/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMStaticText width="131.95" height="44.8" isSelectable="false">
+                <DOMDynamicText name="Title2" selected="true" width="226" height="44.8" isSelectable="false">
                   <matrix>
                     <Matrix tx="67" ty="21.25"/>
                   </matrix>
@@ -25,14 +25,8 @@
                         <DOMTextAttrs aliasText="false" size="32" bitmapSize="640" face="STYuanti-SC-Bold"/>
                       </textAttrs>
                     </DOMTextRun>
-                    <DOMTextRun>
-                      <characters></characters>
-                      <textAttrs>
-                        <DOMTextAttrs aliasText="false" size="32" bitmapSize="640" face="STYuanti-SC-Bold"/>
-                      </textAttrs>
-                    </DOMTextRun>
                   </textRuns>
-                </DOMStaticText>
+                </DOMDynamicText>
                 <DOMBitmapInstance libraryItemName="UI/run_normal.png">
                   <matrix>
                     <Matrix a="1.34614562988281" d="1.34614562988281" tx="19.15" ty="28.05"/>

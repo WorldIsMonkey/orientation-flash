@@ -54,7 +54,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="1" duration="23" keyMode="9728">
               <elements>
-                <DOMStaticText width="32.15" height="61.75" autoExpand="true">
+                <DOMStaticText width="32.25" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="0.85" ty="476.7"/>
                   </matrix>
@@ -71,7 +71,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="24" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="32.2" height="61.75" autoExpand="true">
+                <DOMStaticText width="32.3" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="0.8" ty="476.7"/>
                   </matrix>
@@ -88,7 +88,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="48" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="32.15" height="61.75" autoExpand="true">
+                <DOMStaticText width="32.25" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="0.85" ty="476.7"/>
                   </matrix>
@@ -105,7 +105,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="72" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="32.15" height="61.75" autoExpand="true">
+                <DOMStaticText width="32.25" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="0.85" ty="476.7"/>
                   </matrix>
@@ -122,7 +122,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="96" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="23.2" height="61.75" autoExpand="true">
+                <DOMStaticText width="23.3" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="5.3" ty="476.7"/>
                   </matrix>
@@ -139,7 +139,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="120" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="32.2" height="61.75" autoExpand="true">
+                <DOMStaticText width="32.3" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="0.8" ty="476.7"/>
                   </matrix>
@@ -156,7 +156,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="144" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -173,7 +173,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="168" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.75" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -190,7 +190,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="192" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.3" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.35" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -207,7 +207,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="216" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -224,7 +224,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="240" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -241,7 +241,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="264" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.75" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -258,7 +258,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="288" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -275,7 +275,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="312" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.65" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
@@ -292,7 +292,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="336" duration="24" keyMode="9728">
               <elements>
-                <DOMStaticText width="11.7" height="61.75" autoExpand="true">
+                <DOMStaticText width="11.75" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="11" ty="476.7"/>
                   </matrix>
@@ -309,7 +309,7 @@ function TimerAct(event:MouseEvent):void
             </DOMFrame>
             <DOMFrame index="360" duration="121" keyMode="9728">
               <elements>
-                <DOMStaticText width="20.7" height="61.75" autoExpand="true">
+                <DOMStaticText width="20.75" height="61.75" autoExpand="true">
                   <matrix>
                     <Matrix tx="6.55" ty="476.7"/>
                   </matrix>
