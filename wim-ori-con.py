@@ -85,9 +85,9 @@ DEBUG = False
 # Do this when dependency update is required.
 VERSION = "20190512"
 # GitHub repository for checking for update.
-REPO = "A-Kun/wim-ori-con"
-VIE_TO_ANSWER = "0.0.0.0"
-EVENT_DATE = "2019-05-10"
+REPO = "WorldIsMonkey/orientation-lts"
+VIE_TO_ANSWER = "155.138.143.208"
+EVENT_DATE = "2019-07-01"
 QUESTION_TYPES = {
     "mc": {
         "num_questions": 40,
