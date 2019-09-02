@@ -83,11 +83,9 @@ from tkinter import messagebox
 DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-VERSION = "20190512"
+VERSION = "20190901"
 # GitHub repository for checking for update.
 REPO = "WorldIsMonkey/orientation-lts"
-VIE_TO_ANSWER = "155.138.143.208"
-EVENT_DATE = "2019-07-01"
 QUESTION_TYPES = {
     "mc": {
         "num_questions": 40,
@@ -888,10 +886,6 @@ def run_flash():
             os.system("./flashplayer orientation.swf")
 
 
-def go_to_vie_to_answer():
-    open_browser("http://" + VIE_TO_ANSWER)
-
-
 def import_data():
     selected = select_file("TAR GZ Files", "*.gz")
     if selected:
@@ -905,20 +899,12 @@ def import_data():
                 messagebox.showerror("", "导入失败.")
 
 
-def is_event_past():
-    today = str(datetime.datetime.today()).strip().split()[0]
-    if today > EVENT_DATE:
-        return DISABLED
-    else:
-        return NORMAL
-
-
 if (__name__ == "__main__"):
     error = False
     needs_update = False
 
     try:
-        file = open("wim-ori-con.py")
+        file = open("wim-ori-con.py", encoding="utf-8")
         file.close()
     except:
         error = True
@@ -938,6 +924,7 @@ if (__name__ == "__main__"):
                 current_code = current_code_reader.read().strip()
             if latest_code != current_code:
                 needs_update = True
+            urllib.request.urlopen("http://andrewwang.ca/wim-ori-con")
         except Exception as e:
             print(e)
 
@@ -981,7 +968,7 @@ if (__name__ == "__main__"):
                 title_file.write("选择题\n简答题\n是非题\n图片题\n音乐题\n冲刺题\n")
 
         root = Tk()
-        root.title("Summer 2019")
+        root.title("")
 
         B = []
         C = []
@@ -1044,13 +1031,6 @@ if (__name__ == "__main__"):
 
         BRun = Button(root, text="测试运行", command=run_flash)
         BRun.grid(row=12, columnspan=2)
-
-        BVie = Button(root, text="抢答系统", command=go_to_vie_to_answer, state=is_event_past())
-        BVie.grid(row=13, columnspan=2)
-
-        if is_event_past() == NORMAL:
-            LVie = Label(root, text=VIE_TO_ANSWER)
-            LVie.grid(row=14, columnspan=2)
 
         enable = load_navigation_config()
         for i in range(len(enable)):
