@@ -603,7 +603,7 @@ def edit_question(question_type, ls):
             L1.grid(row=2, column=0)
             if not IV.get():
                 IV.set(48)
-            font_size = Scale(question_edit, variable=IV, orient=HORIZONTAL, length=150)
+            font_size = Scale(question_edit, variable=IV, orient=HORIZONTAL, length=150, from_=16, to=48)
             font_size.grid(row=2, column=1)
 
         if question_type == "sq":
