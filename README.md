@@ -1,7 +1,7 @@
 # orientation-lts
 
 A platform for editing content for WIM Orientation front-end.
-Casually maintained by [Andrew Wang](https://github.com/A-Kun). Thanks to [Zhongyang Xia](https://github.com/XIAZY) for contributing.
+Casually maintained by [Andrew Wang](https://github.com/A-Kun).
 
 This project was started when Flash-based SNS game was still a thing. A rewrite using modern technologies is in the works. Check out the [orientation-ng](https://github.com/WorldIsMonkey/orientation-ng) project.
 
