@@ -1,16 +1,15 @@
-# orientation-lts
+# orientation-flash
 
-A platform for editing content for WIM Orientation front-end.
-Casually maintained by [Andrew Wang](https://github.com/A-Kun).
+A platform for editing and presenting content for Club WIM (World is Moe)'s Orientation/Welcome Party events, since 2014.
 
-This project was started when Flash-based SNS game was still a thing. A rewrite using modern technologies is in the works. Check out the [orientation-ng](https://github.com/WorldIsMonkey/orientation-ng) project.
+This project is no longer maintained, as a direct result of Adobe Flash Player's end-of-life (EOL) date of December 31, 2020.
 
-This project is in long-term support (LTS) mode, meaning patches may be made to correct software bugs, but no new features will be introduced that may cause regression. Any new features should go into the new [orientation-ng](https://github.com/WorldIsMonkey/orientation-ng) project.
+This project was started when Flash-based SNS games were still a thing - remember Club Penguin and Happy Farm? An idea of a rewrite using modern technologies was proposed, but has never been able to be implemented due to manpower. Check out the ~~abandoned~~ [orientation-ng](https://github.com/WorldIsMonkey/orientation-ng) and [orientation-drupal](https://github.com/WorldIsMonkey/orientation-drupal) projects.
 
-For question reviewers, please read [this](/QuestionReviewGuideline.md).
+In the case that this project will still be used in the future - for event organizers, please read the [Question Review Guideline](/QuestionReviewGuideline.md).
 
 ## Download
-https://github.com/WorldIsMonkey/orientation-lts/archive/master.zip
+https://github.com/WorldIsMonkey/orientation-flash/archive/master.zip
 
 ## Usage
 Run `wim-ori-con.py` with `python3`.

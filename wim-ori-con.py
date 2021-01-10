@@ -2,7 +2,7 @@
 
 
 """
-Copyright Andrew Wang, 2019
+Copyright Andrew Wang, 2020
 Distributed under the terms of the GNU General Public License.
 
 This is free software: you can redistribute it and/or modify
@@ -70,6 +70,7 @@ import os
 import shutil
 import ssl
 import struct
+import sys
 import tarfile
 import urllib.request
 import webbrowser
@@ -83,9 +84,9 @@ from tkinter import messagebox
 DEBUG = False
 # Incrementing this variable will force a call to first_time_run.
 # Do this when dependency update is required.
-VERSION = "20190901"
+VERSION = "20201231"
 # GitHub repository for checking for update.
-REPO = "WorldIsMonkey/orientation-lts"
+REPO = "WorldIsMonkey/orientation-flash"
 QUESTION_TYPES = {
     "mc": {
         "num_questions": 40,
@@ -924,7 +925,6 @@ if (__name__ == "__main__"):
                 current_code = current_code_reader.read().strip()
             if latest_code != current_code:
                 needs_update = True
-            urllib.request.urlopen("http://andrewwang.ca/wim-ori-con")
         except Exception as e:
             print(e)
 
